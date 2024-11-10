@@ -3,8 +3,7 @@ import { Code } from "bright";
 import { Heading } from "@/app/blog/_mdx-components/heading";
 
 Code.lineNumbers = true;
-// Code.theme = { light: "github-light", dark: "github-dark" };
-Code.theme = "github-light";
+Code.theme = "light-plus";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {

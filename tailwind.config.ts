@@ -9,12 +9,7 @@ const config: Config = {
     "./src/mdx-components.tsx",
   ],
   theme: {
-    extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
-    },
+    extend: {},
   },
   plugins: [typography],
 };
