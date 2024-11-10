@@ -24,7 +24,7 @@ export function Heading({ level, children, ...props }: HeadingProps) {
         href={`#${props.id}`}
         className="opacity-0 transition-opacity duration-200 focus-within:opacity-100 group-hover:opacity-100"
       >
-        <IoIosLink className="" size={20} />
+        <IoIosLink size={20} />
         <span className="sr-only">Link to heading</span>
       </Link>
     </Tag>
