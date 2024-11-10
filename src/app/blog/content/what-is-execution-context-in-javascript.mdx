@@ -1,0 +1,108 @@
+## Introduction
+
+The execution context is one of the very essential components of a JavaScript
+engine. The execution context is the environment in which the code is executed.
+Everything in JavaScript happens inside an execution context. You can think of
+it as a box that contains two components:
+
+1. Memory Component
+2. Code Component
+
+## Creation of an Execution Context
+
+Memory component is responsible for storing the reference to the variables and
+functions in a key value pair. Code component is responsible for executing the
+code. An execution context is created in two phases:
+
+1. Memory Creation Phase
+2. Code Execution Phase
+
+In the memory creation phase, JavaScript will parse the code line by line and will
+allocate memory for each variable and function. For the variables, it will
+assign a special value called `undefined` as the value of the key. In the case of functions, the whole function will be copy-pasted in the value of the key. Let's
+understand this with the help of a simple example.
+
+```javascript
+var num1 = 5;
+var num2 = 7;
+function add(num1, num2) {
+  return num1 + num2;
+}
+var result = add(num1, num2);
+```
+
+In the above code, we have declared two variables and one function. At first,
+JavaScript will always create a global execution context. In the memory creation
+phase, it will allocate memory for `num1` and `num2` and will assign `undefined`
+as the default value. When JavaScript will reach to line number 3, it will copy
+the whole function into the value of the key `add`. As `result` is also a
+variable so JavaScript will allocate the memory and assigns undefined to it. At
+the end of the memory creation phase, the memory component will look like this:
+
+```placeholder
+num1: undefined
+nu2: undefined
+add: function(num1, num2) {
+  return num1 + num2;
+}
+result: undefined
+```
+
+Now comes phase two, where the code execution phase will start. In this,
+JavaScript will start executing the code line by line. In line number one and
+two, it will assign 5 to `num1` and 7 to `num2`. In line number three, it will
+skip the section as there is nothing to do. Once the JavaScript will reach to
+line number 6, it will invoke the function `add` with the arguments `num1` and
+`num2`.
+
+Everytime a function is invoked, JavaScript will create a new execution context.
+Again, it will go through memory creation and code execution phases. Once it will
+hit the return statement in the code execution phase, or it reaches to the end
+of function (in case of void functions), it will delete the execution context
+and will return the control to the calling execution context with the returned
+value. In the above example, it will check the value of `num1` and `num2` from
+the memory component and will return the sum of both.
+
+## Call Stack
+
+So by now, we have seen that JavaScript has to keep track of the execution
+context. It has to jump into the new execution context when it encounters a
+function invocation and delete it once the code is executed. JavaScript uses the
+concept of stack to keep track of this information, and it is known as
+`call stack` in JavaScript.
+
+The call stack is a stack of execution contexts. Its main purpose is only to
+manage the execution context. Once JavaScript will encounter a function
+invocation in the code execution phase, it will create a new execution context
+and will push it to the top of the call stack. After the function is executed,
+it will pop the execution context from the call stack.
+
+The Call stack maintains the "order of execution" of execution contexts where
+the top of the call stack will always represent the current execution context.
+The bottom of this stack will always represent the global execution context.
+Once the whole code is executed, JavaScript will pop the global execution
+context from the call stack.
+
+## Quick Recap
+
+Let's quickly recap what we have learned so far.
+
+1. Everything in JavaScript happens inside an execution context.
+2. By default, JavaScript creates a global execution context.
+3. JavaScript uses the concept of call stack to keep track of the execution
+contexts.
+4. Each execution will have a memory component and a code component.
+5. In the first phase, JavaScript will allocate memory for each variable, and in the
+case of function, it will copy the whole function.
+6. In the second phase, JavaScript will execute the code line by line.
+7. Once it encounters a function invocation, it will create a new execution
+context and will push it to the top of the call stack.
+8. After the function is executed, it will pop the execution context from the
+call stack.
+
+export const metadata = {
+    title: "What is an Execution Context in JavaScript?",
+    createdAt: "December 26, 2021",
+    description: "The execution context is one of the very essential component of a JavaScript engine. The execution context is the environment in which the code is executed. In this article we will discuss the working of execution context in great details",
+    metaDescription: "What is an execution context in JavaScript? In this article we will discuss the working of execution context in great details",
+}

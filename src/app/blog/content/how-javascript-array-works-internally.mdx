@@ -1,0 +1,209 @@
+## Introduction
+
+All JavaScript engines have their own implementation of the functions and methods,
+but in this article, we'll consider the implementation of
+[Google's V8 engine,](https://v8.dev/) which is one of the most famous JavaScript
+engines.
+
+## Objects in JavaScript
+
+Objects in JavaScript are responsible for holding the mapping between key-value
+pairs. These keys could be any random string. Even if we pass a number as a key,
+JavaScript will first
+[coerce](https://developer.mozilla.org/en-US/docs/Glossary/Type_coercion) it to
+string.
+
+```JavaScript
+const foo = {
+  12e2: 'bar',
+}
+
+console.log(foo[12e2]); // bar
+console.log(foo['12e2']); // undefined
+console.log(foo['1200']); // bar
+```
+
+Here, key `12e4` is first coerced to string and becomes `1200` then `bar` value
+is linked to it. The Same thing happens while accessing the value also. `12e2` will
+first be coerced to string, and then foo will look up for key `1200` and return
+`bar` value. But in the case of string literal `12e2`, no coercion occurs as a
+result it was not able to find any value with such key and therefore returns
+`undefined`.
+
+## Arrays in JavaScript
+
+Arrays are also a type of object in JavaScript but with only numeric keys.
+JavaScript engine can optimize these special objects with purely numeric keys
+Google's V8 javascript engine is entirely written in C++, but C++ arrays can only
+store a similar type of data.
+
+### Element Kind in JavaScript
+
+There is no concept of `int`, `float` and `double` in JavaScript. JavaScript
+categorizes them as `number` type but the underneath implementation cares a lot
+about type of elements being stored in the array. The V8 engine tries its best to
+optimize the array. The operations that are performant for `int` data type can't
+be as much performed for string or double data type. To keep the track of stored
+elements in an array and apply specific optimizations, V8 assigns a
+`element kind` to each array. V8 uses these `element kind` just to internally
+distinguish between the different type of arrays
+
+There are around 22 different `element kind` that V8 can assign to an array. Each
+of them comes with a different performance optimizations. In this article we
+will consider these main `element kind` and later will look at some of the
+performance mistakes that we can avoid when it comes to arrays in JavaScript.
+
+1. PACKED_SMI_ELEMENTS
+2. PACKED_DOUBLE_ELEMENTS
+3. PACKED_ELEMENTS
+4. HOLEY_SMI_ELEMENTS
+5. HOLEY_DOUBLE_ELEMENTS
+6. HOLEY_ELEMENTS
+
+### Packed Elements
+
+Packed elements means that there are no holes (which we'll see later) in the
+array. It is the most performant kind of array in V8. It is also the default
+kind when we initialize an empty array.
+
+```javascript
+const foo = [1, 2, 3];
+// Packed Element
+```
+
+### Holey Elements
+
+Holey elements mean that there are gaps in the array. It represents the sparse
+array. These types of array will not be as performant as the packed array.
+
+```javascript
+const foo = [1, 2, 3];
+foo[100] = 4;
+// Holey Element
+```
+
+#### Packed/Holey SMI Elements
+
+`SMI` means that the array is of type `Smi` which is a signed 32-bit integer.
+
+```javascript
+const foo = [1, 2, 3]; // element kind: PACKED_SMI_ELEMENTS
+
+const bar = [];
+bar[100] = 4; // element kind: HOLEY_SMI_ELEMENTS
+```
+
+#### Packed/Holey Double Elements
+
+`Double` means that there are one or more elements of type `Double` in the
+array.
+
+```javascript
+const foo = [1, 2.5, 3]; // element kind: PACKED_DOUBLE_ELEMENTS
+
+const bar = [];
+bar[100] = 7.4; // element kind: HOLEY_DOUBLE_ELEMENTS
+```
+
+#### Packed/Holey Elements
+
+The elements that are not of type `Smi` or `Double` are considered regular
+elements.
+
+```javascript
+const foo = [1, 2.5, 3, 'bar']; // element kind: PACKED_ELEMENTS
+
+const bar = [1, 2, 2.5];
+bar[100] = 'foo'; // element kind: HOLEY_ELEMENTS
+```
+
+The `element kind` could also change dynamically as we add or remove elements
+from the array. Let's look at the below example for better understanding.
+
+```javascript
+const foo = []; // element kind: PACKED_SMI_ELEMENTS
+
+foo.push(1); // element kind: PACKED_SMI_ELEMENTS
+foo[100] = 2; // element kind: HOLEY_SMI_ELEMENTS
+foo.push(5.2); // element kind: PACKED_DOUBLE_ELEMENTS
+foo.pop(); // element kind: PACKED_DOUBLE_ELEMENTS
+foo.push('bar'); // element kind: HOLEY_ELEMENTS
+```
+
+At the starting `PACKED_SMI_ELEMENTS` is the default element kind. When we push
+`1` to the array it still remains `PACKED_SMI_ELEMENTS`. After adding holes in
+the array, it changes `element kind` to `HOLEY_SMI_ELEMENTS`. In the same way,
+pushing `5.2` makes the `element kind` move to the `HOLEY_DOUBLE_ELEMENTS`.
+
+One thing to notice here is that once the `element kind` is downgraded to
+`PACKED_DOUBLE_ELEMENTS` it stays there. Even after removing the only double
+element `5.2` from the array, `element kind` is still `PACKED_DOUBLE_ELEMENTS`
+At the end, adding `bar` to the array makes the `element kind` move to
+`HOLEY_ELEMENTS`.
+
+Here is the diagram of the `element kind` transitions for better understanding.
+
+<img alt="Element Kind transition in V8" height="600" width="100%"
+     src="https://res.cloudinary.com/gauravthakur/image/upload/s--d6Lt_GXH--/c_scale,h_600/v1689436585/blog/element-kind-transition-v8_tysqsn.webp"/>
+
+JavaScript internally uses C++ vectors to store the packed arrays. It will grow
+dynamically. Once the holes are introduced, the underneath implementation will
+be upgraded to the `hashmap`. Once the underneath implementation is upgraded, it
+cannot be degraded even if you remove that element. So time and complexity can
+vary a lot by just your usage of the array.
+
+## General Performance Tips
+
+### Never access the array with out-of-bounds index
+
+```javascript
+const foo = [1, 2, 3];
+
+console.log(foo[100] ?? 'some placeholder'); // 'some placeholder'
+```
+
+The above example is such a common practice followed by many JS developers, here
+we are accessing `100` index of the array.However, the length of array is `3` so
+the index is out of bounds. In this case, the V8 engine has to perform the
+expensive prototype chain lookup. This will affect the performance of V8 engine
+as V8 will be cautious about this situation, and it will not remain as performant
+it was before accessing the out-of bound key.
+
+### Avoid giving the initial capacity to the array
+
+```javascript
+const foo = new Array(3); // element kind: HOLEY_SMI_ELEMENTS
+
+foo[0] = 1;
+foo[1] = 2;
+foo[2] = 3;
+```
+
+This will create a `HOLEY_SMI_ELEMENTS` array with the initial capacity of 3.
+However, we are only storing `PACKED_SMI_ELEMENTS` elements. Why should we lose
+the optimizations of `PACKED_SMI_ELEMENTS`?
+
+```javascript
+const foo = []; // element kind: HOLEY_SMI_ELEMENTS
+
+foo.push(1);
+foo.push(2);
+foo.push(3); // element kind: PACKED_SMI_ELEMENTS
+```
+
+Instead of giving the initial capacity to the array, we can just create an empty
+array and push the elements to it. This will ensure the `element kind` is the
+same
+
+## Conclusion
+
+So this was a quick deep dive into how the V8 engine internally handles arrays.
+In the end, we also discuss some tips to make your array performant. If you
+like this article, please share it with your friends.
+
+export const metadata = {
+    title: "How JavaScript Array Works Internally?",
+    createdAt: "December 17, 2021",
+    description: "Objects in JavaScript are responsible for holding the mapping between key-value pairs. Arrays are a type of object in JavaScript but with only numeric keys. Let us see how JavaScript engine optimizes these special objects with purely numeric keys",
+    metaDescription: "Arrays are a type of object in JavaScript but with only numeric keys. Let us see how JavaScript engine optimizes these special objects with purely numeric keys",
+}

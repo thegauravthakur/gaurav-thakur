@@ -1,0 +1,167 @@
+It is quite common for JavaScript developers to find `this` keyword to be confusing and understand it incorrectly.
+To get the expected results, developers make random guesses and do hit and trial. They often assume that `this` refers
+to the lexical scope of the current function, which is definitely not true.
+
+To begin with, we must understand that the `this` keyword is a runtime binding whose value is determined at function
+invocation (where function is being called), not where it will be used. In order to determine what `this` is, we should
+look at how the function is called. There are different ways by which we can assign the value of `this` keyword.
+
+## Default Binding
+
+Default binding is applied whenever a function is invoked without using `call`, `bind`, and `apply` methods.
+Furthermore, no `new` keyword is used and there is no additional context provided. We will cover all these in the later
+part of the blog. In such scenario, default binding is applied and the `this` keyword will point to the
+global execution context.
+
+```javascript
+function foo() {
+    var name = 'Tom';
+    console.log(this.name);
+}
+var name = 'Andy';
+foo(); // Andy;
+```
+In the above example, the value of `this` inside foo will point to the global context resulting in "Andy" as the output.
+The behavior changes when we execute the same function in the strict mode. With the strict mode and the default binding,
+the `this` keyword will point to `undefined`.
+
+```javascript
+'use strict';
+function foo() {
+    console.log(this);
+}
+foo(); // undefined;
+```
+In the above example, the value of `this` will be `undefined` as we are using strict mode.
+
+## Explicit Binding
+
+JavaScript's functions are special types of objects that can be invoked by using `()` after the object name. These
+special objects contain some helper methods attached to them like `call`, `apply` and `bind` which allows us to
+explicitly bind `this` keyword to any specific value. While these methods are all aimed to bind the `this` keyword with
+a specific object, they all differ in a few ways. Let's discuss each of them
+
+### Call Method
+
+This method invokes the function and binds `this` to the value given as the first parameter of the function.
+
+```javascript
+function foo() {
+    console.log(this.name);
+}
+foo.call({name: 'John'}); // John
+```
+
+The first argument will be the value of `this`, and the rest will be passed down the function.
+
+```javascript
+function foo(age, place) {
+    console.log(this.name, age, place);
+}
+foo.call({name: 'John'}, 21, 'Kullu' ); // John 21 Kullu
+```
+
+### Apply Method
+
+This method is similar to the `call` method; the only difference is the way arguments are provided to the function. In
+`apply` method arguments are provided as an array whereas in `call` method arguments are provided comma separated
+
+```javascript
+function foo(age, place) {
+    console.log(this.name, age, place);
+}
+foo.apply({name: 'John'}, [21, 'Kullu'] ); // John 21 Kullu
+```
+
+
+### Bind Method
+
+The `Bind` method expects a value in the first parameter, and it will return a new function whose `this` is bound to the
+value given in first argument.
+
+```javascript
+function foo() {
+    console.log(this.name);
+}
+const bar = foo.bind({name: 'John'});
+bar() // John
+```
+
+You may also pass other arguments to the `bind` method, which will be passed to the calling function and applied before
+the arguments passed to the new function
+
+```javascript
+function foo(age, place) {
+    console.log(this.name, age, place);
+}
+const bar = foo.bind({name: 'John'}, 10);
+bar('Kullu') // John 10 Kullu
+```
+
+#### When to use which method
+
+The `call` and `apply` both method invokes the function immediately with the provided arguments and the value of `this`.
+If you want to execute the function immediately then go ahead and use `call`/`apply` methods. It's simply a matter of
+deciding whether to send an array (`apply`) or a list of arguments spelled out in comma-separated form (`call`).
+
+If you want to use call the same function later, then use the `bind` method. It is used quite often for the event handlers like
+`onClick` where we don't know when the function will be called
+
+## Context Object
+
+In the case where a function is attached to an object, the `this` keyword will refer to the attached object. Here, the
+object will serve as the context for the function
+
+```javascript
+const obj = {
+    name: 'Gaurav',
+    foo: function () {
+        console.log(this.name);
+    }
+}
+
+obj.foo(); // Gaurav
+```
+
+## new binding
+
+JavaScript has a `new` keyword which calls the constructor function. It will create an empty object and bind the `this`
+to that newly created object. The function will return `this` binding if it does not explicitly return anything
+
+```javascript
+function Foo() {
+    this.name = 'Gaurav';
+}
+
+const bar = new Foo();
+console.log(bar.name); // Gaurav
+```
+
+## Binding Order
+
+Until now, we have determined that the value of `this` binding can be determined using the methods described above.
+However, what if two cases relate to the same case? In a given case, there should be some order or precedence in
+applying the above method. Now let's discuss the order in which to check which method applies to a specific case
+
+The default binding will always have the lowest priority. Therefore, explicit biding will always have precedence over
+the default binding. Also, one thing to note is that we can't use `new` operator along with the `apply` or `call` method.
+
+## Quick Recap
+
+1. The `this` keyword is a runtime binding whose value is determined at function invocation
+(where function is being called), not where it will be used.
+2. Default binding is applied whenever a function is invoked without using `call`, `bind`, and `apply` methods
+3. Function contains some helper methods attached to them like `call`, `apply` and `bind` which allows us to
+explicitly bind `this` keyword to any specific value
+4. In the case where a function is attached to an object, the `this` keyword will refer to the attached object.
+5. The `new` operator will create an empty object and bind the `this` to that newly created object.
+6. Explicit biding will always have precedence over the implicit binding.
+7. We can't use new operator along with the `apply` or `call` method
+
+
+export const metadata = {
+    title: "What is this keyword in JavaScript?",
+    createdAt: "May 15, 2022",
+    description: "It is quite common for JavaScript developers to find this keyword to be confusing and understand it incorrectly. To get the expected results, developers make random guesses and do hit and trial. In this article, we'll discuss howJavaScript determines the value of this keyword",
+    metaDescription: "It is quite common for JavaScript developers to find this keyword to be confusing and understand it incorrectly. Let's learn how JavaScript determines the value of this keyword",
+}
