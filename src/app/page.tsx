@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-1 items-center justify-center">
+    <main className="flex flex-1 items-center justify-center">
       <div className="m-5 flex flex-col items-start gap-10 sm:flex-row">
         <img
           src="/profile.jpg"
@@ -43,6 +43,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
