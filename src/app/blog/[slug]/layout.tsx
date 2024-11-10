@@ -12,7 +12,7 @@ interface LayoutProps {
 
 const proseStyles = cn(
   "prose prose-pre:border",
-  "hover:prose-a:text-red-600 prose-a:outline-red-600",
+  "prose-a:text-red-700 prose-a:outline-red-700 prose-a:no-underline hover:prose-a:underline",
   "prose-img:rounded-lg",
 );
 

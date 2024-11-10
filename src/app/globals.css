@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+    .prose :where(code) {
+        &::before,
+        &::after {
+            content: none;
+        }
+
+        &:not(:has(*)) {
+            @apply bg-red-100 px-1 py-px font-normal rounded-md;
+        }
+    }
+}
