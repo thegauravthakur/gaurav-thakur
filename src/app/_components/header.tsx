@@ -2,7 +2,6 @@ import { IoSearchOutline, IoSunnyOutline } from "react-icons/io5";
 
 import Link from "next/link";
 import { cn } from "@/app/utilities/tailwind";
-import { preload } from "react-dom";
 import { iconStyles, linkStyles } from "@/app/_styles/common";
 import { MobileMenu } from "@/app/_components/mobile-menu";
 
@@ -13,8 +12,6 @@ export const links = [
 ];
 
 export function Header() {
-  preload("/", { as: "document" });
-
   return (
     <header className="mx-auto flex w-full max-w-screen-xl items-center justify-between border-b px-6 py-2 md:justify-normal">
       <h1 className="font-semibold">

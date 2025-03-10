@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   experimental: { ppr: true, reactCompiler: true },
   rewrites: async () => [
-    { source: "/", destination: "https://gaurav.ensite.dev" },
+    { source: "/", destination: "https://gaurav.ensite.dev", locale: false },
   ],
 };
 
