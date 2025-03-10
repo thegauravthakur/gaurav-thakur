@@ -25,9 +25,15 @@ export function Header() {
       <ul className="hidden flex-1 items-center justify-center gap-x-4 text-sm md:flex">
         {links.map((link) => (
           <li key={link.name}>
-            <Link href={link.href} className={cn(linkStyles)} prefetch={true}>
-              {link.name}
-            </Link>
+            {link.href === "/" ? (
+              <a href="/" className={cn(linkStyles)}>
+                {link.name}
+              </a>
+            ) : (
+              <Link href={link.href} className={cn(linkStyles)} prefetch={true}>
+                {link.name}
+              </Link>
+            )}
           </li>
         ))}
       </ul>
