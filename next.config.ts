@@ -4,8 +4,10 @@ import rehypeSlug from "rehype-slug";
 
 const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-  assetPrefix: "/portfolio",
   experimental: { ppr: true, reactCompiler: true },
+  rewrites: async () => [
+    { source: "/", destination: "https://gaurav.ensite.dev" },
+  ],
 };
 
 const withMDX = createMDX({ options: { rehypePlugins: [rehypeSlug] } });
