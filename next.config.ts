@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+  experimental: { viewTransition: true },
   rewrites: async () => {
     return {
       beforeFiles: [{ source: "/", destination: "https://gaurav.ensite.dev" }],
