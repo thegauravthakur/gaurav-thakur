@@ -41,7 +41,7 @@ export default async function Page() {
 
   return (
     <Fragment>
-      <main className="mx-auto mt-8 flex flex-1 px-4 md:max-w-screen-xl md:px-6 lg:mt-16">
+      <main className="mx-auto mt-8 flex flex-1 px-4 md:max-w-(--breakpoint-xl) md:px-6 lg:mt-16">
         <ul className="grid h-max grid-cols-1 gap-6 lg:grid-cols-2">
           {metadata.map((metadata) => (
             <li key={metadata.slug}>
@@ -51,7 +51,7 @@ export default async function Page() {
         </ul>
       </main>
       <Footer
-        className="mx-auto mt-16 w-full max-w-screen-xl px-4 md:px-6"
+        className="mx-auto mt-16 w-full max-w-(--breakpoint-xl) px-4 md:px-6"
         shareText="Take a look at Gaurav Thakur's blog on creating a better web experience for everyone!"
         shareUrl="https://gauravthakur.in/blog"
       />

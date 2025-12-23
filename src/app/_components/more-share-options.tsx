@@ -17,7 +17,7 @@ export function MoreShareOptions({ link }: MoreShareOptionsProps) {
           <GoShare fontSize={22} />
         </button>
       </Popover.Trigger>
-      <Popover.Content className="min-w-48 rounded-lg border bg-white p-2 shadow outline-red-600">
+      <Popover.Content className="min-w-48 rounded-lg border bg-white p-2 shadow-sm outline-red-600">
         <ul className="flex flex-col text-sm">
           <li className="w-full">
             <Popover.Close asChild>

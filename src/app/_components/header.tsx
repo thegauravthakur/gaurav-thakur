@@ -13,7 +13,7 @@ export const links = [
 
 export function Header() {
   return (
-    <header className="mx-auto flex w-full max-w-screen-xl items-center justify-between border-b px-6 py-2 md:justify-normal">
+    <header className="mx-auto flex w-full max-w-(--breakpoint-xl) items-center justify-between border-b px-6 py-2 md:justify-normal">
       <h1 className="font-semibold">
         <a href="/" className={cn(linkStyles)}>
           Gaurav Thakur

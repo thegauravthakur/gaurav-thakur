@@ -13,7 +13,7 @@ export function MobileMenu() {
           <IoMdMore fontSize={20} />
         </button>
       </Popover.Trigger>
-      <Popover.Content className="mr-2 mt-2 min-w-48 rounded-lg border bg-white p-2 shadow outline-red-600">
+      <Popover.Content className="mr-2 mt-2 min-w-48 rounded-lg border bg-white p-2 shadow-sm outline-red-600">
         <ul className="flex flex-col text-sm">
           {links.map((link) => (
             <li key={link.name} className="w-full">

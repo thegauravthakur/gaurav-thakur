@@ -22,7 +22,7 @@ export function Article({
       href={`/blog/${slug}`}
       className={cn(
         "group inline-block h-full rounded-lg border transition-all",
-        "outline-red-600 hover:border-transparent hover:outline hover:outline-2 hover:outline-offset-2",
+        "outline-red-600 hover:border-transparent hover:outline-solid hover:outline-2 hover:outline-offset-2",
       )}
     >
       <article className={cn("flex h-full flex-col gap-y-4 p-5")} key={title}>
