@@ -8,7 +8,7 @@ export default function Page() {
   return (
     <div className="bg-white text-black antialiased">
       <div className="mx-auto max-w-2xl px-6 py-16 md:py-24">
-        <StaggerWrapper className="mb-12" delay={0}>
+        <StaggerWrapper className="mb-12" delay={0} initialOpacity={0.3}>
           <Header />
         </StaggerWrapper>
 

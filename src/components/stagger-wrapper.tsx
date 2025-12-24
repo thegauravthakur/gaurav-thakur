@@ -8,6 +8,7 @@ interface StaggerWrapperProps {
   className?: string;
   duration?: number;
   delay?: number;
+  initialOpacity?: number;
 }
 
 export function StaggerWrapper({
@@ -15,6 +16,7 @@ export function StaggerWrapper({
   className,
   duration = 0.6,
   delay = 0,
+  initialOpacity = 0,
 }: StaggerWrapperProps) {
   const [scope, animate] = useAnimate();
 
@@ -31,7 +33,7 @@ export function StaggerWrapper({
       ref={scope}
       className={className}
       data-animate
-      style={{ opacity: 0, transform: "translateY(20px)" }}
+      style={{ opacity: initialOpacity, transform: "translateY(20px)" }}
     >
       {children}
     </div>
