@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fragment, Suspense } from "react";
+import { Fragment } from "react";
 import { Footer } from "@/app/_components/footer";
 import { Article } from "@/app/blog/_components/article";
 import calculateReadingTime from "reading-time";
@@ -16,6 +16,8 @@ interface MetadataWithSlug extends PageMetadata {
   slug: string;
   readingTime: number;
 }
+
+export const dynamic = "force-static";
 
 async function fetchAllPostMetadata(): Promise<MetadataWithSlug[]> {
   const slugs = getAllPostSlugs();
@@ -37,15 +39,7 @@ async function fetchAllPostMetadata(): Promise<MetadataWithSlug[]> {
   });
 }
 
-export default function Page() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <_Page />
-    </Suspense>
-  );
-}
-
-async function _Page() {
+export default async function Page() {
   const metadata = await fetchAllPostMetadata();
 
   return (
