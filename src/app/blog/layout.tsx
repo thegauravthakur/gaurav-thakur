@@ -1,5 +1,5 @@
 import { Header } from "@/app/_components/header";
-import { Fragment, ReactNode } from "react";
+import { Fragment, ReactNode, ViewTransition } from "react";
 import { Metadata } from "next";
 
 interface LayoutProps {
@@ -9,7 +9,9 @@ interface LayoutProps {
 export default function LayoutProps({ children }: LayoutProps) {
   return (
     <Fragment>
-      <Header />
+      <ViewTransition>
+        <Header />
+      </ViewTransition>
       {children}
     </Fragment>
   );

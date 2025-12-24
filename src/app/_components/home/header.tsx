@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ViewTransition } from "react";
 
 const navLinks = [
   { href: "/blog", label: "Blog" },
@@ -10,7 +11,11 @@ const navLinks = [
 export function Header() {
   return (
     <section>
-      <h1 className="mb-2 text-4xl font-bold">Gaurav Thakur</h1>
+      <h1 className="mb-2 text-4xl font-bold">
+        <ViewTransition name="brand-name">
+          <span>Gaurav Thakur</span>
+        </ViewTransition>
+      </h1>
       <p className="mb-6 text-lg text-gray-700">All Things Web @ Zepto</p>
 
       <nav>

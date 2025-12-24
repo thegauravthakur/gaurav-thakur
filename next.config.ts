@@ -4,7 +4,6 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   experimental: { viewTransition: true },
-  turbopack: { root: __dirname },
   output: "export",
   // rewrites: async () => {
   //   return {
