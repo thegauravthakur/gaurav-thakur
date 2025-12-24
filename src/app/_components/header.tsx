@@ -15,22 +15,16 @@ export function Header() {
   return (
     <header className="mx-auto flex w-full max-w-(--breakpoint-xl) items-center justify-between border-b px-6 py-2 md:justify-normal">
       <h1 className="font-semibold">
-        <a href="/" className={cn(linkStyles)}>
+        <Link href="/" className={cn(linkStyles)}>
           Gaurav Thakur
-        </a>
+        </Link>
       </h1>
       <ul className="hidden flex-1 items-center justify-center gap-x-4 text-sm md:flex">
         {links.map((link) => (
           <li key={link.name}>
-            {link.href === "/" ? (
-              <a href="/" className={cn(linkStyles)}>
-                {link.name}
-              </a>
-            ) : (
-              <Link href={link.href} className={cn(linkStyles)} prefetch={true}>
-                {link.name}
-              </Link>
-            )}
+            <Link href={link.href} className={cn(linkStyles)} prefetch={true}>
+              {link.name}
+            </Link>
           </li>
         ))}
       </ul>
