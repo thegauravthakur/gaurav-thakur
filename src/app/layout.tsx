@@ -41,6 +41,9 @@ export const metadata: Metadata = {
   title: "Gaurav Thakur",
   description:
     "Hey there, My name is Gaurav Thakur. I'm a frontend engineer with a passion for web technologies. I create beautiful, performant and accessible web experiences for all.",
+  alternates: {
+    canonical: "https://garuavthakur.com",
+  },
   openGraph: {
     title: "Gaurav Thakur",
     description:

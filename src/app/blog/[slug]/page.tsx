@@ -1,4 +1,5 @@
 import { Title } from "@/app/blog/_components/title";
+import { Metadata } from "next";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -16,7 +17,9 @@ export default async function Page({ params }: PageProps) {
   );
 }
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const { metadata } = await import(`../content/${slug}.mdx`);
 
@@ -27,5 +30,6 @@ export async function generateMetadata({ params }: PageProps) {
       title: metadata.title,
       description: metadata.metaDescription,
     },
+    alternates: { canonical: `https://gauravthakur.com/blog/${slug}` },
   };
 }

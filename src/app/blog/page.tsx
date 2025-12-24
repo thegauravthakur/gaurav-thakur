@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Fragment } from "react";
 import { Footer } from "@/app/_components/footer";
 import { Article } from "@/app/blog/_components/article";
@@ -5,13 +6,13 @@ import calculateReadingTime from "reading-time";
 import * as fs from "node:fs";
 import { getAllPostSlugs } from "@/app/blog/[slug]/layout";
 
-interface Metadata {
+interface PageMetadata {
   title: string;
   createdAt: string;
   description: string;
 }
 
-interface MetadataWithSlug extends Metadata {
+interface MetadataWithSlug extends PageMetadata {
   slug: string;
   readingTime: number;
 }
@@ -57,4 +58,10 @@ export default async function Page() {
       />
     </Fragment>
   );
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    alternates: { canonical: "https://gauravthakur.com/blog" },
+  };
 }
