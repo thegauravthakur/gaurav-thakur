@@ -8,11 +8,11 @@ export default function Page() {
   return (
     <div className="bg-white text-black antialiased">
       <div className="mx-auto max-w-2xl px-6 py-16 md:py-24">
-        <StaggerWrapper className="mb-12" delay={0} initialOpacity={0.3}>
+        <section className="mb-12">
           <Header />
-        </StaggerWrapper>
+        </section>
 
-        <StaggerWrapper className="mb-12" delay={0.25}>
+        <StaggerWrapper className="mb-12">
           <p className="text-base leading-relaxed text-gray-800">
             I&apos;m a software engineer with a passion for web applications. I
             create beautiful, performant, and accessible web experiences for
@@ -20,7 +20,7 @@ export default function Page() {
           </p>
         </StaggerWrapper>
 
-        <StaggerWrapper className="mb-12" delay={0.5}>
+        <StaggerWrapper className="mb-12" delay={0.25}>
           <WorkExperienceSection />
         </StaggerWrapper>
       </div>

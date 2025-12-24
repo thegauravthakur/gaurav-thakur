@@ -5,6 +5,7 @@ import { Article } from "@/app/blog/_components/article";
 import calculateReadingTime from "reading-time";
 import * as fs from "node:fs";
 import { getAllPostSlugs } from "@/app/blog/[slug]/layout";
+import { StaggerWrapper } from "@/components/stagger-wrapper";
 
 interface PageMetadata {
   title: string;
@@ -46,9 +47,11 @@ export default async function Page() {
     <Fragment>
       <main className="mx-auto mt-8 flex flex-1 px-4 md:max-w-(--breakpoint-xl) md:px-6 lg:mt-16">
         <ul className="grid h-max grid-cols-1 gap-6 lg:grid-cols-2">
-          {metadata.map((metadata) => (
+          {metadata.map((metadata, index) => (
             <li key={metadata.slug}>
-              <Article {...metadata} />
+              <StaggerWrapper delay={index * 0.1} duration={0.25}>
+                <Article {...metadata} />
+              </StaggerWrapper>
             </li>
           ))}
         </ul>
