@@ -3,29 +3,50 @@ import { StaggerWrapper } from "@/components/stagger-wrapper";
 import { WorkExperienceSection } from "@/app/_components/home/work-experience-section";
 import { Header } from "@/app/_components/home/header";
 import { NonScript } from "@/app/_components/home/non-script";
+import { DesktopMobile } from "@/app/_components/desktop-mobile";
 
 export default function Page() {
   return (
     <div className="bg-white text-black antialiased">
       <div className="mx-auto max-w-2xl px-6 py-16 md:py-24">
         <section className="mb-12">
-          <Header />
+          <DesktopMobile
+            desktop={<Header />}
+            mobile={
+              <StaggerWrapper>
+                <Header avoidTransition />
+              </StaggerWrapper>
+            }
+          />
         </section>
 
-        <StaggerWrapper className="mb-12">
-          <p className="text-base leading-relaxed text-gray-800">
-            I&apos;m a software engineer with a passion for web applications. I
-            create beautiful, performant, and accessible web experiences for
-            all.
-          </p>
-        </StaggerWrapper>
-
-        <StaggerWrapper className="mb-12" delay={0.25}>
+        <DesktopMobile
+          desktop={
+            <StaggerWrapper className="mb-12" delay={0}>
+              <Intro />
+            </StaggerWrapper>
+          }
+          mobile={
+            <StaggerWrapper className="mb-12" delay={0.25}>
+              <Intro />
+            </StaggerWrapper>
+          }
+        />
+        <StaggerWrapper className="mb-12" delay={0.5}>
           <WorkExperienceSection />
         </StaggerWrapper>
       </div>
       <NonScript style="[data-animate]{opacity:1!important;transform:none!important}" />
     </div>
+  );
+}
+
+function Intro() {
+  return (
+    <p className="text-base leading-relaxed text-gray-800">
+      I&apos;m a software engineer with a passion for web applications. I create
+      beautiful, performant, and accessible web experiences for all.
+    </p>
   );
 }
 

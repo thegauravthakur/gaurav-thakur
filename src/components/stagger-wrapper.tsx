@@ -21,11 +21,16 @@ export function StaggerWrapper({
   const [scope, animate] = useAnimate();
 
   useEffect(() => {
-    animate(
-      scope.current,
-      { opacity: 1, transform: "translateY(0px)" },
-      { duration, delay },
-    );
+    try {
+      animate(
+        scope.current,
+        { opacity: 1, transform: "translateY(0px)" },
+        { duration, delay },
+      );
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      /* empty */
+    }
   }, [animate, scope, duration, delay]);
 
   return (
