@@ -4,6 +4,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   experimental: { viewTransition: true },
+  cacheComponents: true,
   output: "export",
   // rewrites: async () => {
   //   return {

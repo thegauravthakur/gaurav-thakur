@@ -1,12 +1,23 @@
 import { Title } from "@/app/blog/_components/title";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
 export default async function Page({ params }: PageProps) {
-  const { slug } = await params;
+  const slug = params.then((p) => p.slug);
+
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <_Page slugPromise={slug} />
+    </Suspense>
+  );
+}
+
+async function _Page({ slugPromise }: { slugPromise: Promise<string> }) {
+  const slug = await slugPromise;
   const { default: Content, metadata } = await import(`../content/${slug}.mdx`);
 
   return (
