@@ -30,12 +30,12 @@ export function Header() {
         </ViewTransition>
       </div>
       <ul className="flex items-center gap-x-1 md:gap-x-2">
-        <li className="flex items-center">
+        <li className="hidden items-center md:flex">
           <button className={cn(iconStyles)} type="button" aria-label="Search">
             <IoSearchOutline fontSize={20} />
           </button>
         </li>
-        <li className="flex items-center">
+        <li className="hidden items-center md:flex">
           <button
             className={cn(iconStyles)}
             type="button"
