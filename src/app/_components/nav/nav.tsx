@@ -29,7 +29,7 @@ export function MobileNav() {
           style={{ viewTransitionName: "nav-mobile-text" }}
         >
           Menu
-          <ChevronDownIcon className="size-4 transition-transform duration-200 group-data-[popup-open]:rotate-180" />
+          <ChevronDownIcon className="size-4 transition-transform duration-200 group-data-popup-open:rotate-180" />
         </span>
       </Menu.Trigger>
       <Menu.Portal>
