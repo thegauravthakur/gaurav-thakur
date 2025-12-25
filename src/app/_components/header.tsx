@@ -5,8 +5,8 @@ import { cn } from "@/app/utilities/tailwind";
 import { iconStyles, linkStyles } from "@/app/_styles/common";
 import { ViewTransition } from "react";
 import { MobileMenu } from "@/app/_components/mobile-menu";
-import { Nav } from "@/app/_components/home/header";
 import { DesktopViewTransition } from "@/app/_components/desktop-view-transition";
+import { MobileNav, Nav } from "@/app/_components/nav/nav";
 
 export const links = [
   { label: "Home", href: "/" },
@@ -25,7 +25,7 @@ export function Header() {
         </Link>
       </h1>
       <div className="hidden flex-1 justify-center md:flex">
-        <ViewTransition name="nav">
+        <ViewTransition name="nav-desktop">
           <Nav />
         </ViewTransition>
       </div>
@@ -45,7 +45,9 @@ export function Header() {
           </button>
         </li>
         <li className="flex items-center md:hidden">
-          <MobileMenu />
+          <ViewTransition name="nav-mobile">
+            <MobileNav />
+          </ViewTransition>
         </li>
       </ul>
     </header>

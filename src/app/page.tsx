@@ -11,27 +11,13 @@ export default function Page() {
       <div className="mx-auto max-w-2xl px-6 py-16 md:py-24">
         <section className="mb-12">
           <DesktopMobile
-            desktop={<Header />}
-            mobile={
-              <StaggerWrapper>
-                <Header avoidTransition />
-              </StaggerWrapper>
-            }
+            desktop={<Header isMobile={false} />}
+            mobile={<Header isMobile />}
           />
         </section>
-
-        <DesktopMobile
-          desktop={
-            <StaggerWrapper className="mb-12" delay={0}>
-              <Intro />
-            </StaggerWrapper>
-          }
-          mobile={
-            <StaggerWrapper className="mb-12" delay={0.25}>
-              <Intro />
-            </StaggerWrapper>
-          }
-        />
+        <StaggerWrapper className="mb-12" delay={0}>
+          <Intro />
+        </StaggerWrapper>
         <StaggerWrapper className="mb-12" delay={0.5}>
           <WorkExperienceSection />
         </StaggerWrapper>

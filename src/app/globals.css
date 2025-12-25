@@ -32,3 +32,8 @@
     }
   }
 }
+
+::view-transition-old(nav-mobile-text),
+::view-transition-new(nav-mobile-text) {
+  opacity: 0;
+}
