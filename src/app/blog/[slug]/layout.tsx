@@ -11,8 +11,8 @@ interface LayoutProps {
 }
 
 const proseStyles = cn(
+  "prose-a:font-medium prose-a:text-red-600 prose-a:underline prose-a:decoration-red-200 prose-a:underline-offset-2 prose-a:hover:decoration-red-600",
   "prose prose-pre:border",
-  "prose-a:text-red-700 prose-a:outline-red-700 prose-a:no-underline hover:prose-a:underline",
   "prose-img:rounded-lg",
 );
 
@@ -33,7 +33,7 @@ export default async function LayoutProps({ children, params }: LayoutProps) {
     <div className="mx-auto max-w-[100vw] md:max-w-3xl">
       <main
         className={cn(
-          "mb-10 mt-12 max-w-none px-4 md:mt-20 md:px-6",
+          "mt-12 mb-10 max-w-none px-4 md:mt-20 md:px-6",
           proseStyles,
         )}
       >

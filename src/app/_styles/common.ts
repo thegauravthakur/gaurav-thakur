@@ -5,5 +5,5 @@ export const iconStyles = cn(
 );
 
 export const linkStyles = cn(
-  "hover:text-red-600 transition-colors duration-200 ease-in-out outline-red-600 hover:underline",
+  "hover:text-red-600 transition-colors duration-200 ease-in-out outline-red-600 hover:underline block",
 );

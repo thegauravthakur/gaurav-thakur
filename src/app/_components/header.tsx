@@ -4,7 +4,6 @@ import Link from "next/link";
 import { cn } from "@/app/utilities/tailwind";
 import { iconStyles, linkStyles } from "@/app/_styles/common";
 import { ViewTransition } from "react";
-import { MobileMenu } from "@/app/_components/mobile-menu";
 import { DesktopViewTransition } from "@/app/_components/desktop-view-transition";
 import { MobileNav, Nav } from "@/app/_components/nav/nav";
 
@@ -18,11 +17,11 @@ export function Header() {
   return (
     <header className="mx-auto flex w-full max-w-(--breakpoint-xl) items-center justify-between px-6 py-2 md:justify-normal">
       <h1 className="font-semibold">
-        <Link href="/" className={cn(linkStyles)}>
-          <DesktopViewTransition name="brand-name">
-            <span>Gaurav Thakur</span>
-          </DesktopViewTransition>
-        </Link>
+        <DesktopViewTransition name="brand-name">
+          <Link href="/" className={cn(linkStyles)}>
+            Gaurav Thakur
+          </Link>
+        </DesktopViewTransition>
       </h1>
       <div className="hidden flex-1 justify-center md:flex">
         <ViewTransition name="nav-desktop">
