@@ -18,13 +18,16 @@ export default function LayoutProps({ children }: LayoutProps) {
 }
 
 export const metadata: Metadata = {
-  title: "Gaurav's Blog",
+  title: "Blog",
   description:
-    "Hi, welcome to the personal blog of Gaurav. I write about things I learn, things I find interesting and things I find useful.",
+    "Articles about web development, React, Next.js, TypeScript, and things I learn along the way.",
+  alternates: {
+    canonical: "https://gauravthakur.com/blog",
+  },
   openGraph: {
     title: "Gaurav's Blog",
     description:
-      "Hi, welcome to the personal blog of Gaurav. I write about things I learn, things I find interesting and things I find useful.",
+      "Articles about web development, React, Next.js, TypeScript, and things I learn along the way.",
     images: [
       {
         url: "https://res.cloudinary.com/gauravthakur/image/upload/s--Px_L7Ow3--/f_auto,q_auto/v1/blog/jye1cxp2bkyxtcufmq7k",

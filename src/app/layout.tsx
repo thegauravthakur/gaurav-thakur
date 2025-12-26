@@ -21,9 +21,33 @@ interface RootLayoutProps {
   children: ReactNode;
 }
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Gaurav Thakur",
+  url: "https://gauravthakur.com",
+  image: "https://res.cloudinary.com/gauravthakur/image/upload/s--RQWMnUhR--/f_auto,q_auto/v1/blog/twtcjh6eodnoveygvscm",
+  jobTitle: "Software Engineer",
+  worksFor: {
+    "@type": "Organization",
+    name: "Zepto",
+  },
+  sameAs: [
+    "https://twitter.com/AskGauravThakur",
+    "https://linkedin.com/in/AskGauravThakur",
+    "https://github.com/AskGauravThakur",
+  ],
+};
+
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className={cn(
           geistSans.variable,
@@ -37,24 +61,67 @@ export default function RootLayout({ children }: RootLayoutProps) {
   );
 }
 
-export const metadata: Metadata = {
-  title: "Gaurav Thakur",
+const siteConfig = {
+  name: "Gaurav Thakur",
   description:
-    "Hey there, My name is Gaurav Thakur. I'm a frontend engineer with a passion for web technologies. I create beautiful, performant and accessible web experiences for all.",
-  alternates: {
-    canonical: "https://garuavthakur.com",
+    "Frontend engineer at Zepto. I build things for the web and write about stuff I learn along the way.",
+  url: "https://gauravthakur.com",
+  ogImage:
+    "https://res.cloudinary.com/gauravthakur/image/upload/s--RQWMnUhR--/f_auto,q_auto/v1/blog/twtcjh6eodnoveygvscm",
+  twitter: "@AskGauravThakur",
+};
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
   },
+  description: siteConfig.description,
+  keywords: [
+    "Gaurav Thakur",
+    "Frontend Engineer",
+    "Web Developer",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Web Performance",
+    "Zepto",
+  ],
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  creator: siteConfig.name,
   openGraph: {
-    title: "Gaurav Thakur",
-    description:
-      "Hey there, My name is Gaurav Thakur. I'm a frontend engineer with a passion for web technologies. I create beautiful, performant and accessible web experiences for all.",
+    type: "website",
+    locale: "en_US",
+    url: siteConfig.url,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    siteName: siteConfig.name,
     images: [
       {
-        url: "https://res.cloudinary.com/gauravthakur/image/upload/s--RQWMnUhR--/f_auto,q_auto/v1/blog/twtcjh6eodnoveygvscm",
+        url: siteConfig.ogImage,
         width: 1200,
         height: 630,
-        alt: "Gaurav Thakur",
+        alt: siteConfig.name,
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
+    creator: siteConfig.twitter,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };

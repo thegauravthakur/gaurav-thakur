@@ -29,7 +29,7 @@ export default async function LayoutProps({ children, params }: LayoutProps) {
       <Footer
         className="px-4 md:px-6"
         shareText={metadata?.title ?? ""}
-        shareUrl={`https://gauravthakur.in/blog/${slug}`}
+        shareUrl={`https://gauravthakur.com/blog/${slug}`}
       />
     </Fragment>
   );
