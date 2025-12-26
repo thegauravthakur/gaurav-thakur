@@ -1,5 +1,6 @@
 import { Fragment, ReactNode, ViewTransition } from "react";
 import { Header } from "@/app/_components/header";
+import { BlogContentWrapper } from "@/app/blog/[slug]/components/blog-content-wrapper";
 
 interface LayoutProps {
   children: ReactNode;
@@ -11,7 +12,7 @@ export default function LayoutProps({ children }: LayoutProps) {
       <ViewTransition>
         <Header />
       </ViewTransition>
-      {children}
+      <BlogContentWrapper>{children}</BlogContentWrapper>
     </Fragment>
   );
 }

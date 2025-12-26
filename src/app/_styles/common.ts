@@ -7,3 +7,9 @@ export const iconStyles = cn(
 export const linkStyles = cn(
   "hover:text-red-600 transition-colors duration-200 ease-in-out outline-red-600 hover:underline block",
 );
+
+export const proseStyles = cn(
+  "prose-a:font-medium prose-a:text-red-600 prose-a:underline prose-a:decoration-red-200 prose-a:underline-offset-2 prose-a:hover:decoration-red-600",
+  "prose prose-pre:border",
+  "prose-img:rounded-lg",
+);
