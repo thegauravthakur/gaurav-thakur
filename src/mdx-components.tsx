@@ -1,7 +1,7 @@
 import type { MDXComponents } from "mdx/types";
 import { Code } from "bright";
-import { Heading } from "@/app/blog/_mdx-components/heading";
-import { Link } from "@/app/blog/_mdx-components/link";
+import { Heading } from "@/app/(tabs)/blog/_mdx-components/heading";
+import { Link } from "@/app/(tabs)/blog/_mdx-components/link";
 import { ReactNode } from "react";
 
 Code.lineNumbers = true;

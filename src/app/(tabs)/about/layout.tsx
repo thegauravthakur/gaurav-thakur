@@ -1,6 +1,5 @@
-import { Fragment, ReactNode, ViewTransition } from "react";
-import { Header } from "@/app/_components/header";
-import { BlogContentWrapper } from "@/app/blog/[slug]/components/blog-content-wrapper";
+import { ReactNode } from "react";
+import { BlogContentWrapper } from "@/app/(tabs)/blog/[slug]/components/blog-content-wrapper";
 import { Metadata } from "next";
 
 interface LayoutProps {
@@ -8,14 +7,7 @@ interface LayoutProps {
 }
 
 export default function LayoutProps({ children }: LayoutProps) {
-  return (
-    <Fragment>
-      <ViewTransition>
-        <Header />
-      </ViewTransition>
-      <BlogContentWrapper>{children}</BlogContentWrapper>
-    </Fragment>
-  );
+  return <BlogContentWrapper>{children}</BlogContentWrapper>;
 }
 
 export const metadata: Metadata = {

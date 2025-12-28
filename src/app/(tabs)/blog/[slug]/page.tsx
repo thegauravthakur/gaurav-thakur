@@ -1,4 +1,4 @@
-import { Title } from "@/app/blog/_components/title";
+import { Title } from "@/app/(tabs)/blog/_components/title";
 import { Metadata } from "next";
 
 interface PageProps {

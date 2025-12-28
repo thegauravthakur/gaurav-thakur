@@ -19,7 +19,7 @@ export function Article({
 }: ArticleProps) {
   return (
     <Link
-      href={`/blog/${slug}`}
+      href={`/src/app/(tabs)/blog/${slug}`}
       className={cn(
         "group inline-block h-full rounded-lg border transition-all",
         "outline-red-600 hover:border-transparent hover:outline-2 hover:outline-offset-2 hover:outline-solid",

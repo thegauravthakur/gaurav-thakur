@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Fragment } from "react";
 import { Footer } from "@/app/_components/footer";
-import { Article } from "@/app/blog/_components/article";
+import { Article } from "@/app/(tabs)/blog/_components/article";
 import calculateReadingTime from "reading-time";
 import * as fs from "node:fs";
-import { getAllPostSlugs } from "@/app/blog/[slug]/layout";
+import { getAllPostSlugs } from "@/app/(tabs)/blog/[slug]/layout";
 import { StaggerWrapper } from "@/components/stagger-wrapper";
 
 interface PageMetadata {
@@ -28,7 +28,7 @@ async function fetchAllPostMetadata(): Promise<MetadataWithSlug[]> {
   const postsWithMetadata = await Promise.all(
     modules.map(async (module) => {
       const { metadata } = await module.module;
-      const path = `./src/app/blog/content/${module.slug}.mdx`;
+      const path = `./src/app/(tabs)/blog/content/${module.slug}.mdx`;
       const content = fs.readFileSync(path, "utf8");
       const readingTime = Math.round(calculateReadingTime(content).minutes);
       return { ...metadata, slug: module.slug, readingTime };

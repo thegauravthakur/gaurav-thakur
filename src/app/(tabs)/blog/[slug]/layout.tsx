@@ -3,7 +3,7 @@ import { Footer } from "@/app/_components/footer";
 import { notFound } from "next/navigation";
 import path from "node:path";
 import fs from "node:fs";
-import { BlogContentWrapper } from "@/app/blog/[slug]/components/blog-content-wrapper";
+import { BlogContentWrapper } from "@/app/(tabs)/blog/[slug]/components/blog-content-wrapper";
 
 interface LayoutProps {
   children: ReactNode;
@@ -11,7 +11,7 @@ interface LayoutProps {
 }
 
 export function getAllPostSlugs() {
-  const _path = path.join(process.cwd(), "src/app/blog/content");
+  const _path = path.join(process.cwd(), "src/app/(tabs)/blog/content");
   const files = fs.readdirSync(_path);
   return files.map((file) => file.replace(".mdx", ""));
 }
