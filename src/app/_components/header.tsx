@@ -44,9 +44,7 @@ export function Header() {
           </button>
         </li>
         <li className="flex items-center md:hidden">
-          <ViewTransition name="nav-mobile">
-            <MobileNav />
-          </ViewTransition>
+          <MobileNav />
         </li>
       </ul>
     </header>

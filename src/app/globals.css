@@ -58,14 +58,14 @@
 
 /* Mobile menu dropdown animations */
 .mobile-menu-popup {
-  transform-origin: var(--transform-origin);
+  transform-origin: top right;
   transition:
-    opacity 150ms ease-out,
-    transform 150ms ease-out;
+    opacity 250ms ease-in-out,
+    transform 250ms ease-in-out;
 }
 
 .mobile-menu-popup[data-starting-style],
 .mobile-menu-popup[data-ending-style] {
   opacity: 0;
-  transform: scale(0.95) translateY(-4px);
+  transform: scale(0);
 }
