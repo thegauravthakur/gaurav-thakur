@@ -28,7 +28,7 @@ export function MobileNav() {
   return (
     <Menu.Root>
       <ViewTransition name="nav-mobile">
-        <Menu.Trigger className="group flex cursor-pointer items-center gap-1 rounded-full bg-white/90 py-2 pr-3 pl-6 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm transition-transform duration-200 select-none active:scale-90">
+        <Menu.Trigger className="group flex cursor-pointer items-center gap-1 rounded-full bg-white/90 py-2 pr-3 pl-6 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm transition-transform duration-100 select-none active:scale-110">
           <span
             className="flex items-center gap-1"
             style={{ viewTransitionName: "nav-mobile-text" }}
