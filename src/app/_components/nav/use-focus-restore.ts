@@ -48,5 +48,10 @@ export function useFocusRestore(href: string) {
     [href],
   );
 
-  return { linkRef, handleFocus };
+  // Save focus state when clicking a nav item (for mouse users)
+  const handleClick = useCallback(() => {
+    sessionStorage.setItem(FOCUS_STORAGE_KEY, href);
+  }, [href]);
+
+  return { linkRef, handleFocus, handleClick };
 }
