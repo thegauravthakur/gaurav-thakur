@@ -23,6 +23,7 @@ export function Article({
       className={cn(
         "group inline-block h-full rounded-lg border transition-all",
         "outline-red-600 hover:border-transparent hover:outline-2 hover:outline-offset-2 hover:outline-solid",
+        "transition-transform duration-250 active:scale-95",
       )}
     >
       <article className={cn("flex h-full flex-col gap-y-4 p-5")} key={title}>

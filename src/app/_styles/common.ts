@@ -5,7 +5,7 @@ export const iconStyles = cn(
 );
 
 export const linkStyles = cn(
-  "hover:text-red-600 transition-colors duration-200 ease-in-out outline-red-600 hover:underline block",
+  "hover:text-red-600 transition-colors duration-200 ease-in-out outline-red-600 hover:underline block active:scale-90 transition-transform duration-250",
 );
 
 export const proseStyles = cn(

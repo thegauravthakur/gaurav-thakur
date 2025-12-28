@@ -9,7 +9,7 @@ import { IoSearchOutline, IoSunnyOutline } from "react-icons/io5";
 export function Nav() {
   return (
     <NavigationMenu.Root className="max-w-min">
-      <NavigationMenu.List className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm">
+      <NavigationMenu.List className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm transition-transform duration-250 in-active:scale-95 in-active:shadow-md">
         {navLinks.map((link) => {
           return (
             <NavItem
@@ -28,7 +28,7 @@ export function MobileNav() {
   return (
     <Menu.Root>
       <ViewTransition name="nav-mobile">
-        <Menu.Trigger className="group flex cursor-pointer items-center gap-1 rounded-full bg-white/90 py-2 pr-3 pl-6 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm transition-transform duration-100 select-none active:scale-110">
+        <Menu.Trigger className="group flex cursor-pointer items-center gap-1 rounded-full bg-white/90 py-2 pr-3 pl-6 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm transition-transform duration-250 select-none active:scale-95 active:shadow-md">
           <span
             className="flex items-center gap-1"
             style={{ viewTransitionName: "nav-mobile-text" }}
@@ -46,7 +46,7 @@ export function MobileNav() {
                 closeOnClick
                 key={link.href + link.label}
                 render={<Link href={link.href} />}
-                className="block rounded-lg px-3 py-2 transition-[colors,transform] duration-200 outline-none active:scale-90"
+                className="block rounded-lg px-3 py-2 active:bg-zinc-900/10"
               >
                 {link.label}
               </Menu.Item>
@@ -55,10 +55,10 @@ export function MobileNav() {
             <Menu.Separator className="my-2 h-px bg-zinc-200" />
 
             <div className="flex gap-1">
-              <Menu.Item className="cursor-pointer rounded-full p-2 transition-[colors,transform] duration-100 outline-none active:scale-90 data-highlighted:bg-red-50 data-highlighted:text-red-600">
+              <Menu.Item className="rounded-full p-2 active:bg-zinc-900/10">
                 <IoSearchOutline fontSize={20} />
               </Menu.Item>
-              <Menu.Item className="cursor-pointer rounded-full p-2 transition-[colors,transform] duration-100 outline-none active:scale-90 data-highlighted:bg-red-50 data-highlighted:text-red-600">
+              <Menu.Item className="rounded-full p-2 active:bg-zinc-900/10">
                 <IoSunnyOutline fontSize={20} />
               </Menu.Item>
             </div>

@@ -27,7 +27,7 @@ export function NavItem({ href, label }: NavItemProps) {
   const isActive = checkIfIsActiveLink(href, pathname);
 
   return (
-    <NavigationMenu.Item>
+    <NavigationMenu.Item className="duration-250 active:scale-95 active:bg-zinc-900/10 active:shadow-md">
       <NavigationMenu.Link
         render={
           <Link
