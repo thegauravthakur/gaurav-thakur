@@ -2,21 +2,24 @@ import { NavItem } from "@/app/_components/nav/nav-item";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Menu } from "@base-ui/react/menu";
 import Link from "next/link";
+import { NavigationMenu } from "@base-ui/react/navigation-menu";
 import { IoSearchOutline, IoSunnyOutline } from "react-icons/io5";
 
 export function Nav() {
   return (
-    <nav className="max-w-min">
-      <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm">
+    <NavigationMenu.Root className="max-w-min">
+      <NavigationMenu.List className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm">
         {navLinks.map((link) => {
           return (
-            <li key={link.href + link.label}>
-              <NavItem href={link.href} label={link.label} />
-            </li>
+            <NavItem
+              href={link.href}
+              label={link.label}
+              key={link.href + link.label}
+            />
           );
         })}
-      </ul>
-    </nav>
+      </NavigationMenu.List>
+    </NavigationMenu.Root>
   );
 }
 
