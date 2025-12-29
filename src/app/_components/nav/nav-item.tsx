@@ -27,7 +27,7 @@ export function NavItem({ href, label }: NavItemProps) {
   const isActive = checkIfIsActiveLink(href, pathname);
 
   return (
-    <NavigationMenu.Item className="duration-250 active:scale-95 active:bg-zinc-900/10 active:shadow-md">
+    <NavigationMenu.Item>
       <NavigationMenu.Link
         render={
           <Link
@@ -35,7 +35,7 @@ export function NavItem({ href, label }: NavItemProps) {
             rel={isExternal ? "noopener noreferrer" : undefined}
             target={isExternal ? "_blank" : undefined}
             className={cn(
-              "relative block px-3 py-2 hover:text-red-500",
+              "relative block px-3 py-2 transition-colors duration-150 hover:text-red-500 active:bg-zinc-900/10 md:active:bg-white",
               isActive && "text-red-500",
             )}
           >

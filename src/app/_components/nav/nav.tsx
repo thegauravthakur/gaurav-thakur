@@ -9,7 +9,7 @@ import { IoSearchOutline, IoSunnyOutline } from "react-icons/io5";
 export function Nav() {
   return (
     <NavigationMenu.Root className="max-w-min">
-      <NavigationMenu.List className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm transition-transform duration-250 in-active:scale-95 in-active:shadow-md">
+      <NavigationMenu.List className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm transition-transform duration-150 ease-out select-none in-active:scale-95 in-active:shadow-md md:in-active:scale-100 md:in-active:shadow-lg">
         {navLinks.map((link) => {
           return (
             <NavItem
@@ -28,13 +28,13 @@ export function MobileNav() {
   return (
     <Menu.Root>
       <ViewTransition name="nav-mobile">
-        <Menu.Trigger className="group flex cursor-pointer items-center gap-1 rounded-full bg-white/90 py-2 pr-3 pl-6 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm transition-transform duration-250 select-none active:scale-95 active:shadow-md">
+        <Menu.Trigger className="group flex cursor-pointer items-center gap-1 rounded-full bg-white/90 py-2 pr-3 pl-6 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm transition-transform duration-150 ease-out select-none active:scale-95 active:shadow-md">
           <span
             className="flex items-center gap-1"
             style={{ viewTransitionName: "nav-mobile-text" }}
           >
             Menu
-            <ChevronDownIcon className="size-4 transition-transform duration-200 group-data-popup-open:rotate-180" />
+            <ChevronDownIcon className="size-4 transition-transform duration-150 group-data-popup-open:rotate-180" />
           </span>
         </Menu.Trigger>
       </ViewTransition>
