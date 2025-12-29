@@ -9,7 +9,7 @@ import { IoSearchOutline, IoSunnyOutline } from "react-icons/io5";
 export function Nav() {
   return (
     <NavigationMenu.Root className="max-w-min">
-      <NavigationMenu.List className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm transition-transform duration-150 ease-out select-none in-active:scale-95 in-active:shadow-md md:in-active:scale-100 md:in-active:shadow-lg">
+      <NavigationMenu.List className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm transition-transform duration-150 ease-out select-none">
         {navLinks.map((link) => {
           return (
             <NavItem
