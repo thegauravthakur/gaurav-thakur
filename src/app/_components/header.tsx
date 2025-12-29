@@ -18,7 +18,13 @@ export function Header() {
     <header className="mx-auto flex w-full max-w-(--breakpoint-xl) items-center justify-between px-6 py-2 md:justify-normal">
       <h1 className="font-semibold">
         <DesktopViewTransition name="brand-name">
-          <Link href="/" className={cn(linkStyles)}>
+          <Link
+            href="/"
+            className={cn(
+              linkStyles,
+              "transition-opacity duration-150 active:opacity-60",
+            )}
+          >
             Gaurav Thakur
           </Link>
         </DesktopViewTransition>
