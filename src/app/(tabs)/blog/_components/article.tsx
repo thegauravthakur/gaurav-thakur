@@ -21,7 +21,7 @@ export function Article({
     <Link
       href={`/blog/${slug}`}
       className={cn(
-        "group inline-block h-full rounded-lg border outline-red-600 transition-transform",
+        "group inline-block h-full rounded-lg shadow-sm ring ring-black/5 outline-red-600 transition-transform",
         "duration-150 active:scale-95",
       )}
     >

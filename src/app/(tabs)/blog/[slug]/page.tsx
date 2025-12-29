@@ -1,3 +1,4 @@
+import { BlogNav } from "@/app/(tabs)/blog/_components/blog-nav";
 import { Title } from "@/app/(tabs)/blog/_components/title";
 import { Metadata } from "next";
 
@@ -11,6 +12,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <article>
+      <BlogNav />
       <Title title={metadata.title} createdAt={metadata.createdAt} />
       <Content />
     </article>
