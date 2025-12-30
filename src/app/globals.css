@@ -70,6 +70,5 @@
 
 .mobile-menu-popup[data-starting-style],
 .mobile-menu-popup[data-ending-style] {
-  opacity: 0;
-  transform: scale(0);
+  @apply opacity-0 scale-95
 }
