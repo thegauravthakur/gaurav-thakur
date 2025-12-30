@@ -11,6 +11,7 @@ interface PageMetadata {
   title: string;
   createdAt: string;
   description: string;
+  isDraft?: boolean;
 }
 
 interface MetadataWithSlug extends PageMetadata {
@@ -41,7 +42,10 @@ async function fetchAllPostMetadata(): Promise<MetadataWithSlug[]> {
 }
 
 export default async function Page() {
-  const metadata = await fetchAllPostMetadata();
+  const _metadata = await fetchAllPostMetadata();
+  const metadata = _metadata.filter(
+    (metadata) => !metadata.isDraft || process.env.NODE_ENV === "development",
+  );
 
   return (
     <Fragment>

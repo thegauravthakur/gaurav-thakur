@@ -23,6 +23,8 @@ export default async function LayoutProps({ children, params }: LayoutProps) {
 
   const { metadata } = await import(`../content/${slug}.mdx`);
 
+  if (metadata?.isDraft && process.env.NODE_ENV === "production") notFound();
+
   return (
     <Fragment>
       <BlogContentWrapper>{children}</BlogContentWrapper>
