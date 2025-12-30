@@ -1,5 +1,7 @@
 import { Title } from "@/app/(tabs)/blog/_components/title";
 import { Metadata } from "next";
+import { ArrowLeftIcon } from "@heroicons/react/16/solid";
+import { Link } from "@/app/_components/ui/link";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -8,9 +10,17 @@ interface PageProps {
 export default async function Page({ params }: PageProps) {
   const { slug } = await params;
   const { default: Content, metadata } = await import(`../content/${slug}.mdx`);
+  console.log(metadata);
 
   return (
     <article>
+      <Link
+        href="/blog"
+        className="group mb-4 inline-flex items-center gap-1.5 text-sm md:mb-6"
+      >
+        <ArrowLeftIcon className="size-3.5 transition-transform duration-150 group-hover:-translate-x-0.5" />
+        All Articles
+      </Link>
       <Title title={metadata.title} createdAt={metadata.createdAt} />
       <Content />
     </article>

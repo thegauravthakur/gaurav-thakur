@@ -14,6 +14,7 @@ export function Link({ className, ...props }: LinkProps) {
       {...props}
       className={cn(
         "text-red-600 underline decoration-red-200 underline-offset-2 hover:decoration-red-600 active:opacity-60",
+        "transition-[color,opacity] duration-150 ease-out",
         className,
       )}
     />
