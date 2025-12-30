@@ -1,6 +1,5 @@
 import { cn } from "@/app/utilities/tailwind";
 import { format } from "date-fns";
-import { Link } from "@/app/_components/ui/link";
 
 interface TitleProps {
   title: string;
