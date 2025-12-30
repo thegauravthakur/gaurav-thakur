@@ -27,7 +27,7 @@ export default async function LayoutProps({ children, params }: LayoutProps) {
     <Fragment>
       <BlogContentWrapper>{children}</BlogContentWrapper>
       <Footer
-        className="px-4 md:px-6"
+        className="mx-auto mt-16 w-full max-w-(--breakpoint-xl) px-4 md:px-6"
         shareText={metadata?.title ?? ""}
         shareUrl={`https://gauravthakur.com/blog/${slug}`}
       />

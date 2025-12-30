@@ -24,6 +24,10 @@
   }
 }
 
+@theme {
+  --scale-97: 0.97;
+}
+
 @utility prose {
   & :where(code) {
     &::before,
