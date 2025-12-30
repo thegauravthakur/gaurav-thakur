@@ -26,7 +26,8 @@ const jsonLd = {
   "@type": "Person",
   name: "Gaurav Thakur",
   url: "https://gauravthakur.com",
-  image: "https://res.cloudinary.com/gauravthakur/image/upload/s--RQWMnUhR--/f_auto,q_auto/v1/blog/twtcjh6eodnoveygvscm",
+  image:
+    "https://res.cloudinary.com/gauravthakur/image/upload/s--RQWMnUhR--/f_auto,q_auto/v1/blog/twtcjh6eodnoveygvscm",
   jobTitle: "Software Engineer",
   worksFor: {
     "@type": "Organization",
@@ -66,9 +67,6 @@ const siteConfig = {
   description:
     "Frontend engineer at Zepto. I build things for the web and write about stuff I learn along the way.",
   url: "https://gauravthakur.com",
-  ogImage:
-    "https://res.cloudinary.com/gauravthakur/image/upload/s--RQWMnUhR--/f_auto,q_auto/v1/blog/twtcjh6eodnoveygvscm",
-  twitter: "@AskGauravThakur",
 };
 
 export const metadata: Metadata = {
@@ -90,29 +88,6 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
   creator: siteConfig.name,
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: siteConfig.url,
-    title: siteConfig.name,
-    description: siteConfig.description,
-    siteName: siteConfig.name,
-    images: [
-      {
-        url: siteConfig.ogImage,
-        width: 1200,
-        height: 630,
-        alt: siteConfig.name,
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: [siteConfig.ogImage],
-    creator: siteConfig.twitter,
-  },
   robots: {
     index: true,
     follow: true,

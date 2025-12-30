@@ -1,3 +1,5 @@
+import { Link } from "@/app/_components/ui/link";
+
 export function WorkExperienceSection() {
   return (
     <section>
@@ -22,15 +24,7 @@ const workExperience = [
     description: (
       <>
         Primarily working on web performance &amp; improving end user experience
-        on{" "}
-        <a
-          href="https://zepto.com"
-          rel="noopener noreferrer"
-          target="_blank"
-          className="underline hover:text-gray-600"
-        >
-          zepto.com
-        </a>
+        on <Link href="https://zepto.com">zepto.com</Link>
       </>
     ),
   },

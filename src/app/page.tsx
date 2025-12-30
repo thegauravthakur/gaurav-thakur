@@ -4,6 +4,7 @@ import { WorkExperienceSection } from "@/app/_components/home/work-experience-se
 import { Header } from "@/app/_components/home/header";
 import { NonScript } from "@/app/_components/home/non-script";
 import { DesktopMobile } from "@/app/_components/desktop-mobile";
+import { Intro } from "@/app/_components/home/intro";
 
 export default function Page() {
   return (
@@ -24,15 +25,6 @@ export default function Page() {
       </div>
       <NonScript style="[data-animate]{opacity:1!important;transform:none!important}" />
     </div>
-  );
-}
-
-function Intro() {
-  return (
-    <p className="text-base leading-relaxed text-gray-800">
-      I&apos;m a software engineer with a passion for web applications. I create
-      beautiful, performant, and accessible web experiences for all.
-    </p>
   );
 }
 
