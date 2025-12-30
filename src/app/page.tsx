@@ -8,7 +8,7 @@ import { Intro } from "@/app/_components/home/intro";
 
 export default function Page() {
   return (
-    <div className="bg-white text-black antialiased">
+    <main className="bg-white text-black antialiased">
       <div className="mx-auto max-w-2xl px-6 py-16 md:py-24">
         <section className="mb-12">
           <DesktopMobile
@@ -24,7 +24,7 @@ export default function Page() {
         </StaggerWrapper>
       </div>
       <NonScript style="[data-animate]{opacity:1!important;transform:none!important}" />
-    </div>
+    </main>
   );
 }
 
