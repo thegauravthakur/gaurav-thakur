@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-function WorkCard({
+export function WorkCard({
   company,
   role,
   period,
@@ -31,7 +31,3 @@ function WorkCard({
     </div>
   );
 }
-
-export const AboutPageMDXComponents = {
-  WorkCard,
-};

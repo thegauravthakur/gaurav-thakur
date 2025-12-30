@@ -22,7 +22,7 @@ export function Article({
       href={`/blog/${slug}`}
       className={cn(
         "group inline-block h-full rounded-lg shadow-sm ring ring-black/5 outline-red-600 transition-transform",
-        "duration-150 active:scale-97",
+        "h-full w-full duration-150 active:scale-97",
       )}
     >
       <article className={cn("flex h-full flex-col gap-y-4 p-5")} key={title}>

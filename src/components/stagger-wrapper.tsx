@@ -2,6 +2,7 @@
 
 import { useAnimate } from "framer-motion/mini";
 import { useEffect, type ReactNode } from "react";
+import { cn } from "@/app/utilities/tailwind";
 
 interface StaggerWrapperProps {
   children: ReactNode;
@@ -36,7 +37,7 @@ export function StaggerWrapper({
   return (
     <div
       ref={scope}
-      className={className}
+      className={cn("h-full w-full", className)}
       data-animate
       style={{ opacity: initialOpacity, transform: "translateY(20px)" }}
     >

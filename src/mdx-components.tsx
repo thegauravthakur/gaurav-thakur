@@ -2,7 +2,6 @@ import type { MDXComponents } from "mdx/types";
 import { Code } from "bright";
 import { Heading } from "@/app/(tabs)/blog/_mdx-components/heading";
 import { Link } from "@/app/(tabs)/blog/_mdx-components/link";
-import { AboutPageMDXComponents } from "@/app/(tabs)/about/mdx-components";
 import { CloudinaryImage } from "@/app/(tabs)/blog/_mdx-components/cloudinary-image";
 import { ImageGrid } from "@/app/(tabs)/blog/_mdx-components/image-grid";
 
@@ -22,6 +21,5 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h6: (props) => <Heading level={6} {...props} />,
     Image: CloudinaryImage,
     ImageGrid: ImageGrid,
-    ...AboutPageMDXComponents,
   };
 }

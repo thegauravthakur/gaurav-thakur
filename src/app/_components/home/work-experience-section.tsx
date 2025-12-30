@@ -10,7 +10,7 @@ export function WorkExperienceSection() {
             <h3 className="text-base font-semibold">{job.company}</h3>
             <p className="text-sm text-gray-600">{job.period}</p>
           </div>
-          <p className="text-sm text-gray-700">{job.description}</p>
+          <p className="text-sm">{job.description}</p>
         </div>
       ))}
     </section>
