@@ -2,6 +2,7 @@ import { Link } from "@/app/_components/ui/link";
 import NextLink from "next/link";
 import { format } from "date-fns";
 import { getRecentPosts } from "@/app/utilities/blog";
+import { ArrowRightIcon } from "@heroicons/react/16/solid";
 
 export async function RecentWritingsSection() {
   const recentPosts = await getRecentPosts(3);
@@ -10,8 +11,12 @@ export async function RecentWritingsSection() {
     <section>
       <div className="mb-6 flex items-baseline justify-between">
         <h2 className="text-xl font-semibold">Recent Writings</h2>
-        <Link href="/blog" className="text-sm">
-          View all →
+        <Link
+          href="/blog"
+          className="group inline-flex items-center gap-1.5 text-sm"
+        >
+          <span>View all</span>
+          <ArrowRightIcon className="size-3.5 transition-transform duration-150 group-hover:translate-x-0.5" />
         </Link>
       </div>
       <div className="flex flex-col gap-4">
