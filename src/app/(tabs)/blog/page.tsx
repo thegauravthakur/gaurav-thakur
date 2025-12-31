@@ -16,7 +16,7 @@ export default async function Page() {
         <ul className="grid h-max grid-cols-1 gap-6 lg:grid-cols-2">
           {posts.map((post, index) => (
             <li key={post.slug}>
-              <AnimateInView delay={index * 0.1}>
+              <AnimateInView delay={index * 0.05}>
                 <Article {...post} />
               </AnimateInView>
             </li>
