@@ -10,7 +10,6 @@ interface PageProps {
 export default async function Page({ params }: PageProps) {
   const { slug } = await params;
   const { default: Content, metadata } = await import(`../content/${slug}.mdx`);
-  console.log(metadata);
 
   return (
     <article>
