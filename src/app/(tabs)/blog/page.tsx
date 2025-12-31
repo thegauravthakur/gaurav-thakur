@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Fragment } from "react";
 import { Footer } from "@/app/_components/footer";
 import { Article } from "@/app/(tabs)/blog/_components/article";
-import { StaggerWrapper } from "@/components/stagger-wrapper";
+import { AnimateInView } from "@/components/animate-in-view";
 import { getAllPosts } from "@/app/utilities/blog";
 
 export const dynamic = "force-static";
@@ -16,9 +16,9 @@ export default async function Page() {
         <ul className="grid h-max grid-cols-1 gap-6 lg:grid-cols-2">
           {posts.map((post, index) => (
             <li key={post.slug}>
-              <StaggerWrapper delay={index * 0.1} duration={0.25}>
+              <AnimateInView delay={index * 0.1}>
                 <Article {...post} />
-              </StaggerWrapper>
+              </AnimateInView>
             </li>
           ))}
         </ul>

@@ -1,19 +1,19 @@
 import { ReactNode } from "react";
 import { FaGithub } from "react-icons/fa6";
 import { HiExternalLink } from "react-icons/hi";
-import { StaggerWrapper } from "@/components/stagger-wrapper";
+import { AnimateInView } from "@/components/animate-in-view";
 
 export default function Page() {
   return (
     <div className="bg-white text-black antialiased">
       <div className="mx-auto max-w-2xl px-6 py-16 md:py-24">
-        <StaggerWrapper>
+        <AnimateInView>
           <h1 className="mb-8 text-3xl font-bold tracking-tight sm:text-4xl">
             Projects
           </h1>
-        </StaggerWrapper>
+        </AnimateInView>
         {projects.map((project, index) => (
-          <StaggerWrapper key={project.name} delay={(index + 1) * 0.2}>
+          <AnimateInView key={project.name} delay={(index + 1) * 0.1}>
             <div className={index < projects.length - 1 ? "mb-8" : ""}>
               <div className="mb-1 flex items-center gap-3">
                 <h2 className="text-base font-semibold">{project.name}</h2>
@@ -46,7 +46,7 @@ export default function Page() {
                 {project.description}
               </p>
             </div>
-          </StaggerWrapper>
+          </AnimateInView>
         ))}
       </div>
     </div>

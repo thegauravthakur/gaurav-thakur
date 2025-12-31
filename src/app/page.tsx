@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { StaggerWrapper } from "@/components/stagger-wrapper";
+import { AnimateInView } from "@/components/animate-in-view";
 import { WorkExperienceSection } from "@/app/_components/home/work-experience-section";
 import { RecentWritingsSection } from "@/app/_components/home/recent-writings-section";
 import { Header } from "@/app/_components/home/header";
-import { NonScript } from "@/app/_components/home/non-script";
 import { DesktopMobile } from "@/app/_components/desktop-mobile";
 import { Intro } from "@/app/_components/home/intro";
 
@@ -17,19 +16,18 @@ export default function Page() {
             mobile={<Header isMobile />}
           />
         </section>
-        <StaggerWrapper className="mb-10" delay={0}>
+        <AnimateInView className="mb-10">
           <Intro />
-        </StaggerWrapper>
+        </AnimateInView>
         <hr className="mb-10 border-gray-100" />
-        <StaggerWrapper className="mb-10" delay={0.25}>
+        <AnimateInView className="mb-10" delay={0.1}>
           <WorkExperienceSection />
-        </StaggerWrapper>
+        </AnimateInView>
         <hr className="mb-10 border-gray-100" />
-        <StaggerWrapper delay={0.5}>
+        <AnimateInView delay={0.2}>
           <RecentWritingsSection />
-        </StaggerWrapper>
+        </AnimateInView>
       </div>
-      <NonScript style="[data-animate]{opacity:1!important;transform:none!important}" />
     </main>
   );
 }
