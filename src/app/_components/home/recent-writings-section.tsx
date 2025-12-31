@@ -22,7 +22,7 @@ export async function RecentWritingsSection() {
             className="group -mx-3 rounded-lg px-3 py-3 transition-colors duration-150 hover:bg-gray-50 active:bg-gray-100"
           >
             <article className="flex flex-col gap-1">
-              <h3 className="font-medium text-gray-900 group-hover:text-red-600">
+              <h3 className="font-medium text-gray-900 group-hover:text-red-600 group-hover:underline">
                 {post.title}
               </h3>
               <p className="line-clamp-2 text-sm leading-relaxed text-gray-700">
