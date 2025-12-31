@@ -79,4 +79,14 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  twitter: {
+    card: "summary_large_image",
+    creator: "@gauravcodes",
+    site: "@gauravcodes",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: siteConfig.name,
+  },
 };

@@ -22,8 +22,9 @@ export default async function Page() {
       </main>
       <Footer
         className="mx-auto mt-16 w-full max-w-(--breakpoint-xl) px-4 md:px-6"
-        shareText="Take a look at Gaurav Thakur's blog on creating a better web experience for everyone!"
-        shareUrl="https://gauravthakur.in/blog"
+        shareTitle="Gaurav's Blog"
+        shareText="Articles about web development, React, Next.js, TypeScript, and things I learn along the way."
+        shareUrl="https://gauravthakur.com/blog"
       />
     </Fragment>
   );

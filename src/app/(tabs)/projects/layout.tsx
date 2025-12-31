@@ -10,15 +10,15 @@ export default function LayoutProps({ children }: LayoutProps) {
 }
 
 export const metadata: Metadata = {
-  title: "Resume",
+  title: "Projects",
   description:
-    "Software Engineer with 4+ years of experience in frontend development. Currently at Zepto working on web performance. Skills: React, Next.js, TypeScript, TailwindCSS.",
+    "Side projects and open source work by Gaurav Thakur. Including Ensite for OG image generation and Vicks, a lightweight fetch wrapper.",
   alternates: {
-    canonical: "https://gauravthakur.com/resume",
+    canonical: "https://gauravthakur.com/projects",
   },
   openGraph: {
-    title: "Resume - Gaurav Thakur",
+    title: "Projects - Gaurav Thakur",
     description:
-      "Software Engineer with 4+ years of experience in frontend development. Currently at Zepto working on web performance.",
+      "Side projects and open source work by Gaurav Thakur. Including Ensite for OG image generation and Vicks, a lightweight fetch wrapper.",
   },
 };
