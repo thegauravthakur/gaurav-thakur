@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { AnimateInView } from "@/components/animate-in-view";
 import { WorkExperienceSection } from "@/app/_components/home/work-experience-section";
 import { RecentWritingsSection } from "@/app/_components/home/recent-writings-section";
 import { Header } from "@/app/_components/home/header";
@@ -16,17 +15,17 @@ export default function Page() {
             mobile={<Header isMobile />}
           />
         </section>
-        <AnimateInView className="mb-10">
+        <section className="mb-10">
           <Intro />
-        </AnimateInView>
+        </section>
         <hr className="mb-10 border-gray-100" />
-        <AnimateInView className="mb-10" delay={0.1}>
+        <section className="mb-10">
           <WorkExperienceSection />
-        </AnimateInView>
+        </section>
         <hr className="mb-10 border-gray-100" />
-        <AnimateInView delay={0.2}>
+        <section>
           <RecentWritingsSection />
-        </AnimateInView>
+        </section>
       </div>
     </main>
   );

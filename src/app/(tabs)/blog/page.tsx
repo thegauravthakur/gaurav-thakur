@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Fragment } from "react";
 import { Footer } from "@/app/_components/footer";
 import { Article } from "@/app/(tabs)/blog/_components/article";
-import { AnimateInView } from "@/components/animate-in-view";
 import { getAllPosts } from "@/app/utilities/blog";
 
 export const dynamic = "force-static";
@@ -14,11 +13,9 @@ export default async function Page() {
     <Fragment>
       <main className="mx-auto mt-8 flex flex-1 px-4 md:max-w-(--breakpoint-xl) md:px-6 lg:mt-16">
         <ul className="grid h-max grid-cols-1 gap-6 lg:grid-cols-2">
-          {posts.map((post, index) => (
+          {posts.map((post) => (
             <li key={post.slug}>
-              <AnimateInView delay={index * 0.05}>
-                <Article {...post} />
-              </AnimateInView>
+              <Article {...post} />
             </li>
           ))}
         </ul>

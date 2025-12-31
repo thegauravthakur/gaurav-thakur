@@ -1,52 +1,50 @@
 import { ReactNode } from "react";
 import { FaGithub } from "react-icons/fa6";
 import { HiExternalLink } from "react-icons/hi";
-import { AnimateInView } from "@/components/animate-in-view";
 
 export default function Page() {
   return (
     <div className="bg-white text-black antialiased">
       <div className="mx-auto max-w-2xl px-6 py-16 md:py-24">
-        <AnimateInView>
-          <h1 className="mb-8 text-3xl font-bold tracking-tight sm:text-4xl">
-            Projects
-          </h1>
-        </AnimateInView>
+        <h1 className="mb-8 text-3xl font-bold tracking-tight sm:text-4xl">
+          Projects
+        </h1>
         {projects.map((project, index) => (
-          <AnimateInView key={project.name} delay={(index + 1) * 0.1}>
-            <div className={index < projects.length - 1 ? "mb-8" : ""}>
-              <div className="mb-1 flex items-center gap-3">
-                <h2 className="text-base font-semibold">{project.name}</h2>
-                <div className="flex items-center gap-2">
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                      aria-label={`${project.name} on GitHub`}
-                      className="text-gray-500 transition-colors hover:text-gray-800"
-                    >
-                      <FaGithub size={18} />
-                    </a>
-                  )}
-                  {project.website && (
-                    <a
-                      href={project.website}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                      aria-label={`Visit ${project.name}`}
-                      className="text-gray-500 transition-colors hover:text-gray-800"
-                    >
-                      <HiExternalLink size={18} />
-                    </a>
-                  )}
-                </div>
+          <div
+            className={index < projects.length - 1 ? "mb-8" : ""}
+            key={project.name}
+          >
+            <div className="mb-1 flex items-center gap-3">
+              <h2 className="text-base font-semibold">{project.name}</h2>
+              <div className="flex items-center gap-2">
+                {project.github && (
+                  <a
+                    href={project.github}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    aria-label={`${project.name} on GitHub`}
+                    className="text-gray-500 transition-colors hover:text-gray-800"
+                  >
+                    <FaGithub size={18} />
+                  </a>
+                )}
+                {project.website && (
+                  <a
+                    href={project.website}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    aria-label={`Visit ${project.name}`}
+                    className="text-gray-500 transition-colors hover:text-gray-800"
+                  >
+                    <HiExternalLink size={18} />
+                  </a>
+                )}
               </div>
-              <p className="text-sm leading-relaxed text-gray-700">
-                {project.description}
-              </p>
             </div>
-          </AnimateInView>
+            <p className="text-sm leading-relaxed text-gray-700">
+              {project.description}
+            </p>
+          </div>
         ))}
       </div>
     </div>
