@@ -26,6 +26,7 @@
 
 @theme {
   --scale-97: 0.97;
+  --font-sans: var(--font-geist-sans);
 }
 
 @utility prose {
