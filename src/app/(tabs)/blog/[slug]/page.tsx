@@ -15,7 +15,7 @@ export default async function Page({ params }: PageProps) {
     <article>
       <Link
         href="/blog"
-        className="group mb-4 inline-flex items-center gap-1.5 text-sm md:mb-6"
+        className="group not-prose mb-4 inline-flex items-center gap-1.5 text-sm md:mb-6"
       >
         <ArrowLeftIcon className="size-3.5 transition-transform duration-150 group-hover:-translate-x-0.5" />
         All Articles

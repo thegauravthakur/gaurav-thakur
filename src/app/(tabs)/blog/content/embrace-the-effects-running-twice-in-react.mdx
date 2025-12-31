@@ -4,18 +4,18 @@ only occurs in development with the strict mode on. In production, all component
 
 ```javascript
 export default function App() {
-    useLayoutEffect(() => {
-        console.log('useLayoutEffect: effect called');
-    }, []);
+  useLayoutEffect(() => {
+    console.log("useLayoutEffect: effect called");
+  }, []);
 
-    useEffect(() => {
-        console.log('useEffect: effect called');
-    }, []);
+  useEffect(() => {
+    console.log("useEffect: effect called");
+  }, []);
 
   return (
-      <div>
-        <p>hello world</p>
-      </div>
+    <div>
+      <p>hello world</p>
+    </div>
   );
 }
 ```
@@ -23,7 +23,12 @@ export default function App() {
 Due to this behavior, all the effects (`useEffect` and `useLayoutEffect`) will run twice. Running the above component
 in React 18 will display the below results
 
-<img height="506" width="962px" alt="console output with effect being called twice" src="https://res.cloudinary.com/gauravthakur/image/upload/s--bLGtEsUw--/v1689436203/blog/console-output-with-effect-called-twice_wdhuxt.webp" />
+<img
+  height="506"
+  width="962px"
+  alt="console output with effect being called twice"
+  src="https://res.cloudinary.com/gauravthakur/image/upload/s--bLGtEsUw--/v1689436203/blog/console-output-with-effect-called-twice_wdhuxt.webp"
+/>
 
 In the beginning, it may seem like an odd behavior from React, but later in the post we will explore the reason behind
 it and why we should embrace it rather than consider it a bug.
@@ -42,20 +47,20 @@ when the user returns to the original screen, it will mount again.
 
 ```javascript
 function ChatScreen() {
-    useEffect(() => {
-       const {connect, connection} = dummyServer();
-       connect();
-       connection.on(() => {
-           console.log('connected');
-       })
-    }, []);
+  useEffect(() => {
+    const { connect, connection } = dummyServer();
+    connect();
+    connection.on(() => {
+      console.log("connected");
+    });
+  }, []);
 
-    return (
-        <div>
-            <p>Chat Screen</p>
-            <a href='/'>Go to home page</a>
-        </div>
-    )
+  return (
+    <div>
+      <p>Chat Screen</p>
+      <a href="/">Go to home page</a>
+    </div>
+  );
 }
 ```
 
@@ -70,21 +75,21 @@ wait for support requests to come in. So, what should be done in such a case? Th
 
 ```javascript
 function Chat() {
-    useEffect(() => {
-       const {connect, disconnect, connection} = dummyServer();
-       connect();
-       connection.on(() => {
-           console.log('connected');
-       });
-       return disconnect; // cleanup
-    }, []);
+  useEffect(() => {
+    const { connect, disconnect, connection } = dummyServer();
+    connect();
+    connection.on(() => {
+      console.log("connected");
+    });
+    return disconnect; // cleanup
+  }, []);
 
-    return (
-        <div>
-            <p>Chat Screen</p>
-            <a href='/'>Go to home page</a>
-        </div>
-    )
+  return (
+    <div>
+      <p>Chat Screen</p>
+      <a href="/">Go to home page</a>
+    </div>
+  );
 }
 ```
 
@@ -99,8 +104,10 @@ logic fails with multiple effect calls. It will help us to make our components f
 edge case free.
 
 export const metadata = {
-    title: 'Embrace the "effects" running twice in ReactJS',
-    description: 'As per the React documentation, whenever a component mounts for the first time, React will unmount and mount it again. In the beginning, it may seem like an odd behavior from React, but in the post we will explore why we should embrace it rather than consider it a bug.',
-    metaDescription: 'Most React developers don\'t understand why effects run twice. Here we cover the reasons to embrace it rather than consider it a bug',
-    createdAt: 'May 29, 2022',
-}
+  title: 'Embrace the "effects" running twice in ReactJS',
+  description:
+    "As per the React documentation, whenever a component mounts for the first time, React will unmount and mount it again. In the beginning, it may seem like an odd behavior from React, but in the post we will explore why we should embrace it rather than consider it a bug.",
+  metaDescription:
+    "Most React developers don't understand why effects run twice. Here we cover the reasons to embrace it rather than consider it a bug",
+  createdAt: "May 29, 2022",
+};
