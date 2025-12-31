@@ -1,14 +1,29 @@
 import { WorkCard } from "./work-card";
+import { ViewTransition } from "react";
 
 # Hi, I'm Gaurav
 
-        <Image
-          src="/media/profile.png"
-          alt="Gaurav Thakur"
-          width={384}
-          height={384}
-          className="mx-auto rounded-full object-cover size-48 md:float-right not-prose"
-        />
+<ViewTransition name="profile-image-desktop">
+  <Image
+    src="/media/profile.png"
+    alt="Gaurav Thakur"
+    width={384}
+    height={384}
+    className="not-prose mx-auto size-48 rounded-full object-cover hidden md:inline-block md:float-right"
+  />
+
+</ViewTransition>
+
+<ViewTransition name="profile-image-mobile">
+  <Image
+    src="/media/profile.png"
+    alt="Gaurav Thakur"
+    width={384}
+    height={384}
+    className="not-prose mx-auto size-48 rounded-full object-cover md:hidden"
+  />
+
+</ViewTransition>
 
 I'm a software engineer with a passion for web applications. I currently work at Zepto, mostly focusing on web performance and improving the overall user experience. Before this, I worked at JioMart.
 

@@ -7,16 +7,24 @@ interface HeaderProps {
 }
 
 export function Header({ isMobile }: HeaderProps) {
+  const photo = (
+    <CloudinaryImage
+      src="/media/profile.png"
+      alt="Gaurav Thakur"
+      width={160}
+      height={160}
+      className="size-20 rounded-full object-cover md:size-22"
+    />
+  );
+
   return (
     <section>
       <div className="mb-6 flex items-center gap-4">
-        <CloudinaryImage
-          src="/media/profile.png"
-          alt="Gaurav Thakur"
-          width={160}
-          height={160}
-          className="size-20 rounded-full object-cover md:size-22"
-        />
+        {isMobile ? (
+          <ViewTransition name={"profile-image-mobile"}>{photo}</ViewTransition>
+        ) : (
+          <ViewTransition name="profile-image-desktop">{photo}</ViewTransition>
+        )}
         <div>
           <h1 className="text-3xl font-bold md:text-4xl">
             {isMobile ? (
