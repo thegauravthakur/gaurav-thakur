@@ -6,11 +6,11 @@ export function WorkExperienceSection() {
       <h2 className="mb-6 text-xl font-semibold">Work Experience</h2>
       {workExperience.map((job, index) => (
         <div key={job.company} className={index < 2 ? "mb-8" : ""}>
-          <div className="mb-1 flex items-start justify-between">
+          <div className="mb-1 flex items-start justify-between gap-4">
             <h3 className="text-base font-semibold">{job.company}</h3>
-            <p className="text-xs text-gray-600">{job.period}</p>
+            <p className="shrink-0 text-sm text-gray-500">{job.period}</p>
           </div>
-          <p className="text-sm text-gray-700">{job.description}</p>
+          <p className="text-base leading-relaxed text-gray-700">{job.description}</p>
         </div>
       ))}
     </section>

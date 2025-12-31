@@ -31,7 +31,7 @@ export function NavItem({ href, label }: NavItemProps) {
       rel={isExternal ? "noopener noreferrer" : undefined}
       target={isExternal ? "_blank" : undefined}
       className={cn(
-        "relative block rounded-full px-3 py-1.5",
+        "relative block rounded-full px-4 py-1.5",
         "transition-transform duration-150 ease-out",
         "hover:text-red-500 active:scale-97 active:bg-black/5",
         isActive && "text-red-500",

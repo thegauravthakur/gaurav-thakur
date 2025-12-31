@@ -17,13 +17,15 @@ export default function Page() {
             mobile={<Header isMobile />}
           />
         </section>
-        <StaggerWrapper className="mb-12" delay={0}>
+        <StaggerWrapper className="mb-10" delay={0}>
           <Intro />
         </StaggerWrapper>
-        <StaggerWrapper className="mb-12" delay={0.25}>
+        <hr className="mb-10 border-gray-100" />
+        <StaggerWrapper className="mb-10" delay={0.25}>
           <WorkExperienceSection />
         </StaggerWrapper>
-        <StaggerWrapper className="mb-12" delay={0.5}>
+        <hr className="mb-10 border-gray-100" />
+        <StaggerWrapper delay={0.5}>
           <RecentWritingsSection />
         </StaggerWrapper>
       </div>

@@ -22,17 +22,17 @@ export async function RecentWritingsSection() {
             className="group -mx-3 rounded-lg px-3 py-3 transition-colors duration-150 hover:bg-gray-50 active:bg-gray-100"
           >
             <article className="flex flex-col gap-1">
-              <h3 className="font-medium text-gray-900 group-hover:text-red-600 group-hover:underline">
+              <h3 className="text-base font-semibold text-gray-900 group-hover:text-red-600 group-hover:underline">
                 {post.title}
               </h3>
               <p className="line-clamp-2 text-sm leading-relaxed text-gray-700">
                 {post.description}
               </p>
-              <div className="mt-1 flex items-center gap-3 text-xs text-gray-600">
+              <div className="mt-1 flex items-center gap-3 text-sm text-gray-500">
                 <time dateTime={post.createdAt}>
                   {format(new Date(post.createdAt), "MMM d, yyyy")}
                 </time>
-                <span className="text-gray-400">·</span>
+                <span className="text-gray-300">·</span>
                 <span>{post.readingTime} min read</span>
               </div>
             </article>
