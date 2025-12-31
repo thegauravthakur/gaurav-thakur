@@ -8,9 +8,9 @@ export function WorkExperienceSection() {
         <div key={job.company} className={index < 2 ? "mb-8" : ""}>
           <div className="mb-1 flex items-start justify-between">
             <h3 className="text-base font-semibold">{job.company}</h3>
-            <p className="text-sm text-gray-600">{job.period}</p>
+            <p className="text-xs text-gray-600">{job.period}</p>
           </div>
-          <p className="text-sm">{job.description}</p>
+          <p className="text-sm text-gray-700">{job.description}</p>
         </div>
       ))}
     </section>

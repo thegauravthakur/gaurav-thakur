@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { StaggerWrapper } from "@/components/stagger-wrapper";
 import { WorkExperienceSection } from "@/app/_components/home/work-experience-section";
+import { RecentWritingsSection } from "@/app/_components/home/recent-writings-section";
 import { Header } from "@/app/_components/home/header";
 import { NonScript } from "@/app/_components/home/non-script";
 import { DesktopMobile } from "@/app/_components/desktop-mobile";
@@ -19,8 +20,11 @@ export default function Page() {
         <StaggerWrapper className="mb-12" delay={0}>
           <Intro />
         </StaggerWrapper>
-        <StaggerWrapper className="mb-12" delay={0.5}>
+        <StaggerWrapper className="mb-12" delay={0.25}>
           <WorkExperienceSection />
+        </StaggerWrapper>
+        <StaggerWrapper className="mb-12" delay={0.5}>
+          <RecentWritingsSection />
         </StaggerWrapper>
       </div>
       <NonScript style="[data-animate]{opacity:1!important;transform:none!important}" />

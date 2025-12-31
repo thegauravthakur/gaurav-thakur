@@ -1,19 +1,12 @@
 import { Fragment, ReactNode } from "react";
 import { Footer } from "@/app/_components/footer";
 import { notFound } from "next/navigation";
-import path from "node:path";
-import fs from "node:fs";
 import { BlogContentWrapper } from "@/app/(tabs)/blog/[slug]/components/blog-content-wrapper";
+import { getAllPostSlugs } from "@/app/utilities/blog";
 
 interface LayoutProps {
   children: ReactNode;
   params: Promise<{ slug: string }>;
-}
-
-export function getAllPostSlugs() {
-  const _path = path.join(process.cwd(), "src/app/(tabs)/blog/content");
-  const files = fs.readdirSync(_path);
-  return files.map((file) => file.replace(".mdx", ""));
 }
 
 export default async function LayoutProps({ children, params }: LayoutProps) {
