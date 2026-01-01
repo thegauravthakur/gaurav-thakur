@@ -34,7 +34,8 @@ export function NavItem({ href, label }: NavItemProps) {
         "relative block rounded-full px-4 py-1.5",
         "transition-transform duration-150 ease-out",
         "hover:text-red-500 active:scale-97 active:bg-black/5",
-        isActive && "text-red-500",
+        "dark:hover:text-red-400 dark:active:bg-white/10",
+        isActive && "text-red-500 dark:text-red-400",
       )}
     >
       {label}

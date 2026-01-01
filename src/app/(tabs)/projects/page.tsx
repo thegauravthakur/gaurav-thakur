@@ -4,9 +4,9 @@ import { HiExternalLink } from "react-icons/hi";
 
 export default function Page() {
   return (
-    <div className="bg-white text-black antialiased">
+    <div className="text-gray-950 dark:text-gray-300">
       <div className="mx-auto max-w-2xl px-6 py-16 md:py-24">
-        <h1 className="mb-8 text-3xl font-bold tracking-tight sm:text-4xl">
+        <h1 className="mb-8 text-3xl font-bold tracking-tight sm:text-4xl dark:text-white">
           Projects
         </h1>
         {projects.map((project, index) => (
@@ -15,7 +15,9 @@ export default function Page() {
             key={project.name}
           >
             <div className="mb-1 flex items-center gap-3">
-              <h2 className="text-base font-semibold">{project.name}</h2>
+              <h2 className="text-base font-semibold dark:text-gray-200">
+                {project.name}
+              </h2>
               <div className="flex items-center gap-2">
                 {project.github && (
                   <a
@@ -23,7 +25,7 @@ export default function Page() {
                     rel="noopener noreferrer"
                     target="_blank"
                     aria-label={`${project.name} on GitHub`}
-                    className="text-gray-500 transition-colors hover:text-gray-800"
+                    className="text-gray-500 transition-colors hover:text-gray-800 dark:hover:text-gray-400"
                   >
                     <FaGithub size={18} />
                   </a>
@@ -34,14 +36,14 @@ export default function Page() {
                     rel="noopener noreferrer"
                     target="_blank"
                     aria-label={`Visit ${project.name}`}
-                    className="text-gray-500 transition-colors hover:text-gray-800"
+                    className="text-gray-500 transition-colors hover:text-gray-800 dark:hover:text-gray-400"
                   >
                     <HiExternalLink size={18} />
                   </a>
                 )}
               </div>
             </div>
-            <p className="text-sm leading-relaxed text-gray-700">
+            <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-400">
               {project.description}
             </p>
           </div>

@@ -2,10 +2,11 @@ import { ViewTransition } from "react";
 import { Nav } from "@/app/_components/nav/nav";
 import { CloudinaryImage } from "@/app/(tabs)/blog/_mdx-components/cloudinary-image";
 import { DesktopMobile } from "@/app/_components/desktop-mobile";
+import { ThemeSwitchButton } from "@/app/_components/theme-switch-button";
 
 export function Header() {
   return (
-    <section>
+    <section className="sm:relative">
       <div className="mb-6 flex items-center gap-4">
         <ViewTransition name="profile-image">
           <CloudinaryImage
@@ -17,16 +18,19 @@ export function Header() {
           />
         </ViewTransition>
 
-        <div>
-          <h1 className="text-3xl font-bold md:text-4xl">
+        <div className="flex-1">
+          <h1 className="text-3xl font-bold text-gray-950 md:text-4xl dark:text-white">
             <ViewTransition name="brand-name">
               <span>Gaurav Thakur</span>
             </ViewTransition>
           </h1>
-          <p className="text-base text-gray-600 md:text-lg">
+          <p className="text-base text-gray-600 md:text-lg dark:text-gray-300">
             All Things Web @ Zepto
           </p>
         </div>
+      </div>
+      <div className="absolute top-4 right-4 sm:top-2">
+        <ThemeSwitchButton size="large" />
       </div>
       <DesktopMobile
         desktop={

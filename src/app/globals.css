@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @plugin "@tailwindcss/typography";
 
+@custom-variant dark (&:where(.dark, .dark *));
 
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
@@ -20,7 +21,27 @@
   }
 
   *:focus-visible {
-    @apply outline-2 outline-red-600 duration-initial rounded-md outline-offset-1;
+    @apply outline-2 outline-red-600 duration-initial rounded-md outline-offset-1 dark:outline-red-400;
+  }
+
+  /* Smooth theme transition */
+  html,
+  body {
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  /* Transition colors for interactive elements */
+  a,
+  button,
+  input,
+  textarea,
+  select {
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      color 0.3s ease;
   }
 }
 

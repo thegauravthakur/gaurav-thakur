@@ -1,10 +1,11 @@
-import { IoSearchOutline, IoSunnyOutline } from "react-icons/io5";
+import { IoSearchOutline } from "react-icons/io5";
 
 import Link from "next/link";
 import { cn } from "@/app/utilities/tailwind";
 import { iconStyles, linkStyles } from "@/app/_styles/common";
 import { ViewTransition } from "react";
 import { MobileNav, Nav } from "@/app/_components/nav/nav";
+import { ThemeSwitchButton } from "@/app/_components/theme-switch-button";
 
 export const links = [
   { label: "Home", href: "/" },
@@ -15,7 +16,7 @@ export const links = [
 export function Header() {
   return (
     <header className="mx-auto flex w-full max-w-(--breakpoint-xl) items-center justify-between px-6 py-2 md:justify-normal">
-      <h1 className="font-semibold">
+      <h1 className="font-semibold dark:text-white">
         <ViewTransition name="brand-name">
           <Link
             href="/"
@@ -40,13 +41,7 @@ export function Header() {
           </button>
         </li>
         <li className="hidden items-center md:flex">
-          <button
-            className={cn(iconStyles)}
-            type="button"
-            aria-label="Dark Mode"
-          >
-            <IoSunnyOutline fontSize={20} />
-          </button>
+          <ThemeSwitchButton />
         </li>
         <li className="flex items-center md:hidden">
           <MobileNav />

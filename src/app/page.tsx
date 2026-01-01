@@ -6,7 +6,7 @@ import { Intro } from "@/app/_components/home/intro";
 
 export default function Page() {
   return (
-    <main className="bg-white text-black antialiased">
+    <main>
       <div className="mx-auto max-w-2xl px-6 py-16 md:py-24">
         <section className="mb-12">
           <Header />
@@ -14,11 +14,11 @@ export default function Page() {
         <section className="mb-10">
           <Intro />
         </section>
-        <hr className="mb-10 border-gray-100" />
+        <hr className="mb-10 border-gray-100 dark:border-gray-700" />
         <section className="mb-10">
           <WorkExperienceSection />
         </section>
-        <hr className="mb-10 border-gray-100" />
+        <hr className="mb-10 border-gray-100 dark:border-gray-700" />
         <section>
           <RecentWritingsSection />
         </section>

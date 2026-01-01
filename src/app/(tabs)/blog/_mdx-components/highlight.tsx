@@ -17,6 +17,7 @@ const variantStyles: Record<HighlightVariant, string> = {
     "rounded-sm",
     "transition-colors duration-200",
     "hover:bg-rose-200",
+    "dark:bg-rose-950 dark:hover:bg-rose-950/60",
   ),
 
   // Softer background

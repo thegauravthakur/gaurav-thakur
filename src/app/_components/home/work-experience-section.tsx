@@ -3,14 +3,22 @@ import { Link } from "@/app/_components/ui/link";
 export function WorkExperienceSection() {
   return (
     <section>
-      <h2 className="mb-6 text-xl font-semibold">Work Experience</h2>
+      <h2 className="mb-6 text-xl font-semibold text-gray-950 dark:text-white">
+        Work Experience
+      </h2>
       {workExperience.map((job, index) => (
         <div key={job.company} className={index < 2 ? "mb-8" : ""}>
           <div className="mb-1 flex items-start justify-between gap-4">
-            <h3 className="text-base font-semibold">{job.company}</h3>
-            <p className="shrink-0 text-sm text-gray-500">{job.period}</p>
+            <h3 className="text-base font-semibold text-gray-950 dark:text-white">
+              {job.company}
+            </h3>
+            <p className="shrink-0 text-sm text-gray-500 dark:text-gray-500">
+              {job.period}
+            </p>
           </div>
-          <p className="text-base leading-relaxed text-gray-700">{job.description}</p>
+          <p className="text-base leading-relaxed text-gray-700 dark:text-gray-400">
+            {job.description}
+          </p>
         </div>
       ))}
     </section>

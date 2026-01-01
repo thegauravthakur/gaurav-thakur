@@ -18,9 +18,17 @@ export function Footer({
   shareUrl,
 }: FooterProps) {
   return (
-    <footer className={cn("border-t py-3 md:space-y-2 md:py-6", className)}>
+    <footer
+      className={cn(
+        "border-t border-black/5 py-3 md:space-y-2 md:py-6",
+        "dark:border-white/10",
+        className,
+      )}
+    >
       <div className="flex items-center">
-        <p className="mr-2 font-semibold">Share on</p>
+        <p className="mr-2 font-semibold text-gray-700 dark:text-gray-400">
+          Share on
+        </p>
         <Link
           className={cn(iconStyles)}
           aria-label="Twitter"
@@ -41,7 +49,10 @@ export function Footer({
         </Link>
         <ShareButton title={shareTitle} text={shareText} url={shareUrl} />
       </div>
-      <Link href="/" className={cn(linkStyles, "font-semibold")}>
+      <Link
+        href="/"
+        className={cn(linkStyles, "font-semibold dark:text-gray-300")}
+      >
         Gaurav Thakur
       </Link>
     </footer>
