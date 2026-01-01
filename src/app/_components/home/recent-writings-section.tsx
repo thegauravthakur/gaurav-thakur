@@ -32,10 +32,10 @@ export async function RecentWritingsSection() {
               <h3 className="text-base font-semibold text-gray-900 group-hover:text-red-600 group-hover:underline dark:text-white dark:group-hover:text-red-400">
                 {post.title}
               </h3>
-              <p className="line-clamp-2 text-sm leading-relaxed text-gray-700 dark:text-gray-500">
+              <p className="line-clamp-2 text-sm leading-relaxed text-gray-700 dark:text-gray-400">
                 {post.description}
               </p>
-              <div className="mt-1 flex items-center gap-3 text-sm text-gray-500 dark:text-gray-600">
+              <div className="mt-1 flex items-center gap-3 text-sm text-gray-500 dark:text-gray-500">
                 <time dateTime={post.createdAt}>
                   {format(new Date(post.createdAt), "MMM d, yyyy")}
                 </time>

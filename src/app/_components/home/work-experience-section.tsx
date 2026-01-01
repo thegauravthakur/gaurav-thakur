@@ -12,11 +12,11 @@ export function WorkExperienceSection() {
             <h3 className="text-base font-semibold text-gray-950 dark:text-white">
               {job.company}
             </h3>
-            <p className="shrink-0 text-sm text-gray-500 dark:text-gray-600">
+            <p className="shrink-0 text-sm text-gray-500 dark:text-gray-500">
               {job.period}
             </p>
           </div>
-          <p className="text-base leading-relaxed text-gray-700 dark:text-gray-500">
+          <p className="text-base leading-relaxed text-gray-700 dark:text-gray-400">
             {job.description}
           </p>
         </div>
