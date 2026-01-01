@@ -10,7 +10,9 @@ export async function RecentWritingsSection() {
   return (
     <section>
       <div className="mb-6 flex items-baseline justify-between">
-        <h2 className="text-xl font-semibold">Recent Writings</h2>
+        <h2 className="text-xl font-semibold dark:text-white">
+          Recent Writings
+        </h2>
         <Link
           href="/blog"
           className="group inline-flex items-center gap-1.5 text-sm"
@@ -24,20 +26,20 @@ export async function RecentWritingsSection() {
           <NextLink
             key={post.slug}
             href={`/blog/${post.slug}`}
-            className="group -mx-3 rounded-lg px-3 py-3 transition-colors duration-150 hover:bg-gray-50 active:bg-gray-100"
+            className="group -mx-3 rounded-lg px-3 py-3 transition-colors duration-150 hover:bg-gray-50 active:bg-gray-100 dark:hover:bg-white/5"
           >
             <article className="flex flex-col gap-1">
-              <h3 className="text-base font-semibold text-gray-900 group-hover:text-red-600 group-hover:underline">
+              <h3 className="text-base font-semibold text-gray-900 group-hover:text-red-600 group-hover:underline dark:text-white dark:group-hover:text-red-400">
                 {post.title}
               </h3>
-              <p className="line-clamp-2 text-sm leading-relaxed text-gray-700">
+              <p className="line-clamp-2 text-sm leading-relaxed text-gray-700 dark:text-gray-500">
                 {post.description}
               </p>
-              <div className="mt-1 flex items-center gap-3 text-sm text-gray-500">
+              <div className="mt-1 flex items-center gap-3 text-sm text-gray-500 dark:text-gray-700">
                 <time dateTime={post.createdAt}>
                   {format(new Date(post.createdAt), "MMM d, yyyy")}
                 </time>
-                <span className="text-gray-300">·</span>
+                <span className="text-gray-300 dark:text-gray-700">·</span>
                 <span>{post.readingTime} min read</span>
               </div>
             </article>

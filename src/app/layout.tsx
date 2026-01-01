@@ -37,7 +37,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="flex min-h-dvh flex-col font-sans">{children}</body>
+      <body className="flex min-h-dvh flex-col bg-white font-sans dark:bg-gray-950">
+        {children}
+      </body>
     </html>
   );
 }
