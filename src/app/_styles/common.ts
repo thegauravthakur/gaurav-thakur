@@ -1,7 +1,7 @@
 import { cn } from "@/app/utilities/tailwind";
 
 export const iconStyles = cn(
-  "rounded-full p-2 outline-red-600 hover:bg-red-50 dark:hover:bg-white/10 transition-colors duration-300 ease-in-out dark:text-white",
+  "rounded-full p-2 outline-red-600 hover:bg-red-50 dark:hover:bg-white/10 transition-colors duration-300 ease-in-out dark:text-white dark:outline-red-400",
 );
 
 export const linkStyles = cn(
