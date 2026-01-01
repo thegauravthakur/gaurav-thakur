@@ -21,7 +21,7 @@
   }
 
   *:focus-visible {
-    @apply outline-2 outline-red-600 duration-initial rounded-md outline-offset-1;
+    @apply outline-2 outline-red-600 duration-initial rounded-md outline-offset-1 dark:outline-red-400;
   }
 }
 
