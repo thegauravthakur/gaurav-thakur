@@ -13,9 +13,7 @@ export default function Page() {
         </p>
         <p className="mt-4 text-base leading-relaxed text-gray-700 dark:text-gray-400">
           In the meantime, feel free to reach out at{" "}
-          <Link href="mailto:hello@gauravthakur.com">
-            hello@gauravthakur.com
-          </Link>
+          <Link href="mailto:hello@gauravthakur.com">hi@gauravthakur.com</Link>
         </p>
       </div>
     </div>

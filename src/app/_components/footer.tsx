@@ -20,8 +20,8 @@ export function Footer({
   return (
     <footer
       className={cn(
-        "py-3 shadow-sm ring ring-black/5 md:space-y-2 md:py-6",
-        "dark:ring-white/10",
+        "border-t border-black/5 py-3 md:space-y-2 md:py-6",
+        "dark:border-white/10",
         className,
       )}
     >
