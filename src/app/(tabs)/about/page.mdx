@@ -3,26 +3,14 @@ import { ViewTransition } from "react";
 
 # Hi, I'm Gaurav
 
-<ViewTransition name="profile-image-desktop">
+<ViewTransition name="profile-image">
   <Image
     src="/media/profile.png"
     alt="Gaurav Thakur"
     width={384}
     height={384}
-    className="not-prose mx-auto size-48 rounded-full object-cover hidden md:inline-block md:float-right"
+    className="not-prose mx-auto size-48 rounded-full object-cover md:float-right md:inline-block"
   />
-
-</ViewTransition>
-
-<ViewTransition name="profile-image-mobile">
-  <Image
-    src="/media/profile.png"
-    alt="Gaurav Thakur"
-    width={384}
-    height={384}
-    className="not-prose mx-auto size-48 rounded-full object-cover md:hidden"
-  />
-
 </ViewTransition>
 
 I'm a software engineer with a passion for web applications. I currently work at [Zepto](https://www.zepto.com), mostly focusing on web performance and improving the overall user experience. Before this, I worked at [JioMart](https://www.jiomart.com).

@@ -3,10 +3,12 @@ import { DesktopMobile } from "@/app/_components/desktop-mobile";
 
 interface DesktopViewTransitionProps extends ViewTransitionProps {
   children: ReactNode;
+  mobileName: string;
 }
 
 export function DesktopViewTransition({
   children,
+  mobileName,
   ...viewTransitionProps
 }: DesktopViewTransitionProps) {
   return (
@@ -15,7 +17,11 @@ export function DesktopViewTransition({
         desktop={
           <ViewTransition {...viewTransitionProps}>{children}</ViewTransition>
         }
-        mobile={children}
+        mobile={
+          <ViewTransition {...viewTransitionProps} name={mobileName}>
+            {children}
+          </ViewTransition>
+        }
       />
     </>
   );

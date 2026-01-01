@@ -4,7 +4,6 @@ import Link from "next/link";
 import { cn } from "@/app/utilities/tailwind";
 import { iconStyles, linkStyles } from "@/app/_styles/common";
 import { ViewTransition } from "react";
-import { DesktopViewTransition } from "@/app/_components/desktop-view-transition";
 import { MobileNav, Nav } from "@/app/_components/nav/nav";
 
 export const links = [
@@ -17,7 +16,7 @@ export function Header() {
   return (
     <header className="mx-auto flex w-full max-w-(--breakpoint-xl) items-center justify-between px-6 py-2 md:justify-normal">
       <h1 className="font-semibold">
-        <DesktopViewTransition name="brand-name">
+        <ViewTransition name="brand-name">
           <Link
             href="/"
             className={cn(
@@ -27,7 +26,7 @@ export function Header() {
           >
             Gaurav Thakur
           </Link>
-        </DesktopViewTransition>
+        </ViewTransition>
       </h1>
       <div className="hidden flex-1 justify-center md:flex">
         <ViewTransition name="nav-desktop">
