@@ -62,7 +62,10 @@ export function MobileNav() {
               <Menu.Item className="rounded-full p-2 active:bg-zinc-900/10 dark:active:bg-white/10">
                 <IoSearchOutline fontSize={20} />
               </Menu.Item>
-              <Menu.Item className="rounded-full p-2 active:bg-zinc-900/10 dark:active:bg-white/10">
+              <Menu.Item
+                className="rounded-full p-0 active:bg-zinc-900/10 dark:active:bg-white/10"
+                closeOnClick={false}
+              >
                 <ThemeSwitchButton />
               </Menu.Item>
             </div>

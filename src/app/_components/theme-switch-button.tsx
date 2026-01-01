@@ -5,12 +5,25 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/app/utilities/tailwind";
 
 interface ThemeSwitchButtonProps {
-  size: "medium" | "large";
+  size?: "medium" | "large";
 }
 
-export function ThemeSwitchButton() {
+const sizeStyles = {
+  medium: {
+    button: "size-9",
+    icon: "size-5",
+  },
+  large: {
+    button: "size-11",
+    icon: "size-6",
+  },
+};
+
+export function ThemeSwitchButton({ size = "medium" }: ThemeSwitchButtonProps) {
   // Always start with null to ensure consistent SSR/hydration
   const [isDark, setIsDark] = useState<boolean | null>(null);
+
+  const styles = sizeStyles[size];
 
   // Initialize theme on client mount only
   useEffect(() => {
@@ -53,7 +66,7 @@ export function ThemeSwitchButton() {
 
   // Don't render until we know the theme (prevents flash)
   if (isDark === null) {
-    return <div className="size-9" />; // Placeholder with same size
+    return <div className={styles.button} />; // Placeholder with same size
   }
 
   return (
@@ -62,7 +75,8 @@ export function ThemeSwitchButton() {
       onClick={toggleTheme}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       className={cn(
-        "relative flex size-9 cursor-pointer items-center justify-center rounded-full",
+        "relative flex cursor-pointer items-center justify-center rounded-full",
+        styles.button,
         "text-gray-600 dark:text-gray-400",
         "transition-colors duration-200 ease-out",
         "hover:bg-gray-100 hover:text-gray-900",
@@ -78,7 +92,7 @@ export function ThemeSwitchButton() {
             fill="none"
             stroke="currentColor"
             strokeWidth={1.5}
-            className="size-5"
+            className={styles.icon}
             initial={{ scale: 0, rotate: -90, opacity: 0 }}
             animate={{ scale: 1, rotate: 0, opacity: 1 }}
             exit={{ scale: 0, rotate: 90, opacity: 0 }}
@@ -98,7 +112,7 @@ export function ThemeSwitchButton() {
             fill="none"
             stroke="currentColor"
             strokeWidth={1.5}
-            className="size-5"
+            className={styles.icon}
             initial={{ scale: 0, rotate: 90, opacity: 0 }}
             animate={{ scale: 1, rotate: 0, opacity: 1 }}
             exit={{ scale: 0, rotate: -90, opacity: 0 }}

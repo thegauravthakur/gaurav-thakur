@@ -6,7 +6,7 @@ import { ThemeSwitchButton } from "@/app/_components/theme-switch-button";
 
 export function Header() {
   return (
-    <section>
+    <section className="sm:relative">
       <div className="mb-6 flex items-center gap-4">
         <ViewTransition name="profile-image">
           <CloudinaryImage
@@ -28,9 +28,9 @@ export function Header() {
             All Things Web @ Zepto
           </p>
         </div>
-        <div className="self-start">
-          <ThemeSwitchButton />
-        </div>
+      </div>
+      <div className="absolute top-4 right-4 sm:top-2">
+        <ThemeSwitchButton size="large" />
       </div>
       <DesktopMobile
         desktop={
