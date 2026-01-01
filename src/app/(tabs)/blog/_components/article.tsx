@@ -22,17 +22,20 @@ export function Article({
       href={`/blog/${slug}`}
       className={cn(
         "group inline-block h-full rounded-lg shadow-sm ring ring-black/5 outline-red-600 transition-transform",
+        "dark:ring-white/10 dark:outline-red-400",
         "h-full w-full duration-150 active:scale-97",
       )}
     >
       <article className={cn("flex h-full flex-col gap-y-4 p-5")} key={title}>
         <header>
-          <h3 className="font-semibold group-hover:text-red-600 group-hover:underline">
+          <h3 className="font-semibold group-hover:text-red-600 group-hover:underline dark:text-white dark:group-hover:text-red-400">
             {title}
           </h3>
         </header>
-        <p className="flex-1 text-sm leading-7">{description}</p>
-        <footer className="flex items-center justify-between text-sm">
+        <p className="flex-1 text-sm leading-7 dark:text-gray-300">
+          {description}
+        </p>
+        <footer className="flex items-center justify-between text-sm dark:text-gray-400">
           <p>{format(createdAt, "MMMM d, yyyy")}</p>
           <p>{readingTime} minutes read</p>
         </footer>
