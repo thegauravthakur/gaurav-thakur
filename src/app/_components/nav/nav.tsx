@@ -37,10 +37,10 @@ export function MobileNav() {
       </ViewTransition>
       <Menu.Portal>
         <Menu.Positioner side="bottom" align="end" sideOffset={8}>
-          <Menu.Popup className="mobile-menu-popup min-w-44 rounded-2xl bg-white/90 p-2 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm">
+          <Menu.Popup className="min-w-44 rounded-2xl bg-white/90 p-2 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm">
             {navLinks.map((link) => (
               <Menu.Item
-                closeOnClick
+                closeOnClick={link.href !== "/"}
                 key={link.href + link.label}
                 render={<Link href={link.href} />}
                 className="block rounded-lg px-3 py-2 active:bg-zinc-900/10"
