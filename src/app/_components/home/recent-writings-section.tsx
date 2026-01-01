@@ -10,7 +10,7 @@ export async function RecentWritingsSection() {
   return (
     <section>
       <div className="mb-6 flex items-baseline justify-between">
-        <h2 className="text-xl font-semibold dark:text-white">
+        <h2 className="text-xl font-semibold text-gray-950 dark:text-white">
           Recent Writings
         </h2>
         <Link
@@ -35,11 +35,11 @@ export async function RecentWritingsSection() {
               <p className="line-clamp-2 text-sm leading-relaxed text-gray-700 dark:text-gray-500">
                 {post.description}
               </p>
-              <div className="mt-1 flex items-center gap-3 text-sm text-gray-500 dark:text-gray-700">
+              <div className="mt-1 flex items-center gap-3 text-sm text-gray-500 dark:text-gray-600">
                 <time dateTime={post.createdAt}>
                   {format(new Date(post.createdAt), "MMM d, yyyy")}
                 </time>
-                <span className="text-gray-300 dark:text-gray-700">·</span>
+                <span className="text-gray-300 dark:text-gray-500">·</span>
                 <span>{post.readingTime} min read</span>
               </div>
             </article>
