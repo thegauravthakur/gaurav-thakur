@@ -3,7 +3,8 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Menu } from "@base-ui/react/menu";
 import Link from "next/link";
 import { ViewTransition } from "react";
-import { IoSearchOutline, IoSunnyOutline } from "react-icons/io5";
+import { IoSearchOutline } from "react-icons/io5";
+import { ThemeSwitchButton } from "@/app/_components/theme-switch-button";
 
 export function Nav() {
   return (
@@ -56,7 +57,7 @@ export function MobileNav() {
                 <IoSearchOutline fontSize={20} />
               </Menu.Item>
               <Menu.Item className="rounded-full p-2 active:bg-zinc-900/10">
-                <IoSunnyOutline fontSize={20} />
+                <ThemeSwitchButton />
               </Menu.Item>
             </div>
           </Menu.Popup>
