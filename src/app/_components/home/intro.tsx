@@ -2,7 +2,7 @@ import { Link } from "@/app/_components/ui/link";
 
 export function Intro() {
   return (
-    <section className="flex flex-col gap-y-4 text-base text-gray-800 dark:text-gray-400">
+    <section className="flex flex-col gap-y-4 text-base text-gray-800 dark:text-gray-300">
       <p className="leading-relaxed">
         I&apos;m a software engineer with a passion for web applications. I
         currently work at <Link href="https://www.zepto.com">Zepto</Link>,

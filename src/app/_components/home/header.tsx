@@ -25,7 +25,7 @@ export function Header() {
               <span>Gaurav Thakur</span>
             </ViewTransition>
           </h1>
-          <p className="text-base text-gray-600 md:text-lg dark:text-gray-400">
+          <p className="text-base text-gray-600 md:text-lg dark:text-gray-300">
             All Things Web @ Zepto
           </p>
         </div>
