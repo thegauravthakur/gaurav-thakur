@@ -29,7 +29,7 @@ export function Header() {
         </ViewTransition>
       </h1>
       <div className="hidden flex-1 justify-center md:flex">
-        <ViewTransition name="nav-desktop">
+        <ViewTransition name="nav">
           <Nav />
         </ViewTransition>
       </div>
