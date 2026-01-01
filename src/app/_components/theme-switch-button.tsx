@@ -4,33 +4,31 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/app/utilities/tailwind";
 
-export function ThemeSwitchButton() {
-  const [isDark, setIsDark] = useState<boolean | null>(() => {
-    // SSR: return null initially, will be set in useEffect
-    if (typeof window === "undefined") return null;
+interface ThemeSwitchButtonProps {
+  size: "medium" | "large";
+}
 
+export function ThemeSwitchButton() {
+  // Always start with null to ensure consistent SSR/hydration
+  const [isDark, setIsDark] = useState<boolean | null>(null);
+
+  // Initialize theme on client mount only
+  useEffect(() => {
     // Check localStorage first
     const saved = localStorage.getItem("theme");
-    if (saved) return saved === "dark";
-
-    // Fall back to system preference
-    return window.matchMedia("(prefers-color-scheme: dark)").matches;
-  });
-
-  // Sync with DOM on mount and when isDark changes
-  useEffect(() => {
-    if (isDark === null) {
-      // On client mount, detect the actual preference
-      const saved = localStorage.getItem("theme");
-      if (saved) {
-        setIsDark(saved === "dark");
-      } else {
-        setIsDark(window.matchMedia("(prefers-color-scheme: dark)").matches);
-      }
+    if (saved) {
+      setIsDark(saved === "dark");
       return;
     }
 
-    // Apply the theme
+    // Fall back to system preference
+    setIsDark(window.matchMedia("(prefers-color-scheme: dark)").matches);
+  }, []);
+
+  // Apply theme to DOM when isDark changes
+  useEffect(() => {
+    if (isDark === null) return;
+
     document.documentElement.classList.toggle("dark", isDark);
     localStorage.setItem("theme", isDark ? "dark" : "light");
   }, [isDark]);
@@ -68,7 +66,7 @@ export function ThemeSwitchButton() {
         "text-gray-600 dark:text-gray-400",
         "transition-colors duration-200 ease-out",
         "hover:bg-gray-100 hover:text-gray-900",
-        "dark:outline-red-400 dark:hover:bg-white/10 dark:hover:text-white",
+        "dark:hover:bg-white/10 dark:hover:text-white",
       )}
     >
       <AnimatePresence mode="wait" initial={false}>

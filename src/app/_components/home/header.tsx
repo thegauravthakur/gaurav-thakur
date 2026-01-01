@@ -7,7 +7,6 @@ import { ThemeSwitchButton } from "@/app/_components/theme-switch-button";
 export function Header() {
   return (
     <section>
-      <ThemeSwitchButton />
       <div className="mb-6 flex items-center gap-4">
         <ViewTransition name="profile-image">
           <CloudinaryImage
@@ -19,7 +18,7 @@ export function Header() {
           />
         </ViewTransition>
 
-        <div>
+        <div className="flex-1">
           <h1 className="text-3xl font-bold text-gray-950 md:text-4xl dark:text-white">
             <ViewTransition name="brand-name">
               <span>Gaurav Thakur</span>
@@ -28,6 +27,9 @@ export function Header() {
           <p className="text-base text-gray-600 md:text-lg dark:text-gray-300">
             All Things Web @ Zepto
           </p>
+        </div>
+        <div className="self-start">
+          <ThemeSwitchButton />
         </div>
       </div>
       <DesktopMobile
