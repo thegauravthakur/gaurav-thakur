@@ -1,6 +1,7 @@
 import { ViewTransition } from "react";
 import { Nav } from "@/app/_components/nav/nav";
 import { CloudinaryImage } from "@/app/(tabs)/blog/_mdx-components/cloudinary-image";
+import { DesktopMobile } from "@/app/_components/desktop-mobile";
 
 export function Header() {
   return (
@@ -27,9 +28,18 @@ export function Header() {
           </p>
         </div>
       </div>
-      <ViewTransition name="nav">
-        <Nav />
-      </ViewTransition>
+      <DesktopMobile
+        desktop={
+          <ViewTransition name="nav-desktop">
+            <Nav />
+          </ViewTransition>
+        }
+        mobile={
+          <ViewTransition name="nav-mobile">
+            <Nav />
+          </ViewTransition>
+        }
+      />
     </section>
   );
 }
