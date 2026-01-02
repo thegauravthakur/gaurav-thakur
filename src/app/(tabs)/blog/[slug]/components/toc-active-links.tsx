@@ -89,12 +89,19 @@ export function TOCActiveLinks({ headings }: TOCActiveLinksProps) {
 
   if (headings.length === 0) return null;
 
+  // Check if there's at least one h2 in the list (for contextual h3 indentation)
+  const hasH2 = headings.some((h) => h.level === 2);
+
   return (
     <nav aria-label="Table of contents">
       <ul className="space-y-1.5">
-        {headings.map((heading) => {
+        {headings.map((heading, index) => {
           const isActive = activeId === heading.id;
           const isH3 = heading.level === 3;
+          // Only indent h3 if there's a preceding h2 in the list
+          const hasPrecedingH2 =
+            hasH2 && headings.slice(0, index).some((h) => h.level === 2);
+          const shouldIndent = isH3 && hasPrecedingH2;
 
           return (
             <li key={heading.id}>
@@ -103,10 +110,11 @@ export function TOCActiveLinks({ headings }: TOCActiveLinksProps) {
                 onClick={(e) => handleClick(e, heading.id)}
                 className={cn(
                   "block py-1 leading-snug transition-all duration-200 ease-out",
-                  isH3 ? "pl-3 text-sm" : "text-base",
+                  shouldIndent ? "pl-3" : "",
+                  isH3 ? "text-sm" : "text-base",
                   isActive
                     ? "text-red-600 dark:text-red-400"
-                    : "text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200",
+                    : "text-gray-900 opacity-70 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200",
                 )}
               >
                 {heading.text}
