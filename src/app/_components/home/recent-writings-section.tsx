@@ -26,7 +26,7 @@ export async function RecentWritingsSection() {
           <NextLink
             key={post.slug}
             href={`/blog/${post.slug}`}
-            className="group -mx-3 rounded-lg px-3 py-3 transition-colors duration-150 hover:bg-gray-50 active:bg-gray-100 dark:hover:bg-white/5"
+            className="group -mx-3 rounded-lg px-3 py-3 transition-colors duration-150 hover:bg-gray-50 active:bg-gray-100 dark:hover:bg-white/5 dark:active:bg-white/10"
           >
             <article className="flex flex-col gap-1">
               <h3 className="text-base font-semibold text-gray-900 group-hover:text-red-600 group-hover:underline dark:text-white dark:group-hover:text-red-400">

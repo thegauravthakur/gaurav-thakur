@@ -7,7 +7,11 @@ import { ImageGrid } from "@/app/(tabs)/blog/_mdx-components/image-grid";
 import { Highlight } from "@/app/(tabs)/blog/_mdx-components/highlight";
 
 Code.lineNumbers = true;
-Code.theme = "light-plus";
+Code.theme = {
+  light: "github-light",
+  dark: "github-dark",
+  lightSelector: "html:not(.dark)",
+};
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {

@@ -12,14 +12,6 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
-  *,
-  ::after,
-  ::before,
-  ::backdrop,
-  ::file-selector-button {
-    border-color: var(--color-gray-200, currentcolor);
-  }
-
   *:focus-visible {
     @apply outline-2 outline-red-600 duration-initial rounded-md outline-offset-1 dark:outline-red-400;
   }
