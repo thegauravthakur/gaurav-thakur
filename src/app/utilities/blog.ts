@@ -24,7 +24,9 @@ export async function getAllPosts(): Promise<Post[]> {
 
   const posts = await Promise.all(
     slugs.map(async (slug) => {
-      const { metadata } = await import(`@/app/(tabs)/blog/content/${slug}.mdx`);
+      const { metadata } = await import(
+        `@/app/(tabs)/blog/content/${slug}.mdx`
+      );
       const filePath = path.join(process.cwd(), CONTENT_PATH, `${slug}.mdx`);
       const content = fs.readFileSync(filePath, "utf8");
       const readingTime = Math.round(calculateReadingTime(content).minutes);
@@ -49,4 +51,3 @@ export async function getRecentPosts(count: number = 3): Promise<Post[]> {
   const posts = await getAllPosts();
   return posts.slice(0, count);
 }
-

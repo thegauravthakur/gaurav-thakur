@@ -1,6 +1,8 @@
 import { cn } from "@/app/utilities/tailwind";
 import { format } from "date-fns";
 import { RelativeTime } from "./relative-time";
+import { PageView } from "@/app/(tabs)/blog/_components/page-view";
+import { Suspense } from "react";
 
 interface TitleProps {
   title: string;
@@ -18,6 +20,10 @@ export function Title({ title, createdAt }: TitleProps) {
         <span className="hidden md:inline-block">|</span>
         <span>{formattedDate}</span>
         <RelativeTime date={createdAt} />
+        <span className="flex-1" />
+        <Suspense fallback={null}>
+          <PageView />
+        </Suspense>
       </p>
     </header>
   );

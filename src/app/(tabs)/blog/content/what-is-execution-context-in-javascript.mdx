@@ -1,5 +1,3 @@
-## Introduction
-
 The execution context is one of the very essential components of a JavaScript
 engine. The execution context is the environment in which the code is executed.
 Everything in JavaScript happens inside an execution context. You can think of
@@ -90,19 +88,21 @@ Let's quickly recap what we have learned so far.
 1. Everything in JavaScript happens inside an execution context.
 2. By default, JavaScript creates a global execution context.
 3. JavaScript uses the concept of call stack to keep track of the execution
-contexts.
+   contexts.
 4. Each execution will have a memory component and a code component.
 5. In the first phase, JavaScript will allocate memory for each variable, and in the
-case of function, it will copy the whole function.
+   case of function, it will copy the whole function.
 6. In the second phase, JavaScript will execute the code line by line.
 7. Once it encounters a function invocation, it will create a new execution
-context and will push it to the top of the call stack.
+   context and will push it to the top of the call stack.
 8. After the function is executed, it will pop the execution context from the
-call stack.
+   call stack.
 
 export const metadata = {
-    title: "What is an Execution Context in JavaScript?",
-    createdAt: "December 26, 2021",
-    description: "The execution context is one of the very essential component of a JavaScript engine. The execution context is the environment in which the code is executed. In this article we will discuss the working of execution context in great details",
-    metaDescription: "What is an execution context in JavaScript? In this article we will discuss the working of execution context in great details",
-}
+  title: "What is an Execution Context in JavaScript?",
+  createdAt: "December 26, 2021",
+  description:
+    "The execution context is one of the very essential component of a JavaScript engine. The execution context is the environment in which the code is executed. In this article we will discuss the working of execution context in great details",
+  metaDescription:
+    "What is an execution context in JavaScript? In this article we will discuss the working of execution context in great details",
+};

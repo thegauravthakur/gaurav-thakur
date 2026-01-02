@@ -1,5 +1,3 @@
-## Introduction
-
 All JavaScript engines have their own implementation of the functions and methods,
 but in this article, we'll consider the implementation of
 [Google's V8 engine,](https://v8.dev/) which is one of the most famous JavaScript
@@ -15,12 +13,12 @@ string.
 
 ```javascript
 const foo = {
-  12e2: 'bar',
-}
+  12e2: "bar",
+};
 
 console.log(foo[12e2]); // bar
-console.log(foo['12e2']); // undefined
-console.log(foo['1200']); // bar
+console.log(foo["12e2"]); // undefined
+console.log(foo["1200"]); // bar
 ```
 
 Here, key `12e4` is first coerced to string and becomes `1200` then `bar` value
@@ -111,10 +109,10 @@ The elements that are not of type `Smi` or `Double` are considered regular
 elements.
 
 ```javascript
-const foo = [1, 2.5, 3, 'bar']; // element kind: PACKED_ELEMENTS
+const foo = [1, 2.5, 3, "bar"]; // element kind: PACKED_ELEMENTS
 
 const bar = [1, 2, 2.5];
-bar[100] = 'foo'; // element kind: HOLEY_ELEMENTS
+bar[100] = "foo"; // element kind: HOLEY_ELEMENTS
 ```
 
 The `element kind` could also change dynamically as we add or remove elements
@@ -127,7 +125,7 @@ foo.push(1); // element kind: PACKED_SMI_ELEMENTS
 foo[100] = 2; // element kind: HOLEY_SMI_ELEMENTS
 foo.push(5.2); // element kind: PACKED_DOUBLE_ELEMENTS
 foo.pop(); // element kind: PACKED_DOUBLE_ELEMENTS
-foo.push('bar'); // element kind: HOLEY_ELEMENTS
+foo.push("bar"); // element kind: HOLEY_ELEMENTS
 ```
 
 At the starting `PACKED_SMI_ELEMENTS` is the default element kind. When we push
@@ -143,8 +141,12 @@ At the end, adding `bar` to the array makes the `element kind` move to
 
 Here is the diagram of the `element kind` transitions for better understanding.
 
-<img alt="Element Kind transition in V8" height="600" width="100%"
-     src="https://res.cloudinary.com/gauravthakur/image/upload/s--d6Lt_GXH--/c_scale,h_600/v1689436585/blog/element-kind-transition-v8_tysqsn.webp"/>
+<img
+  alt="Element Kind transition in V8"
+  height="600"
+  width="100%"
+  src="https://res.cloudinary.com/gauravthakur/image/upload/s--d6Lt_GXH--/c_scale,h_600/v1689436585/blog/element-kind-transition-v8_tysqsn.webp"
+/>
 
 JavaScript internally uses C++ vectors to store the packed arrays. It will grow
 dynamically. Once the holes are introduced, the underneath implementation will
@@ -159,7 +161,7 @@ vary a lot by just your usage of the array.
 ```javascript
 const foo = [1, 2, 3];
 
-console.log(foo[100] ?? 'some placeholder'); // 'some placeholder'
+console.log(foo[100] ?? "some placeholder"); // 'some placeholder'
 ```
 
 The above example is such a common practice followed by many JS developers, here
@@ -202,8 +204,10 @@ In the end, we also discuss some tips to make your array performant. If you
 like this article, please share it with your friends.
 
 export const metadata = {
-    title: "How JavaScript Array Works Internally?",
-    createdAt: "December 17, 2021",
-    description: "Objects in JavaScript are responsible for holding the mapping between key-value pairs. Arrays are a type of object in JavaScript but with only numeric keys. Let us see how JavaScript engine optimizes these special objects with purely numeric keys",
-    metaDescription: "Arrays are a type of object in JavaScript but with only numeric keys. Let us see how JavaScript engine optimizes these special objects with purely numeric keys",
-}
+  title: "How JavaScript Array Works Internally?",
+  createdAt: "December 17, 2021",
+  description:
+    "Objects in JavaScript are responsible for holding the mapping between key-value pairs. Arrays are a type of object in JavaScript but with only numeric keys. Let us see how JavaScript engine optimizes these special objects with purely numeric keys",
+  metaDescription:
+    "Arrays are a type of object in JavaScript but with only numeric keys. Let us see how JavaScript engine optimizes these special objects with purely numeric keys",
+};

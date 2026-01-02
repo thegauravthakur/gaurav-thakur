@@ -1,12 +1,17 @@
 import { Fragment, ReactNode } from "react";
 import { Metadata } from "next";
+import { PageViewProvider } from "@/app/(tabs)/blog/_components/page-view-provider";
 
 interface LayoutProps {
   children: ReactNode;
 }
 
 export default function LayoutProps({ children }: LayoutProps) {
-  return <Fragment>{children}</Fragment>;
+  return (
+    <Fragment>
+      <PageViewProvider>{children}</PageViewProvider>
+    </Fragment>
+  );
 }
 
 export const metadata: Metadata = {
