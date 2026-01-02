@@ -90,8 +90,6 @@ export function TOCActiveLinks({ headings }: TOCActiveLinksProps) {
     const element = document.getElementById(headingId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
-      // Update URL without triggering scroll
-      window.history.pushState(null, "", `#${headingId}`);
     }
   }
 
