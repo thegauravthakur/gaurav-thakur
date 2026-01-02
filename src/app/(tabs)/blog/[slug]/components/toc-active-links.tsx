@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { cn } from "@/app/utilities/tailwind";
 import type { Heading } from "@/app/utilities/extract-headings";
 
@@ -11,9 +11,32 @@ interface TOCActiveLinksProps {
 export function TOCActiveLinks({ headings }: TOCActiveLinksProps) {
   const [activeId, setActiveId] = useState<string>("");
   const observerRef = useRef<IntersectionObserver | null>(null);
-  const headingElementsRef = useRef<Map<string, IntersectionObserverEntry>>(
-    new Map(),
-  );
+  // Track which heading IDs are currently visible (intersecting)
+  const visibleIdsRef = useRef<Set<string>>(new Set());
+
+  // Calculate active heading from fresh DOM positions
+  const updateActiveHeading = useCallback(() => {
+    const visibleIds = visibleIdsRef.current;
+
+    if (visibleIds.size === 0) return;
+
+    // Get fresh positions for all visible headings
+    const visibleWithPositions: { id: string; top: number }[] = [];
+
+    visibleIds.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        visibleWithPositions.push({ id, top: rect.top });
+      }
+    });
+
+    if (visibleWithPositions.length > 0) {
+      // Sort by position and get the topmost visible heading
+      visibleWithPositions.sort((a, b) => a.top - b.top);
+      setActiveId(visibleWithPositions[0].id);
+    }
+  }, []);
 
   useEffect(() => {
     // Get all heading elements that match our headings
@@ -26,35 +49,23 @@ export function TOCActiveLinks({ headings }: TOCActiveLinksProps) {
     // Set initial active heading
     setActiveId(headings[0]?.id ?? "");
 
-    // Create IntersectionObserver - triggers when heading enters viewport
+    // Create IntersectionObserver - only tracks visibility, not positions
     observerRef.current = new IntersectionObserver(
       (entries) => {
-        // Update the map with latest entries
+        // Update visible set based on intersection changes
         entries.forEach((entry) => {
-          headingElementsRef.current.set(entry.target.id, entry);
-        });
-
-        // Find all currently visible headings
-        const visibleHeadings: { id: string; top: number }[] = [];
-
-        headingElementsRef.current.forEach((entry, id) => {
           if (entry.isIntersecting) {
-            visibleHeadings.push({
-              id,
-              top: entry.boundingClientRect.top,
-            });
+            visibleIdsRef.current.add(entry.target.id);
+          } else {
+            visibleIdsRef.current.delete(entry.target.id);
           }
         });
 
-        if (visibleHeadings.length > 0) {
-          // Sort by position and get the topmost visible heading
-          visibleHeadings.sort((a, b) => a.top - b.top);
-          setActiveId(visibleHeadings[0].id);
-        }
+        // Calculate active from fresh positions
+        updateActiveHeading();
       },
       {
-        // Trigger as soon as heading becomes visible on screen
-        // -10% bottom margin means heading becomes active when in top 90% of viewport
+        // Trigger when heading enters top 90% of viewport
         rootMargin: "0px 0px -10% 0px",
         threshold: 0,
       },
@@ -67,9 +78,9 @@ export function TOCActiveLinks({ headings }: TOCActiveLinksProps) {
 
     return () => {
       observerRef.current?.disconnect();
-      headingElementsRef.current.clear();
+      visibleIdsRef.current.clear();
     };
-  }, [headings]);
+  }, [headings, updateActiveHeading]);
 
   function handleClick(
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -81,9 +92,6 @@ export function TOCActiveLinks({ headings }: TOCActiveLinksProps) {
       element.scrollIntoView({ behavior: "smooth" });
       // Update URL without triggering scroll
       window.history.pushState(null, "", `#${headingId}`);
-      // Don't manually set activeId here - let the IntersectionObserver
-      // handle it naturally when the heading scrolls into view
-      // This prevents the flicker of active state changing twice
     }
   }
 
