@@ -109,12 +109,12 @@ export function TOCActiveLinks({ headings }: TOCActiveLinksProps) {
                 href={`#${heading.id}`}
                 onClick={(e) => handleClick(e, heading.id)}
                 className={cn(
-                  "block py-1 leading-snug transition-all duration-200 ease-out",
+                  "block py-1 transition-all duration-200 ease-out",
                   shouldIndent ? "pl-3" : "",
                   isH3 ? "text-sm" : "text-base",
                   isActive
                     ? "text-red-600 dark:text-red-400"
-                    : "text-gray-900 opacity-70 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-200",
+                    : "text-gray-950 opacity-70 hover:opacity-100 dark:text-gray-300 dark:hover:text-gray-200",
                 )}
               >
                 {heading.text}
