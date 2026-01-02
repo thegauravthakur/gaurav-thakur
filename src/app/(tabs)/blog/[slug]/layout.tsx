@@ -3,6 +3,7 @@ import { Footer } from "@/app/_components/footer";
 import { notFound } from "next/navigation";
 import { BlogContentWrapper } from "@/app/(tabs)/blog/[slug]/components/blog-content-wrapper";
 import { getAllPostSlugs } from "@/app/utilities/blog";
+import { extractHeadings } from "@/app/utilities/extract-headings";
 
 interface LayoutProps {
   children: ReactNode;
@@ -18,9 +19,12 @@ export default async function LayoutProps({ children, params }: LayoutProps) {
 
   if (metadata?.isDraft && process.env.NODE_ENV === "production") notFound();
 
+  // Extract headings for TOC
+  const headings = extractHeadings(slug);
+
   return (
     <Fragment>
-      <BlogContentWrapper>{children}</BlogContentWrapper>
+      <BlogContentWrapper headings={headings}>{children}</BlogContentWrapper>
       <Footer
         className="mx-auto mt-16 w-full max-w-(--breakpoint-xl) px-4 md:px-6"
         shareTitle={metadata?.title ?? ""}
