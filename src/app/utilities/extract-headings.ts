@@ -10,16 +10,16 @@ export interface Heading {
 const CONTENT_PATH = "src/app/(tabs)/blog/content";
 
 /**
- * Slugifies text to match rehype-slug behavior
- * Converts to lowercase, replaces spaces with hyphens, removes special chars
+ * Slugifies text to match rehype-slug (GitHub slugger) behavior
+ * Converts to lowercase, replaces each space with hyphen, removes special chars
+ * NOTE: Replaces each space individually (not collapsed) to match GitHub slugger
  */
 function slugify(text: string): string {
   return text
     .toLowerCase()
     .trim()
-    .replace(/[^\w\s-]/g, "") // Remove special characters
-    .replace(/\s+/g, "-") // Replace spaces with hyphens
-    .replace(/-+/g, "-"); // Replace multiple hyphens with single
+    .replace(/[^\w\s-]/g, "") // Remove special characters (like &)
+    .replace(/\s/g, "-"); // Replace EACH space with a hyphen (not collapsed)
 }
 
 /**
@@ -30,7 +30,8 @@ export function extractHeadings(slug: string): Heading[] {
   const filePath = path.join(process.cwd(), CONTENT_PATH, `${slug}.mdx`);
   const content = fs.readFileSync(filePath, "utf8");
 
-  const headings: Heading[] = [];
+  // Always start with Introduction pointing to the article header
+  const headings: Heading[] = [{ id: "introduction", text: "Introduction", level: 2 }];
 
   // Match markdown headings: ## or ### at start of line
   // Regex captures the hashes and the heading text

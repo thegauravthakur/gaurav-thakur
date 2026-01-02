@@ -119,7 +119,7 @@ export function TOCActiveLinks({ headings }: TOCActiveLinksProps) {
                 className={cn(
                   "block py-1 transition-all duration-200 ease-out",
                   shouldIndent ? "pl-3" : "",
-                  isH3 ? "text-sm" : "text-base",
+                  isH3 ? "text-sm" : "text-[15px]",
                   isActive
                     ? "text-red-600 dark:text-red-400"
                     : "text-gray-950 opacity-70 hover:opacity-100 dark:text-gray-300 dark:hover:text-gray-200",

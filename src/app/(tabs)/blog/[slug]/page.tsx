@@ -21,7 +21,10 @@ export default async function Page({ params }: PageProps) {
         All Articles
       </Link>
       <Title title={metadata.title} createdAt={metadata.createdAt} />
-      <Content />
+      <div id="introduction" className="h-8" />
+      <div className="-mt-4">
+        <Content />
+      </div>
     </article>
   );
 }
