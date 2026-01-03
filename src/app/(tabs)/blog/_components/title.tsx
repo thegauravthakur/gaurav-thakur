@@ -1,7 +1,7 @@
 import { cn } from "@/app/utilities/tailwind";
 import { format } from "date-fns";
 import { RelativeTime } from "./relative-time";
-import { PageView } from "@/app/(tabs)/blog/_components/page-view";
+import { PageView } from "@/app/(tabs)/blog/_components/page-view/page-view";
 import { Suspense } from "react";
 
 interface TitleProps {

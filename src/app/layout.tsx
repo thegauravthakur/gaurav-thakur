@@ -30,7 +30,11 @@ const jsonLd = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         {/* Blocking script to prevent flash of incorrect theme */}
         <script
@@ -52,7 +56,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="flex min-h-dvh flex-col bg-white font-sans dark:bg-gray-950">
+      <body className="flex min-h-dvh flex-col bg-white font-sans text-gray-950 dark:bg-gray-950 dark:text-gray-300">
         {children}
       </body>
     </html>

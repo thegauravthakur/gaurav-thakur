@@ -1,6 +1,6 @@
 import { Fragment, ReactNode } from "react";
 import { Metadata } from "next";
-import { PageViewProvider } from "@/app/(tabs)/blog/_components/page-view-provider";
+import { PageViewProvider } from "@/app/(tabs)/blog/_components/page-view/page-view-provider";
 
 interface LayoutProps {
   children: ReactNode;
