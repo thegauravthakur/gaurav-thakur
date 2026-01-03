@@ -70,7 +70,7 @@ export function ThemeSwitchButton({ size = "medium" }: ThemeSwitchButtonProps) {
   }
 
   return (
-    <button
+    <motion.button
       type="button"
       onClick={toggleTheme}
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
@@ -82,6 +82,9 @@ export function ThemeSwitchButton({ size = "medium" }: ThemeSwitchButtonProps) {
         "hover:bg-gray-100 hover:text-gray-900",
         "dark:hover:bg-white/10 dark:hover:text-white",
       )}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.97 }}
+      transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
       <AnimatePresence mode="wait" initial={false}>
         {isDark ? (
@@ -126,6 +129,6 @@ export function ThemeSwitchButton({ size = "medium" }: ThemeSwitchButtonProps) {
           </motion.svg>
         )}
       </AnimatePresence>
-    </button>
+    </motion.button>
   );
 }

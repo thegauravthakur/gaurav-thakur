@@ -4,6 +4,7 @@ import { DocSearch, useDocSearch } from "@docsearch/core";
 import type { DocSearchModal as DocSearchModalType } from "@docsearch/modal/modal";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { cn } from "@/app/utilities/tailwind";
 
 let DocSearchModal: typeof DocSearchModalType | null = null;
@@ -94,7 +95,7 @@ function DocSearchTrigger({
   };
 
   return (
-    <button
+    <motion.button
       onClick={() => loadModal()}
       className={cn(
         "flex cursor-pointer items-center justify-center rounded-full",
@@ -103,8 +104,11 @@ function DocSearchTrigger({
         "dark:hover:bg-white/10 dark:hover:text-white",
         sizeStyles[size].button,
       )}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.97 }}
+      transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
       <MagnifyingGlassIcon className={sizeStyles[size].icon} />
-    </button>
+    </motion.button>
   );
 }
