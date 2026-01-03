@@ -12,5 +12,5 @@ export function PageView() {
 
   if (!count) return null;
 
-  return <span>{count + 1500} views</span>;
+  return <span>{count} views</span>;
 }
