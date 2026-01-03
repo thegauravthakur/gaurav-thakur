@@ -38,12 +38,10 @@ export function ThemeSwitchButton({ size = "medium" }: ThemeSwitchButtonProps) {
     setIsDark(window.matchMedia("(prefers-color-scheme: dark)").matches);
   }, []);
 
-  // Apply theme to DOM when isDark changes
+  // Apply theme to DOM when isDark changes (don't save to localStorage here!)
   useEffect(() => {
     if (isDark === null) return;
-
     document.documentElement.classList.toggle("dark", isDark);
-    localStorage.setItem("theme", isDark ? "dark" : "light");
   }, [isDark]);
 
   // Listen for system preference changes
@@ -61,7 +59,12 @@ export function ThemeSwitchButton({ size = "medium" }: ThemeSwitchButtonProps) {
   }, []);
 
   function toggleTheme() {
-    setIsDark((prev) => !prev);
+    setIsDark((prev) => {
+      const newValue = !prev;
+      // Only save to localStorage when user explicitly toggles
+      localStorage.setItem("theme", newValue ? "dark" : "light");
+      return newValue;
+    });
   }
 
   // Don't render until we know the theme (prevents flash)
