@@ -3,6 +3,7 @@ import { Nav } from "@/app/_components/nav/nav";
 import { CloudinaryImage } from "@/app/(tabs)/blog/_mdx-components/cloudinary-image";
 import { DesktopMobile } from "@/app/_components/desktop-mobile";
 import { ThemeSwitchButton } from "@/app/_components/theme-switch-button";
+import { Search } from "@/app/_components/search/search";
 
 export function Header() {
   return (
@@ -29,7 +30,8 @@ export function Header() {
           </p>
         </div>
       </div>
-      <div className="absolute top-4 right-4 sm:top-2">
+      <div className="absolute top-4 right-4 flex items-center gap-x-2 sm:top-2">
+        <Search size="large" />
         <ThemeSwitchButton size="large" />
       </div>
       <DesktopMobile

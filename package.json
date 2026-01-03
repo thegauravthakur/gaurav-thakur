@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.0.0",
+    "@docsearch/core": "^4.4.0",
+    "@docsearch/css": "^4.4.0",
+    "@docsearch/modal": "^4.4.0",
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
     "@mdx-js/loader": "^3.1.1",

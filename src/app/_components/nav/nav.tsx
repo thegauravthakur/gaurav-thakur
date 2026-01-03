@@ -3,9 +3,9 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Menu } from "@base-ui/react/menu";
 import Link from "next/link";
 import { ViewTransition } from "react";
-import { IoSearchOutline } from "react-icons/io5";
 import { ThemeSwitchButton } from "@/app/_components/theme-switch-button";
 import { cn } from "@/app/utilities/tailwind";
+import { Search } from "@/app/_components/search/search";
 
 export function Nav() {
   return (
@@ -58,10 +58,8 @@ export function MobileNav() {
 
             <Menu.Separator className="my-2 h-px bg-zinc-200 dark:bg-gray-700" />
 
-            <div className="flex gap-1">
-              <Menu.Item className="rounded-full p-2 active:bg-zinc-900/10 dark:active:bg-white/10">
-                <IoSearchOutline fontSize={20} />
-              </Menu.Item>
+            <div className="flex items-center gap-1">
+              <Search />
               <Menu.Item
                 className="rounded-full p-0 active:bg-zinc-900/10 dark:active:bg-white/10"
                 closeOnClick={false}

@@ -1,11 +1,10 @@
-import { IoSearchOutline } from "react-icons/io5";
-
 import Link from "next/link";
 import { cn } from "@/app/utilities/tailwind";
-import { iconStyles, linkStyles } from "@/app/_styles/common";
+import { linkStyles } from "@/app/_styles/common";
 import { ViewTransition } from "react";
 import { MobileNav, Nav } from "@/app/_components/nav/nav";
 import { ThemeSwitchButton } from "@/app/_components/theme-switch-button";
+import { Search } from "@/app/_components/search/search";
 
 export const links = [
   { label: "Home", href: "/" },
@@ -36,9 +35,7 @@ export function Header() {
       </div>
       <ul className="flex items-center gap-x-1 md:gap-x-2">
         <li className="hidden items-center md:flex">
-          <button className={cn(iconStyles)} type="button" aria-label="Search">
-            <IoSearchOutline fontSize={20} />
-          </button>
+          <Search />
         </li>
         <li className="hidden items-center md:flex">
           <ThemeSwitchButton />
