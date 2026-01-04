@@ -203,9 +203,9 @@ function ClientSettingsPanel({ initialPrefs }) {
 }
 ```
 
-If the client boundary is very deep and there’s no server component nearby, or you need this data throughout the app,
+If the client boundary is very deep and there's no server component nearby, or you need this data throughout the app,
 use Context to provide the value instead of prop-drilling. Context is simple to implement and great for read-only values
-that won’t change during the session. It’s small, predictable, and requires extra effort.
+that won't change during the session.
 
 ```jsx
 // server component
@@ -249,16 +249,14 @@ export default async function Page() {
 
 // client component using react-query
 function ClientSettingsPanel({ initialPrefs }) {
-  const { data } = useQuery(
-    {
-      queryKey: ["user-prefs"],
-      queryFn: async () => {
-        const response = await fetch("/api/user-prefs");
-        return response.json();
-      },
+  const { data } = useQuery({
+    queryKey: ["user-prefs"],
+    queryFn: async () => {
+      const response = await fetch("/api/user-prefs");
+      return response.json();
     },
-    { initialData: initialPrefs },
-  );
+    initialData: initialPrefs,
+  });
   console.log(data);
 }
 ```
@@ -378,5 +376,5 @@ export const metadata = {
   description:
     "A practical guide to data fetching in React Server Components. Learn when to fetch on the server vs client, how to dedupe requests with React's cache API, and patterns for sharing data across the server-client boundary using props, context, and React Query hydration.",
   metaDescription:
-    "Learn data fetching patterns in React Server Components. Covers server-owned data, client-owned data, crossing the server-client boundary, React cache API, and React Query hydration.",
+    "Learn data fetching patterns in React Server Components. Covers server vs client data ownership, the cache API, and React Query hydration.",
 };
