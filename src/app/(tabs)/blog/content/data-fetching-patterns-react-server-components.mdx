@@ -178,6 +178,8 @@ const getOrderStatus = cache(async (id: string) => {
 Now, no matter how many times we call these functions at different levels in Server Components, they will only be called
 once during a single render cycle.
 
+<CacheDeduplicationDemo />
+
 ### 2. Shared Data (Crossing the Server–Client Boundary)
 
 When a piece of data is needed inside a client boundary, the simplest thing to try first is to pass it down as a prop

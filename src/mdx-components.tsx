@@ -5,6 +5,7 @@ import { Link } from "@/app/(tabs)/blog/_mdx-components/link";
 import { CloudinaryImage } from "@/app/(tabs)/blog/_mdx-components/cloudinary-image";
 import { ImageGrid } from "@/app/(tabs)/blog/_mdx-components/image-grid";
 import { Highlight } from "@/app/(tabs)/blog/_mdx-components/highlight";
+import { CacheDeduplicationDemo } from "@/app/(tabs)/blog/_mdx-components/cache-deduplication-demo";
 
 Code.lineNumbers = true;
 Code.theme = {
@@ -27,5 +28,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     Image: CloudinaryImage,
     ImageGrid: ImageGrid,
     Highlight: Highlight,
+    CacheDeduplicationDemo: CacheDeduplicationDemo,
   };
 }
