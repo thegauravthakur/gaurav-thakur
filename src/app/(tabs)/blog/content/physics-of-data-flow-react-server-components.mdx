@@ -1,0 +1,117 @@
+As developers, what we are optimizing for is basically <Highlight>how fast we can show meaningful content to the end
+user</Highlight>, in an optimal infra cost. When the final UI depends on some data from an external source, how we fetch
+that data has a direct impact on how soon we are showing the final UI to the user.
+
+For the last decade, we have treated data fetching as a specific “moment in time.”
+
+## The Client-Side Data Fetching Model
+
+The pattern that we follow is that we mount a React component and render a pending state on UI, and then useEffect
+fires, which fetches data from our external source. Once we get data from the external source, we render the final UI.
+
+What we notice here is that there is a request waterfall. The browser first needs to get the required JavaScript to
+render that component from the server. Then it has to make another request to the server to get the data required to
+render the UI. Only after that can it render the final UI on the user’s screen.
+
+## Server-Side Rendering: Moving Data Earlier
+
+This was later improved with the server-side rendering technique. Now, when the initial document request comes to the
+server, you fetch the data even before React starts parsing the components on the server to generate the HTML.
+
+You pass this fetched data via props to the root component, and now it is your job to push that data down from your root
+React component to the target component where you actually need it. So when React starts parsing this component tree to
+create HTML, it already has the data required to render that component.
+
+Now, on the initial HTML request, the server sends a full-blown piece of final **meaningful UI** to the end user in a
+single request. There are no more round trips to the server to render the final expected UI. All things are done in the
+single request itself.
+
+### The Tradeoffs of Server-Side Rendering
+
+But this approach had its own downsides.
+
+#### 1. Data Must Be Hoisted and Passed Down
+
+You always have to fetch data outside the React tree on the server and pass it down as props to the root React
+component. Now imagine if the component where you require this data is very deep down in the tree. You always have to
+pass this data via props only\*.
+
+#### 2. Hydration and Payload Costs
+
+Surely, the prop-drilling part can be solved by using the Context API, where you keep a React context in the root
+component and wrap it in a context provider. Now you can read the context value at any depth.
+
+But the problem is that the data we pass as props to our root React component on the server to generate the HTML string
+also needs to be passed to the browser. React needs this data to hydrate the HTML string generated on the server on the
+client, and it re-renders the same JavaScript it used to build the component tree on the server.
+
+Now imagine if the data that we fetched on the server is quite big. This will bloat the JavaScript that we end up
+sending to the client. Even though the component where you are using this data is a dumb component and is just rendering
+stuff with no interactivity, React will still re-render it again in the browser, and for rendering it needs that
+payload. <Highlight>Basically, there is no way of rendering a component exclusively on the server through which we can
+avoid this hydration and payload cost.</Highlight>
+
+## Why React Server Components Exist
+
+So what if there could be a way to fetch data close to the component where it is actually needed, and also skip the
+hydration part on the client for components where no client interactivity is required by exclusively rendering these
+components just once on the server only.
+
+This can be achieved with **React Server Components**.
+
+In the next section, we’ll look at the most common data-fetching patterns that one can use in their app with React
+Server Components.
+
+## Data Fetching and Sharing Patterns in React Server Components
+
+### 1. Server-Owned Data (No Client State)
+
+Let's say we are building an app where we have to fetch user's preferences from an API and use that data in across the
+multiple server components.
+
+#### Data Needed in Across Server Components
+
+The good thing about server components is that unlike normal React components, they run exclusively on the server. So we
+are sure that in the entire lifecycle of the request, a server component would only run once and these components can be
+async in nature. As a result, we can just directly call the data in the nearest server component where we actually need
+the data to render UI
+
+```jsx
+async function ProductCard() {
+  const userPreferences = await getUserPreferences();
+
+  return (
+    <Card>
+      <Discount>{userPreferences?.maxDiscount}</Discount>
+    </Card>
+  );
+}
+```
+
+It doesn't matter how deep this `ProductCard` component is called in the React tree. But, what if we call this component
+multiple times at different level of the React Tree as shown below
+
+#### 1.2 Same Server Data Used Across Multiple Components (Same Request)
+
+#### 1.3 Same Server Data Used Across Multiple Requests
+
+### 2. Client-Owned Data (Session-Bound State)
+
+#### 2.1 Data Needed in a Single Client Component
+
+#### 2.2 Same Client Data Used Across Multiple Components
+
+### 3. Shared Data (Crossing the Server–Client Boundary)
+
+#### 3.1 Server Data Read by Client Components
+
+#### 3.2 Server Data Shared with Multiple Client Components
+
+#### 3.3 Server Data with Client-Only Refresh Semantics
+
+export const metadata = {
+  title: "The Physics of Data Flow: Architectural Patterns for React Server Components",
+  createdAt: "January 4, 2026",
+  description: "",
+  metaDescription: "",
+};

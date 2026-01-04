@@ -54,6 +54,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "globals": "^16.5.0",
+    "mdxlint": "^1.0.0",
     "next-mdx-remote": "^5.0.0",
     "postcss": "^8",
     "prettier": "^3.3.3",
