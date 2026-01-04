@@ -109,15 +109,20 @@ async function Page() {
 }
 ```
 
-There are a few optimizations that React does when it comes to data fetching in Server Components.
+There are a few optimizations when it comes to data fetching in Server Components.
 
 ##### Fetch De-duplication
 
-React makes sure that, within a single render cycle, it performs a fetch only once and reuses the response for identical
-fetch calls in other places.
+If you're using Next.js, it extends the native `fetch` API to automatically dedupe identical requests within a single
+render pass. So if multiple Server Components call the same fetch, only one network request actually goes out.
 
-However, for this to work, you must ensure that the request is truly identical. This includes having the same headers
-and request configuration. In real-world applications, this is often not the case.
+Interestingly, React itself used to do this. The original implementation patched the global `fetch` to use `React.cache`
+under the hood. But in April 2024, the React team
+[removed this behavior](https://github.com/facebook/react/pull/28896) after some RSC framework maintainers pushed back
+on it. Now it's up to frameworks like Next.js to reimplement it in userspace.
+
+For this deduplication to kick in, the request must be truly identical — same URL, same headers, same config. In
+real-world apps, this is often not the case.
 
 For example, many applications use a wrapper around `fetch` where default headers are added, such as an `x-request-id`
 with a unique value for every call. In some cases, the data might not even come from a `fetch` call at all, but directly
@@ -143,10 +148,9 @@ async function getOrderStatus(id: string) {
 }
 ```
 
-With this logic, if you use `getUserPreferences` or `getOrderStatus` at multiple places, React won’t be able to
-de-duplicate the requests. For React, each call to `getUserPreferences` is a unique fetch because the headers are
-different, and `getOrderStatus` is custom logic, so React has no way of knowing whether it should de-duplicate these
-calls.
+With this logic, if you use `getUserPreferences` or `getOrderStatus` at multiple places, the automatic deduplication
+won't help you. Each call to `getUserPreferences` produces a unique fetch because the headers are different, and
+`getOrderStatus` is custom logic that doesn't go through `fetch` at all.
 
 ##### Custom Logic De-duplication
 
@@ -369,10 +373,10 @@ Quick recap of the patterns we covered:
 
 export const metadata = {
   isDraft: true,
-  title: "The Physics of Data Flow: Architectural Patterns for React Server Components",
+  title: "Data Fetching Patterns in React Server Components",
   createdAt: "January 4, 2026",
   description:
-    "A deep dive into how data flows in React Server Component architectures. This article explores server-owned, client-owned, and shared data patterns, explains the trade-offs behind each approach, and provides practical guidance for designing scalable RSC applications.",
+    "A practical guide to data fetching in React Server Components. Learn when to fetch on the server vs client, how to dedupe requests with React's cache API, and patterns for sharing data across the server-client boundary using props, context, and React Query hydration.",
   metaDescription:
-    "Learn how data flows in React Server Components. Understand server vs client data ownership, shared data patterns, hydration trade-offs, and how to design scalable RSC architectures without relying on fragile APIs.",
+    "Learn data fetching patterns in React Server Components. Covers server-owned data, client-owned data, crossing the server-client boundary, React cache API, and React Query hydration.",
 };
