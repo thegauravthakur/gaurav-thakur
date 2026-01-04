@@ -350,13 +350,6 @@ With this setup:
 
 This pattern scales much better as the application grows and avoids the DX issues of passing initialData manually.
 
-export const metadata = {
-  title: "The Physics of Data Flow: Architectural Patterns for React Server Components",
-  createdAt: "January 4, 2026",
-  description: "",
-  metaDescription: "",
-};
-
 ## Conclusion
 
 We started with a simple goal, showing meaningful content to users as fast as possible while keeping infra costs sane.
@@ -373,3 +366,13 @@ Quick recap of the patterns we covered:
    read-only values at depth; use server actions + revalidation when the server should remain authoritative; use a
    client cache (React Query) when you want the client to manage refreshes without a full backend revalidation, and
    prefer hydration over `initialData` when the same query is used in many places.
+
+export const metadata = {
+  isDraft: true,
+  title: "The Physics of Data Flow: Architectural Patterns for React Server Components",
+  createdAt: "January 4, 2026",
+  description:
+    "A deep dive into how data flows in React Server Component architectures. This article explores server-owned, client-owned, and shared data patterns, explains the trade-offs behind each approach, and provides practical guidance for designing scalable RSC applications.",
+  metaDescription:
+    "Learn how data flows in React Server Components. Understand server vs client data ownership, shared data patterns, hydration trade-offs, and how to design scalable RSC architectures without relying on fragile APIs.",
+};
