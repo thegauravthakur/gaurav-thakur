@@ -1,4 +1,4 @@
-import { RequestWaterfallDemo, CacheDeduplicationDemo } from "./_components/data-fetching-patterns";
+import { RequestWaterfallDemo, CacheDeduplicationDemo } from "../[slug]/components/data-fetching-patterns";
 
 As developers, what we are optimizing for is basically <Highlight>how fast we can show meaningful content to the end
 user</Highlight>, at an optimal infra cost. When the final UI depends on some data from an external source, how we fetch
@@ -8,14 +8,14 @@ For the last decade, we have treated data fetching as a specific "moment in time
 
 ## The Client-Side Data Fetching Model
 
-The pattern that we follow is that we mount a React component and render a pending state on UI, and then useEffect
+The pattern that we follow is that we mount a React component and render a pending state on UI, and then `useEffect`
 fires, which fetches data from our external source. Once we get data from the external source, we render the final UI.
 
 What we notice here is that there is a request waterfall. The browser first needs to get the required JavaScript to
 render that component from the server. Then it has to make another request to the server to get the data required to
 render the UI. Only after that can it render the final UI on the user's screen.
 
-## Server-Side Rendering: Moving Data Earlier
+## Traditional Server-Side Rendering: Moving Data Earlier
 
 This was later improved with the server-side rendering technique. Now, when the initial document request comes to the
 server, you fetch the data even before React starts parsing the components on the server to generate the HTML.
