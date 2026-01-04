@@ -1,8 +1,10 @@
+import { RequestWaterfallDemo, CacheDeduplicationDemo } from "./_components/data-fetching-patterns";
+
 As developers, what we are optimizing for is basically <Highlight>how fast we can show meaningful content to the end
 user</Highlight>, at an optimal infra cost. When the final UI depends on some data from an external source, how we fetch
 that data has a direct impact on how soon we are showing the final UI to the user.
 
-For the last decade, we have treated data fetching as a specific “moment in time.”
+For the last decade, we have treated data fetching as a specific "moment in time."
 
 ## The Client-Side Data Fetching Model
 
@@ -11,7 +13,7 @@ fires, which fetches data from our external source. Once we get data from the ex
 
 What we notice here is that there is a request waterfall. The browser first needs to get the required JavaScript to
 render that component from the server. Then it has to make another request to the server to get the data required to
-render the UI. Only after that can it render the final UI on the user’s screen.
+render the UI. Only after that can it render the final UI on the user's screen.
 
 ## Server-Side Rendering: Moving Data Earlier
 
@@ -58,6 +60,8 @@ hydration part on the client for components where no client interactivity is req
 components just once on the server only.
 
 This can be achieved with **React Server Components**.
+
+<RequestWaterfallDemo />
 
 In the next section, we’ll look at the most common data-fetching patterns that one can use in their app with React
 Server Components.
@@ -117,9 +121,9 @@ If you're using Next.js, it extends the native `fetch` API to automatically dedu
 render pass. So if multiple Server Components call the same fetch, only one network request actually goes out.
 
 Interestingly, React itself used to do this. The original implementation patched the global `fetch` to use `React.cache`
-under the hood. But in April 2024, the React team
-[removed this behavior](https://github.com/facebook/react/pull/28896) after some RSC framework maintainers pushed back
-on it. Now it's up to frameworks like Next.js to reimplement it in userspace.
+under the hood. But in April 2024, the React team [removed this behavior](https://github.com/facebook/react/pull/28896)
+after some RSC framework maintainers pushed back on it. Now it's up to frameworks like Next.js to reimplement it in
+userspace.
 
 For this deduplication to kick in, the request must be truly identical — same URL, same headers, same config. In
 real-world apps, this is often not the case.

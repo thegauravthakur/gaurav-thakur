@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/app/utilities/tailwind";
+import { InteractiveDemo } from "./interactive-demo";
 
 interface ComponentNodeProps {
   name: string;
@@ -27,7 +28,7 @@ function ComponentNode({
       className="flex items-center gap-3 py-2"
       style={{ paddingLeft: `${depth * 24}px` }}
     >
-      <div className="flex items-center gap-2 rounded-lg bg-zinc-100 dark:bg-zinc-800 px-3 py-2 font-mono text-sm">
+      <div className="flex items-center gap-2 rounded-lg bg-zinc-100 px-3 py-2 font-mono text-sm dark:bg-zinc-800">
         <span className="text-zinc-600 dark:text-zinc-400">{"<"}</span>
         <span className="text-rose-600 dark:text-rose-400">{name}</span>
         <span className="text-zinc-600 dark:text-zinc-400">{" />"}</span>
@@ -75,7 +76,7 @@ function ComponentNode({
   );
 }
 
-export function CacheDeduplicationDemo() {
+function CacheDemoContent() {
   const [usesCache, setUsesCache] = useState(false);
 
   const components = [
@@ -93,7 +94,7 @@ export function CacheDeduplicationDemo() {
     : components.filter((c) => c.showsRequest).length;
 
   return (
-    <div className="not-prose my-8 overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-700">
+    <>
       {/* Header */}
       <div className="flex items-center justify-between border-b border-zinc-200 bg-zinc-50 px-4 py-3 dark:border-zinc-700 dark:bg-zinc-800/50">
         <div className="flex items-center gap-3">
@@ -151,7 +152,15 @@ export function CacheDeduplicationDemo() {
             : "Without cache(), each component triggers a separate network request."}
         </p>
       </div>
-    </div>
+    </>
+  );
+}
+
+export function CacheDeduplicationDemo() {
+  return (
+    <InteractiveDemo title="See how cache() deduplicates requests">
+      <CacheDemoContent />
+    </InteractiveDemo>
   );
 }
 
