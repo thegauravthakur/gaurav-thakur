@@ -3,10 +3,10 @@
 import { DocSearch, useDocSearch } from "@docsearch/core";
 import type { DocSearchModal as DocSearchModalType } from "@docsearch/modal/modal";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/app/utilities/tailwind";
-
+import { FaSpinner } from "react-icons/fa";
 let DocSearchModal: typeof DocSearchModalType | null = null;
 
 async function importDocSearchModalIfNeeded() {
@@ -66,6 +66,7 @@ function DocSearchTrigger({
   setTheme,
   size,
 }: DocSearchTriggerProps) {
+  const [isPending, startTransition] = useTransition();
   const { openModal } = useDocSearch();
 
   function applyCorrectTheme() {
@@ -83,20 +84,23 @@ function DocSearchTrigger({
     linkElement.href = link;
     linkElement.id = "docsearch-css";
     document.head.appendChild(linkElement);
+
+    return new Promise((resolve) => setTimeout(resolve, 80));
   }
 
-  const loadModal = () => {
+  const loadModal = async () => {
     openModal();
-    applyCorrectStyles();
+    await applyCorrectStyles();
     applyCorrectTheme();
-    importDocSearchModalIfNeeded().then(() => {
-      setModalLoaded(true);
-    });
+    await importDocSearchModalIfNeeded();
+    setModalLoaded(true);
   };
 
   return (
     <motion.button
-      onClick={() => loadModal()}
+      onClick={() => {
+        startTransition(loadModal);
+      }}
       className={cn(
         "flex cursor-pointer items-center justify-center rounded-full",
         "size-9 transition-colors duration-200 ease-out",
@@ -108,7 +112,13 @@ function DocSearchTrigger({
       whileTap={{ scale: 0.97 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
-      <MagnifyingGlassIcon className={sizeStyles[size].icon} />
+      {isPending ? (
+        <FaSpinner
+          className={cn(sizeStyles[size].icon, "animate-spin duration-100")}
+        />
+      ) : (
+        <MagnifyingGlassIcon className={sizeStyles[size].icon} />
+      )}
     </motion.button>
   );
 }

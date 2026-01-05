@@ -2,9 +2,10 @@ import Link from "next/link";
 import { cn } from "@/app/utilities/tailwind";
 import { linkStyles } from "@/app/_styles/common";
 import { ViewTransition } from "react";
-import { MobileNav, Nav } from "@/app/_components/nav/nav";
+import { Nav } from "@/app/_components/nav/nav";
 import { ThemeSwitchButton } from "@/app/_components/theme-switch-button";
 import { Search } from "@/app/_components/search/search";
+import { MobileNav } from "@/app/_components/nav/mobile-nav";
 
 export const links = [
   { label: "Home", href: "/" },
