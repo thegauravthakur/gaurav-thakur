@@ -1,4 +1,9 @@
-import { RequestWaterfallDemo, CacheDeduplicationDemo } from "../[slug]/components/data-fetching-patterns";
+import {
+  RequestWaterfallDemo,
+  CacheDeduplicationDemo,
+  CSRWaterfallDemo,
+  SSRWaterfallDemo,
+} from "../[slug]/components/data-fetching-patterns";
 
 As developers, what we are optimizing for is basically <Highlight>how fast we can show meaningful content to the end
 user</Highlight>, at an optimal infra cost. When the final UI depends on some data from an external source, how we fetch
@@ -15,6 +20,8 @@ What we notice here is that there is a request waterfall. The browser first need
 render that component from the server. Then it has to make another request to the server to get the data required to
 render the UI. Only after that can it render the final UI on the user's screen.
 
+<CSRWaterfallDemo />
+
 ## Traditional Server-Side Rendering: Moving Data Earlier
 
 This was later improved with the server-side rendering technique. Now, when the initial document request comes to the
@@ -27,6 +34,8 @@ create HTML, it already has the data required to render that component.
 Now, on the initial HTML request, the server sends a full-blown piece of final **meaningful UI** to the end user in a
 single request. There are no more round trips to the server to render the final expected UI. All things are done in the
 single request itself.
+
+<SSRWaterfallDemo />
 
 ### The Tradeoffs of Server-Side Rendering
 
@@ -44,8 +53,8 @@ Surely, the prop-drilling part can be solved by using the Context API, where you
 component and wrap it in a context provider. Now you can read the context value at any depth.
 
 But the problem is that the data we pass as props to our root React component on the server to generate the HTML string
-also needs to be passed to the browser. React needs this data to hydrate the HTML string generated on the server on the
-client, and it re-renders the same JavaScript it used to build the component tree on the server.
+also needs to be passed to the browser. React needs this data to hydrate the HTML string on the client, and it
+re-renders the same JavaScript on the client that it earlier used to build the component tree on the server.
 
 Now imagine if the data that we fetched on the server is quite big. This will bloat the JavaScript that we end up
 sending to the client. Even though the component where you are using this data is a dumb component and is just rendering
