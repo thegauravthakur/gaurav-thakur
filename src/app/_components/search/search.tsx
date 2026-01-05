@@ -3,7 +3,7 @@
 import { DocSearch, useDocSearch } from "@docsearch/core";
 import type { DocSearchModal as DocSearchModalType } from "@docsearch/modal/modal";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/app/utilities/tailwind";
 import { FaSpinner } from "react-icons/fa";
@@ -66,7 +66,7 @@ function DocSearchTrigger({
   setTheme,
   size,
 }: DocSearchTriggerProps) {
-  const [isPending, startTransition] = useTransition();
+  const [isLoading, setIsLoading] = useState(false);
   const { openModal } = useDocSearch();
 
   function applyCorrectTheme() {
@@ -89,18 +89,18 @@ function DocSearchTrigger({
   }
 
   const loadModal = async () => {
+    setIsLoading(true);
     openModal();
     await applyCorrectStyles();
     applyCorrectTheme();
     await importDocSearchModalIfNeeded();
     setModalLoaded(true);
+    setIsLoading(false);
   };
 
   return (
     <motion.button
-      onClick={() => {
-        startTransition(loadModal);
-      }}
+      onClick={loadModal}
       className={cn(
         "flex cursor-pointer items-center justify-center rounded-full",
         "size-9 transition-colors duration-200 ease-out",
@@ -112,7 +112,7 @@ function DocSearchTrigger({
       whileTap={{ scale: 0.97 }}
       transition={{ type: "spring", stiffness: 400, damping: 17 }}
     >
-      {isPending ? (
+      {isLoading ? (
         <FaSpinner
           className={cn(sizeStyles[size].icon, "animate-spin duration-100")}
         />
