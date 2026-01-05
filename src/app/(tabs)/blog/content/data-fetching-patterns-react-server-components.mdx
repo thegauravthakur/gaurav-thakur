@@ -245,8 +245,8 @@ UI:
 #### 1. Server as the source of truth
 
 You can keep the server as the source of truth and invoke a server action to update the data. Once the action completes,
-you revalidate the client cache using your framework’s invalidation APIs (for example, revalidatePath or router.refresh
-in Next.js). This keeps the update flow consistent.
+you revalidate the client cache using your framework’s invalidation APIs (for example, `revalidatePath` or
+`router.refresh` in Next.js). This keeps the update flow consistent.
 
 #### 2. Client-managed refresh using a client cache
 
@@ -280,7 +280,7 @@ This pattern works if the data is read in one place only, and you want a client 
 situations, initialData gives you a smooth transition from server-rendered data to client-managed state.
 
 One thing to note is that if useQuery is called in a component deeper down the tree, you need to pass the same
-initialData all the way down to that point. A better solution would be to use -
+initialData all the way down to that point. A better solution would be to use
 
 ##### Query hydration: the more scalable pattern
 

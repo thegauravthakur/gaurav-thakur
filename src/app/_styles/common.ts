@@ -13,5 +13,6 @@ export const proseStyles = cn(
   "prose-a:font-medium prose-a:text-red-600 prose-a:underline prose-a:decoration-red-200 prose-a:underline-offset-2 prose-a:hover:decoration-red-600 prose-a:active:opacity-60",
   "dark:prose-a:text-red-400 dark:prose-a:decoration-red-300 dark:prose-a:hover:decoration-red-400",
   "prose prose-pre:border prose-pre:border-gray-200 dark:prose-invert dark:prose-pre:border-gray-700",
+  "prose-h5:font-medium",
   "prose-img:rounded-lg",
 );
