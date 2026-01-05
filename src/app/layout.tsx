@@ -51,6 +51,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             `,
           }}
         />
+        <link rel="CF_PAGES_URL" href={process.env.CF_PAGES_URL} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
