@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
-  experimental: { viewTransition: true, inlineCss: true },
+  experimental: { viewTransition: true },
   output: "export",
   // PostHog reverse proxy configuration
   // Note: rewrites only work during `next dev` with static export mode
