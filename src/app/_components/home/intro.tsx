@@ -16,9 +16,10 @@ export function Intro() {
         attention to small details that make a difference over time.
       </p>
       <p className="leading-relaxed">
-        This space is a mix of everything I care about. I write about frontend
-        engineering and performance, but also share thoughts from work, life,
-        and things I’m learning along the way.
+        This space is a mix of everything I care about. I{" "}
+        <Link href="/blog">write about</Link> frontend engineering and
+        performance, but also share thoughts from work, life, and things I’m
+        learning along the way.
       </p>
     </section>
   );
