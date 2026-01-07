@@ -13,10 +13,16 @@ export const links = [
   { label: "About", href: "/blog/who-is-gaurav-thakur" },
 ];
 
-export function Header() {
+interface HeaderProps {
+  renderBrandAsHeading?: boolean;
+}
+
+export function Header({ renderBrandAsHeading = true }: HeaderProps) {
+  const HeadingTag = renderBrandAsHeading ? "h1" : "span";
+
   return (
     <header className="mx-auto flex w-full max-w-(--breakpoint-xl) items-center justify-between px-6 py-2 md:justify-normal">
-      <h1 className="font-semibold dark:text-white">
+      <HeadingTag className="inline-block font-semibold dark:text-white">
         <ViewTransition name="brand-name">
           <Link
             href="/"
@@ -28,7 +34,7 @@ export function Header() {
             Gaurav Thakur
           </Link>
         </ViewTransition>
-      </h1>
+      </HeadingTag>
       <div className="hidden flex-1 justify-center md:flex">
         <ViewTransition name="nav-desktop">
           <Nav />

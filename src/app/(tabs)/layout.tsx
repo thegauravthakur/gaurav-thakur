@@ -9,7 +9,7 @@ export default function LayoutProps({ children }: LayoutProps) {
   return (
     <Fragment>
       <ViewTransition>
-        <Header />
+        <Header renderBrandAsHeading={false} />
       </ViewTransition>
       <main>{children}</main>
     </Fragment>
