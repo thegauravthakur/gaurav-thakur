@@ -11,7 +11,9 @@ that data has a direct impact on how soon we are showing the final UI to the use
 
 For the last decade, we have treated data fetching as a specific "moment in time."
 
-## The Client-Side Data Fetching Model
+## Part 1: How We Got Here
+
+### Client-Side Fetching
 
 The pattern that we follow is that we mount a React component and render a pending state on UI, and then `useEffect`
 fires, which fetches data from our external source. Once we get data from the external source, we render the final UI.
@@ -22,7 +24,7 @@ render the UI. Only after that can it render the final UI on the user's screen.
 
 <CSRWaterfallDemo />
 
-## Traditional Server-Side Rendering: Moving Data Earlier
+### Server-Side Rendering
 
 This was later improved with the server-side rendering technique. Now, when the initial document request comes to the
 server, you fetch the data even before React starts parsing the components on the server to generate the HTML.
@@ -37,20 +39,14 @@ single request itself.
 
 <SSRWaterfallDemo />
 
-### The Tradeoffs of Server-Side Rendering
-
 But this approach had its own downsides.
 
-#### 1. Data Must Be Hoisted and Passed Down
+**Data must be hoisted and passed down.** You always have to fetch data outside the React tree on the server and pass it
+down as props to the root React component. Now imagine if the component where you require this data is very deep down in
+the tree. You always have to pass this data via props.
 
-You always have to fetch data outside the React tree on the server and pass it down as props to the root React
-component. Now imagine if the component where you require this data is very deep down in the tree. You always have to
-pass this data via props only\*.
-
-#### 2. Hydration and Payload Costs
-
-Surely, the prop-drilling part can be solved by using the Context API, where you keep a React context in the root
-component and wrap it in a context provider. Now you can read the context value at any depth.
+**Hydration and payload costs.** Surely, the prop-drilling part can be solved by using the Context API, where you keep a
+React context in the root component and wrap it in a context provider. Now you can read the context value at any depth.
 
 But the problem is that the data we pass as props to our root React component on the server to generate the HTML string
 also needs to be passed to the browser. React needs this data to hydrate the HTML string on the client, and it
@@ -62,7 +58,7 @@ stuff with no interactivity, React will still re-render it again in the browser,
 payload. <Highlight>Basically, there is no way of rendering a component exclusively on the server through which we can
 avoid this hydration and payload cost.</Highlight>
 
-## Why React Server Components Exist
+### The Case for React Server Components
 
 So what if there could be a way to fetch data close to the component where it is actually needed, and also skip the
 hydration part on the client for components where no client interactivity is required by exclusively rendering these
@@ -72,29 +68,19 @@ This can be achieved with **React Server Components**.
 
 <RequestWaterfallDemo />
 
-In the next section, we’ll look at the most common data-fetching patterns that one can use in their app with React
+In the next section, we'll look at the most common data-fetching patterns that one can use in their app with React
 Server Components.
 
-## Data Fetching and Sharing Patterns in React Server Components
+## Part 2: Data Fetching Patterns
 
-I’ll categorize these patterns into two main sections.
+I'll categorize these patterns based on where the data lives and how it moves through your application. I won't cover
+patterns where data is fetched in a Client Component and shared across other Client Components, since that area is
+already well covered in many places online.
 
-The first category focuses on scenarios where you fetch data in a Server Component and need to share that data only
-across other Server Components in the tree.
+### Pattern 1: Server-Owned Data
 
-In the second category, we’ll look at cases where data is fetched in a Server Component but needs to be shared with
-Client Components. This can also be combined with the first category, where the same data is fetched in a Server
-Component and shared across both Server Components and Client Components.
-
-I won’t cover patterns where data is fetched in a Client Component and shared across other Client Components, since that
-area is already well covered in many places online.
-
-### 1. Server-Owned Data (No Client State)
-
-Let’s say we are building an app where we have to fetch a user’s preferences from an API and use that data across
-multiple server components.
-
-#### Data Needed Across Server Components
+When data is fetched in a Server Component and only needs to be shared across other Server Components in the tree, you
+have some unique advantages.
 
 The good thing about Server Components is that, unlike normal React components, they run exclusively on the server. We
 are sure that during the entire lifecycle of a request, a Server Component will only run once, and these components can
@@ -136,7 +122,7 @@ async function Page() {
 
 There are a few optimizations when it comes to data fetching in Server Components.
 
-##### Fetch De-duplication
+#### Deduplicating Fetch Requests
 
 If you're using Next.js, it extends the native `fetch` API to automatically dedupe identical requests within a single
 render pass. So if multiple Server Components call the same fetch, only one network request actually goes out.
@@ -177,7 +163,7 @@ With this logic, if you use `getUserPreferences` or `getOrderStatus` at multiple
 won't help you. Each call to `getUserPreferences` produces a unique fetch because the headers are different, and
 `getOrderStatus` is custom logic that doesn't go through `fetch` at all.
 
-##### Custom Logic De-duplication
+#### Deduplicating Custom Logic with cache()
 
 To handle situations where we need to de-duplicate custom logic, React has introduced a `cache` API.
 
@@ -205,10 +191,10 @@ once during a single render cycle.
 
 <CacheDeduplicationDemo />
 
-### 2. Shared Data (Crossing the Server–Client Boundary)
+### Pattern 2: Sharing Data Across the Boundary
 
-When a piece of data is needed inside a client boundary, the simplest thing to try first is to pass it down as a prop
-from the nearest server component.
+When data is fetched in a Server Component but needs to be shared with Client Components, the simplest thing to try
+first is to pass it down as a prop from the nearest server component.
 
 One important caveat here is that we should be extra cautious when passing props from a server component to a client
 component. Any data that crosses this boundary needs to be serialized and sent to the browser along with the JavaScript
@@ -252,15 +238,15 @@ function SomeDeepClientComponent() {
 ```
 
 If the data can change over time after sending it to the client, you still have two broad options to refresh the stale
-UI:
+UI.
 
-#### 1. Server as the source of truth
+#### Server Actions and Revalidation
 
 You can keep the server as the source of truth and invoke a server action to update the data. Once the action completes,
 you revalidate the client cache using your framework’s invalidation APIs (for example, `revalidatePath` or
 `router.refresh` in Next.js). This keeps the update flow consistent.
 
-#### 2. Client-managed refresh using a client cache
+#### Client Cache with React Query
 
 If you want to avoid a full backend refresh and instead want the client to fetch updated data by itself, you can use a
 client cache like React Query instead of raw Context.
@@ -289,12 +275,12 @@ function ClientSettingsPanel({ initialPrefs }) {
 ```
 
 This pattern works if the data is read in one place only, and you want a client side refetching or mutation. In these
-situations, initialData gives you a smooth transition from server-rendered data to client-managed state.
+situations, `initialData` gives you a smooth transition from server-rendered data to client-managed state.
 
 One thing to note is that if useQuery is called in a component deeper down the tree, you need to pass the same
-initialData all the way down to that point. A better solution would be to use
+`initialData` all the way down to that point. A better solution is query hydration.
 
-##### Query hydration: the more scalable pattern
+#### Query Hydration
 
 In most real-world cases, where data can be required at any depth in the tree or in multiple client components, query
 hydration is a much more practical approach.
@@ -379,9 +365,9 @@ With this setup:
 
 This pattern scales much better as the application grows and avoids the DX issues of passing initialData manually.
 
-#### Streaming promises: pass the Promise, don’t await it
+### Pattern 3: Streaming Promises
 
-One thing that often gets missed is that you don’t always have to await data on the server before sending HTML to the
+One thing that often gets missed is that you don't always have to await data on the server before sending HTML to the
 client.
 
 In JavaScript, promises are eager. The moment you call an async function, the work starts. You can use this to your
