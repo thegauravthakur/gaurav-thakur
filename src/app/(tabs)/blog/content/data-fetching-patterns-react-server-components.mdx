@@ -77,6 +77,18 @@ Server Components.
 
 ## Data Fetching and Sharing Patterns in React Server Components
 
+I’ll categorize these patterns into two main sections.
+
+The first category focuses on scenarios where you fetch data in a Server Component and need to share that data only
+across other Server Components in the tree.
+
+In the second category, we’ll look at cases where data is fetched in a Server Component but needs to be shared with
+Client Components. This can also be combined with the first category, where the same data is fetched in a Server
+Component and shared across both Server Components and Client Components.
+
+I won’t cover patterns where data is fetched in a Client Component and shared across other Client Components, since that
+area is already well covered in many places online.
+
 ### 1. Server-Owned Data (No Client State)
 
 Let’s say we are building an app where we have to fetch a user’s preferences from an API and use that data across
@@ -219,8 +231,8 @@ function ClientSettingsPanel({ initialPrefs }) {
 ```
 
 If the client boundary is very deep and there's no server component nearby, or you need this data throughout the app,
-use Context to provide the value instead of prop-drilling. Context is simple to implement and great for read-only values
-that won't change during the session.
+use `Context` to provide the value instead of prop-drilling. Context is straightforward to implement and great for
+read-only values that won't change during the session.
 
 ```jsx
 // server component
@@ -367,22 +379,98 @@ With this setup:
 
 This pattern scales much better as the application grows and avoids the DX issues of passing initialData manually.
 
+#### Streaming promises: pass the Promise, don’t await it
+
+One thing that often gets missed is that you don’t always have to await data on the server before sending HTML to the
+client.
+
+In JavaScript, promises are eager. The moment you call an async function, the work starts. You can use this to your
+advantage by starting the fetch on the server, passing the promise to a client component, and letting the client wait
+for it instead of the server. This can help you avoid waterfalls and start network work as early as possible.
+
+```tsx
+// app/page.tsx (server)
+import { Suspense } from "react";
+import PageWrapper from "./page-wrapper";
+import ClientPanel from "./client-panel";
+import { getUserPreferences } from "./api";
+
+export default function Page() {
+  // start the fetch early — do not await
+  const prefsPromise = getUserPreferences();
+
+  return (
+    <PageWrapper>
+      <Suspense fallback={<div>Loading preferences...</div>}>
+        <ClientPanel prefsPromise={prefsPromise} />
+      </Suspense>
+    </PageWrapper>
+  );
+}
+```
+
+```tsx
+// app/client-panel.tsx
+"use client";
+import { use } from "react";
+
+export default function ClientPanel({ prefsPromise }) {
+  const prefs = use(prefsPromise);
+  return <div>Max discount: {prefs.maxDiscount}</div>;
+}
+```
+
+One important constraint to keep in mind is that the promise must resolve to serializable data. Since this data is
+streamed from the server to the browser, it needs to be JSON-compatible.
+
+Returning class instances, database documents (for example, a Mongoose document), or values with methods will break this
+pattern. The promise should resolve to plain objects, arrays, or primitives.
+
+What matters here is where the fetch is initiated. By starting the request at the page level, the network work begins
+while React is still rendering the rest of the tree. If the same fetch were awaited inside a deeply nested component, it
+would only start once React reaches that part of the tree, creating a render-time waterfall.
+
+The client does not make a second request. The resolved data is streamed to the browser over the same response, and the
+Suspense boundary is replaced once the promise resolves.
+
+This pattern is useful when:
+
+- the data is needed inside a client component
+- the fetch is slow or expensive
+- the component consuming the data sits deep in the tree
+- you want to avoid blocking the server render on that fetch
+
+This doesn’t replace hydration or client caching. It’s simply a way to start work earlier and move waiting time out of
+the server render path when crossing the server–client boundary.
+
 ## Conclusion
 
-We started with a simple goal, showing meaningful content to users as fast as possible while keeping infra costs sane.
-The arrival of Server Components changes the problem from “when do I fetch?” to “where should data live, who owns it,
-and how do we move it across the server–client boundary?”
+We started with a simple goal: show meaningful content to users as fast as possible, while keeping infra costs sane. The
+arrival of Server Components shifts the problem from “when do I fetch?” to “where should data live, who owns it, and how
+does it move across the server–client boundary?”
 
-Quick recap of the patterns we covered:
+Once you start looking at data flow through that lens, the tradeoffs become much clearer.
 
-1. Server-owned data — fetch near the consuming server component; use `cache` to dedupe custom logic when the same data
-   is needed multiple times in a single render.
-2. Client-owned data — local state, context, or a client cache when the data is session-scoped or mutable in the
-   browser.
-3. Shared data (crossing the boundary) — prefer props from the nearest server component; fallback to Context for simple,
-   read-only values at depth; use server actions + revalidation when the server should remain authoritative; use a
-   client cache (React Query) when you want the client to manage refreshes without a full backend revalidation, and
-   prefer hydration over `initialData` when the same query is used in many places.
+A quick recap of the patterns we covered:
+
+1. Server-owned data — fetch data close to the consuming Server Component. When the same data is needed multiple times
+   during a single render, use request-scoped deduplication (cache) to avoid repeated work.
+
+2. Client-owned data — keep data on the client when it is session-scoped or frequently changing. Local state, Context,
+   or a client cache works well here, depending on how widely the data is shared.
+
+3. Shared data (crossing the boundary) — start by passing data as props from the nearest Server Component. Use Context
+   for simple, read-only values that are needed deep in the tree. When the server should remain authoritative, use
+   server actions and revalidation. When the client needs to control refreshes, use a client cache, and prefer query
+   hydration over initialData once the same data is consumed in multiple places.
+
+4. Streaming data to the client — when data is slow and consumed by a client component, you can start the fetch early on
+   the server and pass the promise across the boundary. This avoids render-time waterfalls by letting the server keep
+   rendering while the client waits behind a Suspense boundary.
+
+None of these patterns are universally correct. Each one optimizes for a different constraint: ownership, freshness,
+payload size, or render timing. Framework APIs will continue to evolve, but these constraints won’t. If you design
+around them, the specific tools tend to fall into place naturally.
 
 export const metadata = {
   title: "Data Fetching Patterns in React Server Components",
