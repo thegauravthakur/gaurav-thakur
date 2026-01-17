@@ -23,7 +23,7 @@ export default async function Image({
 
   // Adjust font size based on title length
   const titleLength = metadata.title.length;
-  const fontSize = titleLength > 40 ? 48 : titleLength > 25 ? 56 : 64;
+  const fontSize = titleLength > 40 ? 56 : titleLength > 25 ? 68 : 80;
 
   return new ImageResponse(
     <div
@@ -57,7 +57,7 @@ export default async function Image({
         />
         <span
           style={{
-            fontSize: 24,
+            fontSize: 28,
             fontWeight: 500,
             color: "#94a3b8",
           }}
@@ -95,7 +95,7 @@ export default async function Image({
       >
         <span
           style={{
-            fontSize: 20,
+            fontSize: 24,
             fontWeight: 400,
             color: "#64748b",
             letterSpacing: "0.05em",
