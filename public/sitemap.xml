@@ -53,4 +53,9 @@
     <changefreq>weekly</changefreq>
     <lastmod>2026-01-09</lastmod>
   </url>
+  <url>
+    <loc>https://gauravthakur.com/blog/writing-maintainable-react-useeffects</loc>
+    <changefreq>weekly</changefreq>
+    <lastmod>2026-01-18</lastmod>
+  </url>
 </urlset>
