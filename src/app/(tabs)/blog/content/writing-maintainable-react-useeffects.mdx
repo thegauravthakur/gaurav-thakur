@@ -8,6 +8,8 @@ effects, we step out of the pure rendering flow and have to manage state synchro
 
 In React, useEffect is the primary tool to handle these side effects.
 
+## Where It Goes Wrong
+
 The issue is that useEffect also tends to become a dumping ground. Effects quietly depend on variables from the
 surrounding scope, dependency arrays become hard to maintain, and over time the component becomes difficult to scan. In
 many cases, you don’t even need `useEffect`, and using it for derived state can quickly turn into a footgun.
@@ -16,10 +18,12 @@ But there are cases where we do need effects. And when we do, As developers, we 
 the effect — why was this hook needed in the first place? This becomes critical as components grow in complexity and
 effects start dominating the file.
 
-In this post, I’ll share a few practical patterns to structure and maintain useEffect in complex React components, so
+In this post, I'll share a few practical patterns to structure and maintain useEffect in complex React components, so
 the intent is clear and the code remains reviewable.
 
-Before diving into specific pattern, the golden rule is <Highlight>One Purpose Per Effect.</Highlight>
+## The Golden Rule
+
+Before diving into specific patterns, the golden rule is <Highlight>One Purpose Per Effect.</Highlight>
 
 Always split your effects. If you try to do three unrelated things in a single useEffect just to "save" a few lines of
 code, you are making the dependency array a nightmare to manage. Three small, focused effects are infinitely better than
@@ -27,7 +31,9 @@ one complicated one. If you find yourself needing multiple complex effects, that
 
 <Highlight>break the component into smaller sub-components.</Highlight>
 
-## 1. Add a comment at the top (when effect is simple)
+## Patterns for Readable Effects
+
+### 1. Add a comment at the top (when effect is simple)
 
 If your component is small and the effect is relatively simple, a simple comment explaining why the effect exists is
 often enough. Just state the purpose clearly so the next person (or you in six months) knows why this block exists.
@@ -39,7 +45,7 @@ useEffect(() => {
 }, [query]);
 ```
 
-## 2. Use a named function
+### 2. Use a named function
 
 We often use anonymous arrow functions inside useEffect because they are quick to write and keep the code compact. But
 in some cases, it is better to avoid anonymous functions and instead use a named function. By naming the function inside
@@ -84,7 +90,7 @@ function useFormAutosave(data, url) {
 }
 ```
 
-## Conclustion
+## Conclusion
 
 `useEffect` is not inherently bad. It’s just easy to misuse.
 
@@ -110,7 +116,9 @@ If you take away just one thing from this post, let it be this:
 
 export const metadata = {
   title: "Writing Maintainable React useEffects: Clean Code Patterns",
-  createdAt: "January 18, 2025",
-  description: "",
-  metaDescription: "",
+  createdAt: "January 18, 2026",
+  metaDescription:
+    "Practical patterns to keep useEffect readable and maintainable — from simple comments to custom hooks.",
+  description:
+    "In this post, we’ll look at practical clean-code patterns for writing maintainable useEffect in React. We’ll cover the “one purpose per effect” rule, when to use comments, how named functions improve readability, and when it’s better to extract complex logic into custom hooks.",
 };
