@@ -14,7 +14,7 @@ The issue is that useEffect also tends to become a dumping ground. Effects quiet
 surrounding scope, dependency arrays become hard to maintain, and over time the component becomes difficult to scan. In
 many cases, you don’t even need `useEffect`, and using it for derived state can quickly turn into a footgun.
 
-But there are cases where we do need effects. And when we do, As developers, we should explicitly state the purpose of
+But there are cases where we do need effects. And when we do, as developers, we should explicitly state the purpose of
 the effect — why was this hook needed in the first place? This becomes critical as components grow in complexity and
 effects start dominating the file.
 
