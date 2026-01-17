@@ -6,11 +6,11 @@ subscribing to external events, mutating the DOM, syncing with a third-party lib
 consider these all as side effects. This is where the simplicity often breaks down. The moment we introduce side
 effects, we step out of the pure rendering flow and have to manage state synchronization manually.
 
-In React, useEffect is the primary tool to handle these side effects.
+In React, `useEffect` is the primary tool to handle these side effects.
 
 ## Where It Goes Wrong
 
-The issue is that useEffect also tends to become a dumping ground. Effects quietly depend on variables from the
+The issue is that `useEffect` also tends to become a dumping ground. Effects quietly depend on variables from the
 surrounding scope, dependency arrays become hard to maintain, and over time the component becomes difficult to scan. In
 many cases, you don’t even need `useEffect`, and using it for derived state can quickly turn into a footgun.
 
@@ -18,14 +18,14 @@ But there are cases where we do need effects. And when we do, as developers, we 
 the effect — why was this hook needed in the first place? This becomes critical as components grow in complexity and
 effects start dominating the file.
 
-In this post, I'll share a few practical patterns to structure and maintain useEffect in complex React components, so
+In this post, I'll share a few practical patterns to structure and maintain `useEffect in complex React components, so
 the intent is clear and the code remains reviewable.
 
 ## The Golden Rule
 
 Before diving into specific patterns, the golden rule is <Highlight>One Purpose Per Effect.</Highlight>
 
-Always split your effects. If you try to do three unrelated things in a single useEffect just to "save" a few lines of
+Always split your effects. If you try to do three unrelated things in a single `useEffect just to "save" a few lines of
 code, you are making the dependency array a nightmare to manage. Three small, focused effects are infinitely better than
 one complicated one. If you find yourself needing multiple complex effects, that is usually a strong signal to
 
@@ -67,9 +67,9 @@ useEffect(
 
 If the logic is complex, the best approach is to extract it into a named custom hook.
 
-Beyond just cleaning up the render body, this forces you to be honest about your dependencies. When logic lives inside
-the component, it’s easy to accidentally grab a variable from the component scope and forget to add it to the dependency
-array.
+Beyond just cleaning up the render body, <Highlight>this forces you to be honest about your dependencies</Highlight>.
+When logic lives inside the component, it’s easy to accidentally grab a variable from the component scope and forget to
+add it to the dependency array.
 
 When you extract it to a hook, you can't just "find" variables in scope—you are forced to pass them as explicit
 arguments. This makes the data flow obvious and saves a lot of debugging headaches down the line.
