@@ -1,0 +1,116 @@
+React components are easiest to maintain and understand when rendering stays pure and data flows in one direction from
+props/state → UI.
+
+The complexity starts when a component needs to do work that’s not directly related to rendering. Fetching data,
+subscribing to external events, mutating the DOM, syncing with a third-party library, firing analytics. In React, we
+consider these all as side effects. This is where the simplicity often breaks down. The moment we introduce side
+effects, we step out of the pure rendering flow and have to manage state synchronization manually.
+
+In React, useEffect is the primary tool to handle these side effects.
+
+The issue is that useEffect also tends to become a dumping ground. Effects quietly depend on variables from the
+surrounding scope, dependency arrays become hard to maintain, and over time the component becomes difficult to scan. In
+many cases, you don’t even need `useEffect`, and using it for derived state can quickly turn into a footgun.
+
+But there are cases where we do need effects. And when we do, As developers, we should explicitly state the purpose of
+the effect — why was this hook needed in the first place? This becomes critical as components grow in complexity and
+effects start dominating the file.
+
+In this post, I’ll share a few practical patterns to structure and maintain useEffect in complex React components, so
+the intent is clear and the code remains reviewable.
+
+Before diving into specific pattern, the golden rule is <Highlight>One Purpose Per Effect.</Highlight>
+
+Always split your effects. If you try to do three unrelated things in a single useEffect just to "save" a few lines of
+code, you are making the dependency array a nightmare to manage. Three small, focused effects are infinitely better than
+one complicated one. If you find yourself needing multiple complex effects, that is usually a strong signal to
+
+<Highlight>break the component into smaller sub-components.</Highlight>
+
+## 1. Add a comment at the top (when effect is simple)
+
+If your component is small and the effect is relatively simple, a simple comment explaining why the effect exists is
+often enough. Just state the purpose clearly so the next person (or you in six months) knows why this block exists.
+
+```typescript jsx
+useEffect(() => {
+  // Track search query change
+  track("search_updated", { q: query });
+}, [query]);
+```
+
+## 2. Use a named function
+
+We often use anonymous arrow functions inside useEffect because they are quick to write and keep the code compact. But
+in some cases, it is better to avoid anonymous functions and instead use a named function. By naming the function inside
+the hook, the code becomes self-documenting. You don't need a comment because the function name tells you exactly what
+is happening. As long as we are trying to be brief, a good name is always better than a comment, at least in my book.
+
+```typescript jsx
+useEffect(
+  function syncFiltersToUrl() {
+    const params = new URLSearchParams();
+    params.set("q", query);
+    navigate(`?${params.toString()}`, { replace: true });
+  },
+  [query, navigate],
+);
+```
+
+### 3. Extract into a custom hook (best for complex effects)
+
+If the logic is complex, the best approach is to extract it into a named custom hook.
+
+Beyond just cleaning up the render body, this forces you to be honest about your dependencies. When logic lives inside
+the component, it’s easy to accidentally grab a variable from the component scope and forget to add it to the dependency
+array.
+
+When you extract it to a hook, you can't just "find" variables in scope—you are forced to pass them as explicit
+arguments. This makes the data flow obvious and saves a lot of debugging headaches down the line.
+
+```typescript jsx
+// In your component
+useFormAutosave(formData, "/api/drafts/save");
+
+// In a separate file or definition
+function useFormAutosave(data, url) {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      saveToApi(url, data);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [data, url]); // Dependencies are now explicit arguments
+}
+```
+
+## Conclustion
+
+`useEffect` is not inherently bad. It’s just easy to misuse.
+
+Most of the pain comes from effects doing too much, depending on too many things, and hiding intent behind a wall of
+logic. Once that happens, the component stops being something you can quickly scan and reason about. It turns into
+something you are afraid to touch.
+
+The patterns in this post are simple, but they work:
+
+- Keep <strong>one purpose</strong> per effect.
+- <strong>Document the intent</strong> (at least with a short comment).
+- If the effect has a real job, give it a <strong>real name</strong>.
+- If the logic is complex, <strong>extract it</strong> into a custom hook.
+
+The goal is not to write “clever React code.” The goal is to write code that is easy to review, easy to debug, and easy
+to maintain six months later.
+
+If you take away just one thing from this post, let it be this:
+
+<strong>
+  If your effect needs a paragraph to explain, it probably doesn’t belong inside the component. Extract it.
+</strong>
+
+export const metadata = {
+  title: "Writing Maintainable React useEffects: Clean Code Patterns",
+  createdAt: "January 18, 2025",
+  description: "",
+  metaDescription: "",
+};
