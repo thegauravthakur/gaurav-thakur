@@ -1,0 +1,109 @@
+After Splitwise introduced a daily cap on how many expenses you can add, I started searching for another alternative.
+
+At first, this sounded like a simple problem. There are already plenty of expense-splitting apps, and group expense
+tracking is not exactly a new category. But the more I looked, the more I realized that the product I wanted was
+surprisingly hard to find.
+
+My requirements were actually very basic:
+
+1. **[P0]** It should not restrict how many expenses I can add.
+2. **[P0]** It should not show ads.
+3. **[P0]** It should not restrict what kind of expenses are allowed, especially if I want to attach receipts or other
+   media.
+4. **[P0]** It should not delete my past expense history.
+5. **[P2]** It should work across all the devices I use — Mac, iPhone, Android, Windows, and everything else in between.
+6. **[P2]** It should have a clear and simple user experience.
+
+The closest alternatives were the built-in expense-sharing features inside payment apps like PhonePe and Paytm. They
+were usable, but only up to a point. Adding even a simple expense often took too many clicks. Desktop support was weak
+or non-existent. And attachment history was not something I could trust to remain available for the long term.
+
+That was the point where I stopped searching and decided to build one myself: [SplitMaadi](https://splitmaadi.com).
+_Maadi_ is a Kannada word that means “do it”.
+
+## What I wanted to optimize for
+
+I was not trying to build a feature-heavy finance app. I just wanted to build an expense-sharing app that is simple,
+practical, and works well.
+
+That led to a few clear product decisions.
+
+### 1. No limits on the core use case
+
+If the main purpose of the app is to let users add shared expenses, then limiting expense creation does not make much
+sense.
+
+SplitMaadi does not put limits on how many expenses you can add, how many groups you can create, or how many people you
+can add to a group.
+
+### 2. Simple user experience
+
+One thing I care about a lot is reducing unnecessary friction.
+
+If I am adding an expense, I do not want too many steps, too much clutter, or confusing flows. I want the app to feel
+simple and easy to use.
+
+### 3. Attachments should be supported properly
+
+Expenses are not always just numbers. Sometimes you want to attach a receipt or an image for reference.
+
+So I did not want attachments to feel like a secondary feature. They are part of the expense itself.
+
+### 4. Cross-platform support
+
+I also wanted it to work across all the devices I use.
+
+Sometimes I may add an expense on my phone, and sometimes I may want to check balances later on my laptop. So being
+cross-platform was an important requirement for me, not an extra nice-to-have.
+
+## Why SplitMaadi is a PWA
+
+SplitMaadi is built as a **Progressive Web App (PWA)**.
+
+The reason is simple: I wanted the product to be available everywhere without forcing users into one platform or app
+store flow. If a device can run a browser, it can run SplitMaadi.
+
+That means you can use it on iPhone, Android, Mac, Windows, Linux, tablets, or desktop browsers. And on mobile, you can
+install it to your home screen so it behaves much more like a normal app.
+
+This model also aligns well with what I wanted from the product in the first place: broad access, low friction, and no
+platform lock-in.
+
+## What SplitMaadi tries to do differently
+
+At a product level, SplitMaadi is not trying to win by adding complexity. It is trying to win by removing the common
+sources of friction.
+
+The goals are straightforward:
+
+- let users add expenses without arbitrary caps
+- keep the experience clean and fast
+- support receipts and attachments properly
+- work across devices
+- preserve history instead of treating it as disposable
+
+That is it.
+
+In many ways, SplitMaadi is just an attempt to make expense sharing feel boring again — in the good sense. You should
+not have to think about the tool too much. It should quietly do its job and stay reliable over time.
+
+## Free to use
+
+The most important part is this: **SplitMaadi is free to use, and I intend to keep it that way.**
+
+No premium gate just to keep using the basic product. No daily cap on adding expenses. No ads getting in the way of the
+experience.
+
+If you were also looking for an expense-splitting app that does the basics well and does not fight you on the
+fundamentals, give it a try:
+
+**[splitmaadi.com](https://splitmaadi.com)**
+
+export const metadata = {
+  title: "Why I Built SplitMaadi",
+  createdAt: "February 28, 2026",
+  description:
+    "After Splitwise introduced a daily cap on how many expenses you can add, I started looking for another alternative. My requirements were simple: no restrictions on the number of expenses, no ads, no limits on attachments, no deletion of old history, cross-platform access, and a clear user experience. Since I could not find an app that checked all these boxes, I decided to build SplitMaadi.",
+  metaDescription:
+    "After Splitwise introduced a daily cap on expense creation, I decided to build SplitMaadi — a free expense-splitting app with no ads, no limits, attachment support, and cross-platform access.",
+};
