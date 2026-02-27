@@ -11,12 +11,14 @@ My requirements were actually very basic:
 3. **[P0]** It should not restrict what kind of expenses are allowed, especially if I want to attach receipts or other
    media.
 4. **[P0]** It should not delete my past expense history.
-5. **[P2]** It should work across all the devices I use — Mac, iPhone, Android, Windows, and everything else in between.
-6. **[P2]** It should have a clear and simple user experience.
+5. **[P1]** It should have a clear and simple user experience.
+6. **[P2]** It should work across all the devices I use — Mac, iPhone, Android, Windows, and everything else in between.
 
 The closest alternatives were the built-in expense-sharing features inside payment apps like PhonePe and Paytm. They
-were usable, but only up to a point. Adding even a simple expense often took too many clicks. Desktop support was weak
-or non-existent. And attachment history was not something I could trust to remain available for the long term.
+were usable, but only up to a point. Adding even a simple expense took too many clicks, mainly because this feature was
+hidden deep inside the app. These apps are not focused on expense splitting, since it is not their main feature. Desktop
+support was almost non-existent. And attachment history was also not something I could rely on, since these apps would
+delete it after a few months.
 
 That was the point where I stopped searching and decided to build one myself: [SplitMaadi](https://splitmaadi.com).
 _Maadi_ is a Kannada word that means “do it”.
@@ -30,8 +32,7 @@ That led to a few clear product decisions.
 
 ### 1. No limits on the core use case
 
-If the main purpose of the app is to let users add shared expenses, then limiting expense creation does not make much
-sense.
+If the main purpose of the app is to let users add shared expenses, then limiting expense creation makes little sense.
 
 SplitMaadi does not put limits on how many expenses you can add, how many groups you can create, or how many people you
 can add to a group.
