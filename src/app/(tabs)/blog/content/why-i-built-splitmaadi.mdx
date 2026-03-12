@@ -57,18 +57,21 @@ I also wanted it to work across all the devices I use.
 Sometimes I may add an expense on my phone, and sometimes I may want to check balances later on my laptop. So being
 cross-platform was an important requirement for me, not an extra nice-to-have.
 
-## Why SplitMaadi is a PWA
+## How SplitMaadi works across platforms
 
-SplitMaadi is built as a **Progressive Web App (PWA)**.
+At its core, SplitMaadi is built as a **Progressive Web App (PWA)**. If a device can run a browser, it can run
+SplitMaadi. That covers Mac, Windows, Linux, tablets, and pretty much anything else with a screen. On mobile, you can
+install it to your home screen so it behaves like a regular app.
 
-The reason is simple: I wanted the product to be available everywhere without forcing users into one platform or app
-store flow. If a device can run a browser, it can run SplitMaadi.
+But I also wanted SplitMaadi to feel native on phones. So I built dedicated apps for both **iPhone** and **Android**
+using Capacitor — which is essentially a thin native wrapper around the same web app. The underlying codebase is shared,
+so the experience stays consistent across platforms.
 
-That means you can use it on iPhone, Android, Mac, Windows, Linux, tablets, or desktop browsers. And on mobile, you can
-install it to your home screen so it behaves much more like a normal app.
+Both apps are currently in review on the **App Store** and **Play Store**, and should be live within a few weeks. In the
+meantime, the PWA works just fine on both platforms.
 
-This model also aligns well with what I wanted from the product in the first place: broad access, low friction, and no
-platform lock-in.
+This setup gives me the best of both worlds: a single codebase that runs everywhere, and native apps for people who
+prefer installing from their app store.
 
 ## What SplitMaadi tries to do differently
 
