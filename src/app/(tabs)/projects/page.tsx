@@ -62,15 +62,21 @@ interface Project {
 
 const projects: Project[] = [
   {
+    name: "SplitMaadi",
+    website: "https://splitmaadi.com",
+    description:
+      "A free group expense-splitting app available on web, iOS, and Android. Supports equal, percentage, and exact-amount splits with multi-currency support, receipt attachments, and optimized debt settlement — all without ads or paywalls.",
+  },
+  {
+    name: "PerfKit",
+    website: "https://perfkit.dev",
+    description:
+      "A web performance analysis toolkit that combines real-user data from Chrome UX Report with lab diagnostics. Features side-by-side benchmarking of up to 5 URLs, Core Web Vitals analysis, and origin-level performance comparisons.",
+  },
+  {
     name: "Ensite",
     website: "https://ensite.io",
     description:
       "A web-based tool for generating beautiful site previews and social cards. Helps developers create stunning OG images for their websites without design skills. Built with a focus on simplicity and speed.",
-  },
-  {
-    name: "Vicks",
-    github: "https://github.com/thegauravthakur/vicks",
-    description:
-      "A lightweight (0.8KB) fetch wrapper with superpowers. Features include request/response interceptors, default configurations, and multiple client support. Written in TypeScript with zero dependencies.",
   },
 ];
