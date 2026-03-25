@@ -3,6 +3,7 @@ import { WorkExperienceSection } from "@/app/_components/home/work-experience-se
 import { RecentWritingsSection } from "@/app/_components/home/recent-writings-section";
 import { Header } from "@/app/_components/home/header";
 import { Intro } from "@/app/_components/home/intro";
+import { SideQuestsSection } from "@/app/_components/home/side-quests-section";
 
 export default function Page() {
   return (
@@ -17,6 +18,10 @@ export default function Page() {
         <hr className="mb-10 border-gray-100 dark:border-gray-700" />
         <section className="mb-10">
           <WorkExperienceSection />
+        </section>
+        <hr className="mb-10 border-gray-100 dark:border-gray-700" />
+        <section className="mb-10">
+          <SideQuestsSection />
         </section>
         <hr className="mb-10 border-gray-100 dark:border-gray-700" />
         <section>
