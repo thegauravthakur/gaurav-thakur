@@ -17,4 +17,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://gauravthakur.com/about",
   },
+  openGraph: {
+    title: "About - Gaurav Thakur",
+    description:
+      "Frontend engineer at Zepto from Kullu, Himachal Pradesh. Building things for the web with React, Next.js, and TypeScript.",
+  },
 };

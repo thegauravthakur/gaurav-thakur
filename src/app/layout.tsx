@@ -4,6 +4,7 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 
 import "./globals.css";
+import { siteConfig } from "@/app/config";
 
 interface RootLayoutProps {
   children: ReactNode;
@@ -12,8 +13,8 @@ interface RootLayoutProps {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Gaurav Thakur",
-  url: "https://gauravthakur.com",
+  name: siteConfig.name,
+  url: siteConfig.url,
   image:
     "https://res.cloudinary.com/gauravthakur/image/upload/s--RQWMnUhR--/f_auto,q_auto/v1/blog/twtcjh6eodnoveygvscm",
   jobTitle: "Software Engineer",
@@ -22,7 +23,7 @@ const jsonLd = {
     name: "Zepto",
   },
   sameAs: [
-    "https://twitter.com/AskGauravThakur",
+    "https://twitter.com/gauravcodes",
     "https://linkedin.com/in/AskGauravThakur",
     "https://github.com/AskGauravThakur",
   ],
@@ -51,7 +52,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
             `,
           }}
         />
-        <link rel="CF_PAGES_URL" href={process.env.CF_PAGES_URL} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -63,13 +63,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
     </html>
   );
 }
-
-const siteConfig = {
-  name: "Gaurav Thakur",
-  description:
-    "Frontend engineer at Zepto. I build things for the web and write about stuff I learn along the way.",
-  url: "https://gauravthakur.com",
-};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -105,6 +98,11 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     creator: "@gauravcodes",
     site: "@gauravcodes",
+  },
+  alternates: {
+    types: {
+      "application/rss+xml": `${siteConfig.url}/feed.xml`,
+    },
   },
   openGraph: {
     type: "website",
